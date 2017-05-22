@@ -1,0 +1,16 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 2.6)
+
+PROJECT(TheBeast)
+
+FIND_PACKAGE(ROOT REQUIRED)
+INCLUDE(${ROOT_USE_FILE})
+
+ROOT_GENERATE_DICTIONARY(G__TheBeast TheBeast.h TheRatPack.h TheSampleFile.h LINKDEF LinkDef.h)
+
+SET(SRCS TheBeast.cxx
+  TheRatPack.cxx
+  TheSample.cxx
+  TheSampleFile.cxx)
+
+ADD_LIBRARY(TheBeast SHARED ${SRCS} G__TheBeast.cxx)
+TARGET_LINK_LIBRARIES(TheBeast ${ROOT_LIBRARIES})

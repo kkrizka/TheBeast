@@ -7,14 +7,11 @@ thebeast=ROOT.TheBeast.rawr()
 def main():
     ROOT.gSystem.Load('libTheBeast.so')
 
-    thebeast.ratPack().defineHistogram("jet0_pt_s", "Leading Jet p_{T} [GeV]", 100, 0,  200, "jet_pt[0]");
-    thebeast.ratPack().defineHistogram("jet0_pt_m", "Leading Jet p_{T} [GeV]", 100, 0,  500, "jet_pt[0]");
-    thebeast.ratPack().defineHistogram("jet0_pt",   "Leading Jet p_{T} [GeV]", 100, 0, 1000, "jet_pt[0]");    
-    thebeast.ratPack().defineHistogram("jet0_pt_l", "Leading Jet p_{T} [GeV]", 100, 0, 5000, "jet_pt[0]");
-
-    testsample=ROOT.TheSampleFile("user.kkrizka.10914515._000001.tree.root","outTree")
+    testsample=ROOT.TheSampleFile("user.kkrizka.10914515._000001.tree.root","outTree",ROOT.DijetISREvent(True, False))
     thebeast.addSample('test',testsample)
 
-    h=thebeast.get('test','jet0_pt')
+    thebeast.ratPack().addHists("event", ROOT.EventHists());
+
+    h=thebeast.get('test','event/mu_ave')
     plottools.plot(h)
 

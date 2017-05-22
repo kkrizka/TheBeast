@@ -3,6 +3,7 @@
 
 #include <map>
 
+#include "TheCave.h"
 #include "TheRatPack.h"
 #include "TheSample.h"
 
@@ -22,6 +23,7 @@ private:
   
   TheBeast();
 
+  TheCave m_cave;
   TheRatPack m_ratpack;
   std::map<std::string, TheSample*> m_samples;
 };

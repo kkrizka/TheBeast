@@ -10,5 +10,6 @@
 
 #pragma link C++ defined_in "TheSampleFile.h";
 
+#pragma link C++ defined_in "DijetISREvent.h";
 
 #endif

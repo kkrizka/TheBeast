@@ -3,31 +3,23 @@
 
 #include <map>
 
+#include "TheHists.h"
+#include "TheSample.h"
+
+#include <TDirectory.h>
 #include <TH1.h>
-
-struct HistDefinition
-{
-  std::string name;
-  std::string branch;
-
-  std::string xtitle;
-
-  int nbins;
-  double minval;
-  double maxval;
-};
 
 class TheRatPack
 {
 public:
   TheRatPack();
 
-  void defineHistogram(const std::string& name, const std::string& xtitle, int nbins, double minval, double maxval, const std::string& branch="");
+  void addHists(const std::string& name, TheHists *hists);
 
-  HistDefinition histDefinition(const std::string& name) const;
+  void execute(const std::string& histname, TheSample *sample, TDirectory *output);
 
 private:
-  std::map<std::string, HistDefinition> m_histDefinitions;
+  std::map<std::string, TheHists*> m_hists;
 };
 
 #endif // THERATPACK_H_

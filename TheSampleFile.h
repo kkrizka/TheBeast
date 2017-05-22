@@ -4,15 +4,22 @@
 #include <TFile.h>
 
 #include "TheSample.h"
+#include "TheEvent.h"
 
 class TheSampleFile : public TheSample
 {
 public:
-  TheSampleFile(const std::string& path, const std::string& tree);
+  TheSampleFile(const std::string& path, const std::string& tree, TheEvent* event);
   ~TheSampleFile();
+
+  TheEvent* event() const;
+
+  uint nEvents() const;
+  void loadEvent(uint eidx) const;
 
 private:
   TFile *m_fh;
+  TheEvent *m_event;
 };
 
 #endif // THESAMPLEFILE_H_

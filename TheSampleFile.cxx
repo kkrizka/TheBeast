@@ -24,4 +24,7 @@ uint TheSampleFile::nEvents() const
 { return m_tree->GetEntries(); }
 
 void TheSampleFile::loadEvent(uint eidx) const
-{ m_tree->GetEntry(eidx); }
+{
+  m_tree->GetEntry(eidx);
+  m_event->updateEntry();
+}

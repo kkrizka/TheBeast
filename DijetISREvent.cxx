@@ -5,7 +5,7 @@
 DijetISREvent::DijetISREvent(bool mc, bool truthOnly)
   : TheEvent(),
     m_truthOnly(truthOnly), m_mc(mc),
-    //m_jets(0), m_photons(0), m_truth(0), m_trigJets(0),
+    m_jets(0), // m_photons(0), m_truth(0), m_trigJets(0),
     m_triggerInfoSwitch(0)
 {
   setTriggerDetail("");
@@ -21,7 +21,7 @@ DijetISREvent::~DijetISREvent()
   delete m_passedTriggers;
   delete m_triggerPrescales;
 
-  //if(m_jets)     delete m_jets;
+  if(m_jets)     delete m_jets;
   //if(m_photons)  delete m_photons;
   //if(m_truth)    delete m_truth;
   //if(m_trigJets) delete m_trigJets;
@@ -62,7 +62,7 @@ void DijetISREvent::setTree(TTree *tree)
   setBranchAddress ("weight_xs",&m_weight_xs);
 
   // particles
-  //if(m_jets)     m_jets    ->setTree(tree);
+  if(m_jets)     m_jets    ->setTree(tree);
   //if(m_photons)  m_photons ->setTree(tree);
   //if(m_truth)    m_truth   ->setTree(tree);
   //if(m_trigJets) m_trigJets->setTree(tree);
@@ -83,7 +83,7 @@ void DijetISREvent::setTree(TTree *tree)
 
 void DijetISREvent::updateEntry()
 {
-  // if(m_jets)     m_jets    ->updateEntry();
+  if(m_jets)     m_jets    ->updateEntry();
   // if(m_photons)  m_photons ->updateEntry();
   // if(m_truth)    m_truth   ->updateEntry();
   // if(m_trigJets) m_trigJets->updateEntry();
@@ -99,7 +99,7 @@ void DijetISREvent::setTriggerDetail(const std::string &detailStr)
 
 void DijetISREvent::initializeJets(const std::string& name, const std::string& detailStr)
 {
-  //m_jets    =new xAH::JetContainer   (name, detailStr, 1e3, m_mc);
+  m_jets    =new JetContainer   (name, detailStr, 1e3, m_mc);
 }
 
 void DijetISREvent::initializePhotons(const std::string& name, const std::string& detailStr)

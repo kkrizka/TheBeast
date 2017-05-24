@@ -20,5 +20,5 @@ void TheCave::openFile(const std::string& sample)
 TDirectory* TheCave::output(const std::string& sample) const
 { return m_outputs.at(sample); }
 
-TH1* TheCave::get(const std::string&sample, const std::string& histname)
-{ return dynamic_cast<TH1*>(m_outputs[sample]->Get(histname.c_str())); }
+TObject* TheCave::get(const std::string&sample, const std::string& histname)
+{ return m_outputs[sample]->Get(histname.c_str()); }

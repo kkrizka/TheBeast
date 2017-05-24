@@ -17,7 +17,7 @@ public:
 
   TDirectory* output(const std::string& sample) const;
 
-  TH1* get(const std::string&sample, const std::string& histname);
+  TObject* get(const std::string&sample, const std::string& histname);
 
 private:
   std::map<std::string, TFile*> m_fhs;

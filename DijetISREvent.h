@@ -10,6 +10,7 @@
 #include "TheEvent.h"
 
 #include "InfoSwitch.h"
+#include "JetContainer.h"
 
 class DijetISREvent : public TheEvent
 {
@@ -51,7 +52,7 @@ public:
   float m_weight_pileup;
 
   // particles
-  //xAH::JetContainer    *m_jets;
+  JetContainer    *m_jets;
   //xAH::PhotonContainer *m_photons;
   //xAH::TruthContainer  *m_truth;
   //xAH::JetContainer    *m_trigJets;

@@ -65,7 +65,6 @@ void ZprimeResonanceHists::execute()
   // Figure out event stuff
   double eventWeight=1.;
 
-  if(m_event->m_jets->size()<2) return;
   const Jet *reso0=&m_event->m_jets->at(0);
   const Jet *reso1=&m_event->m_jets->at(1);
 

@@ -11,10 +11,13 @@ SET(HEADERS
   TheBeast.h
   TheRatPack.h
   TheSampleFile.h
+  TheSampleSelection.h
+  TheSelection.h
 
   DijetISREvent.h
   EventHists.h
-  ZprimeResonanceHists.h)
+  ZprimeResonanceHists.h
+  ZprimeGammaJetJetSelection.h)
 
 SET(SRCS TheBeast.cxx
   TheRatPack.cxx
@@ -22,15 +25,20 @@ SET(SRCS TheBeast.cxx
   TheEvent.cxx
   TheSample.cxx
   TheSampleFile.cxx
+  TheSampleSelection.cxx
+  TheSelection.cxx
   TheHists.cxx
 
   InfoSwitch.cxx
   DijetISREvent.cxx  
   JetContainer.cxx
   MuonContainer.cxx
+  PhotonContainer.cxx
   Jet.cxx
+  Photon.cxx
   EventHists.cxx
-  ZprimeResonanceHists.cxx)
+  ZprimeResonanceHists.cxx
+  ZprimeGammaJetJetSelection.cxx)
 
 ROOT_GENERATE_DICTIONARY(G__TheBeast ${HEADERS} LINKDEF LinkDef.h)
 

@@ -11,6 +11,7 @@
 
 #include "InfoSwitch.h"
 #include "JetContainer.h"
+#include "PhotonContainer.h"
 
 class DijetISREvent : public TheEvent
 {
@@ -53,7 +54,7 @@ public:
 
   // particles
   JetContainer    *m_jets;
-  //xAH::PhotonContainer *m_photons;
+  PhotonContainer *m_photons;
   //xAH::TruthContainer  *m_truth;
   //xAH::JetContainer    *m_trigJets;
 

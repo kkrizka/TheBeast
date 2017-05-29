@@ -1,5 +1,8 @@
 #include "TheRatPack.h"
 
+#include <iostream>
+#include <ctime>
+
 TheRatPack::TheRatPack()
 { }
 
@@ -16,10 +19,25 @@ void TheRatPack::execute(const std::string& histname, TheSample *sample, TDirect
 
   hists->initialize(sample->event());
 
+  std::clock_t begin;
+
   for(uint eidx=0; eidx<sample->nEvents(); eidx++)
     {
       sample->loadEvent(eidx);
       hists->execute();
+
+      if(eidx%10000==0)
+	{
+	  std::cout << "Processing event " << eidx;
+	  if(eidx>0)
+	    {
+	      std::clock_t end = std::clock();
+	      double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+	      std::cout << " (rate: " << 10./elapsed_secs << " kHz)";
+	    }
+	  std::cout << std::endl;
+	  begin = std::clock();
+	}
     }
 
   outdir->Write();

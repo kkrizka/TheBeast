@@ -11,6 +11,7 @@ SET(HEADERS
   TheBeast.h
   TheRatPack.h
   TheSampleFile.h
+  TheSampleList.h
   TheSampleSelection.h
   TheSelection.h
 
@@ -25,6 +26,7 @@ SET(SRCS TheBeast.cxx
   TheEvent.cxx
   TheSample.cxx
   TheSampleFile.cxx
+  TheSampleList.cxx
   TheSampleSelection.cxx
   TheSelection.cxx
   TheHists.cxx

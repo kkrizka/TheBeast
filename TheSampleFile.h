@@ -2,6 +2,7 @@
 #define THESAMPLEFILE_H_
 
 #include <TFile.h>
+#include <TTree.h>
 
 #include "TheSample.h"
 #include "TheEvent.h"
@@ -19,6 +20,7 @@ public:
 
 private:
   TFile *m_fh;
+  TTree *m_tree;
   TheEvent *m_event;
 };
 

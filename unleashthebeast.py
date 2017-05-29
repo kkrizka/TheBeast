@@ -7,11 +7,13 @@ thebeast=ROOT.TheBeast.rawr()
 def main():
     ROOT.gSystem.Load('libTheBeast.so')
 
-    event=ROOT.DijetISREvent(True, False)
-    event.initializeJets   ('jet','kinematic useTheS')
-    event.initializePhotons('ph' ,'kinematic')
-    
-    testsample=ROOT.TheSampleFile("user.kkrizka.10914515._000001.tree.root","outTree",event)
+    testevent=ROOT.DijetISREvent(True, False)
+    testevent.initializeJets   ('jet','kinematic useTheS')
+    testevent.initializePhotons('ph' ,'kinematic')
+
+    #
+    # small sample
+    testsample=ROOT.TheSampleFile("user.kkrizka.10914515._000001.tree.root","outTree",testevent)
     thebeast.addSample('test',testsample)
 
     selection_ystar=ROOT.ZprimeGammaJetJetSelection()
@@ -20,10 +22,27 @@ def main():
     redsample=ROOT.TheSampleSelection(testsample,selection_ystar)
     redsample.runSelection()
     thebeast.addSample('red',redsample)
-    
+
+    #
+    # data16 sample
+    dataevent=ROOT.DijetISREvent(False, False)
+    dataevent.initializeJets   ('jet','kinematic')
+    dataevent.initializePhotons('ph' ,'kinematic')
+
+    bigsample=ROOT.TheSampleList('filelists/data16.gammajet.NTUP.txt',"outTree",dataevent)
+    thebeast.addSample('big',bigsample)
+
+    bigredsample=ROOT.TheSampleSelection(testsample,selection_ystar)
+    bigredsample.runSelection()
+    thebeast.addSample('bigred',bigredsample)    
+
+    #
+    # histograms
     thebeast.ratPack().addHists("event", ROOT.EventHists());
     thebeast.ratPack().addHists("reso" , ROOT.ZprimeResonanceHists());
 
-    h=thebeast.get('red','reso/mjj')
+    #
+    # plot
+    h=thebeast.get('big','reso/mjj')
     plottools.plot(h)
 

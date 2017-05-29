@@ -34,7 +34,6 @@ void TheSampleSelection::runSelection()
 bool TheSampleSelection::passes()
 {
   DijetISREvent *anevent=dynamic_cast<DijetISREvent*>(event());
-  std::cout << "FOUND EVENT " << anevent << " " << event() << std::endl;
   if(anevent->m_jets->size()<2) return false;
   return true;
 }

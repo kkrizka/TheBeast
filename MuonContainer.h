@@ -23,7 +23,7 @@ public:
   using ParticleContainer::setTree; // make other overloaded version of execute() to show up in subclass
 
 protected:
-  virtual void updateParticle(uint idx, Muon& muon);
+  virtual void updateParticle(uint idx);
     
 private:
 

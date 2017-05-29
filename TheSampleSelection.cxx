@@ -34,6 +34,6 @@ void TheSampleSelection::runSelection()
 bool TheSampleSelection::passes()
 {
   DijetISREvent *anevent=dynamic_cast<DijetISREvent*>(event());
-  if(anevent->m_jets->size()<2) return false;
+  if(anevent->m_jets->m_n<2) return false;
   return true;
 }

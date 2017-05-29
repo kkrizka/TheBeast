@@ -183,58 +183,58 @@ void PhotonContainer::setTree(TTree *tree)
 
 }
 
-void PhotonContainer::updateParticle(uint idx, Photon& photon)
+void PhotonContainer::updateParticle(uint idx)
 {
-  ParticleContainer::updateParticle(idx,photon);
+  ParticleContainer::updateParticle(idx);
 
   if(m_infoSwitch.m_isolation){
-    photon.isIsolated_Cone40CaloOnly =  m_isIsolated_Cone40CaloOnly ->at(idx);
-    photon.isIsolated_Cone40 =          m_isIsolated_Cone40         ->at(idx);
-    photon.isIsolated_Cone20 =          m_isIsolated_Cone20         ->at(idx);
-    photon.ptcone20 =                   m_ptcone20                  ->at(idx);
-    photon.ptcone30 =                   m_ptcone30                  ->at(idx);
-    photon.ptcone40 =                   m_ptcone40                  ->at(idx);
-    photon.ptvarcone20 =                m_ptvarcone20               ->at(idx);
-    photon.ptvarcone30 =                m_ptvarcone30               ->at(idx);
-    photon.ptvarcone40 =                m_ptvarcone40               ->at(idx);
-    photon.topoetcone20 =               m_topoetcone20              ->at(idx);
-    photon.topoetcone30 =               m_topoetcone30              ->at(idx);
-    photon.topoetcone40 =               m_topoetcone40              ->at(idx);
+    m_particles[idx].isIsolated_Cone40CaloOnly =  m_isIsolated_Cone40CaloOnly ->at(idx);
+    m_particles[idx].isIsolated_Cone40 =          m_isIsolated_Cone40         ->at(idx);
+    m_particles[idx].isIsolated_Cone20 =          m_isIsolated_Cone20         ->at(idx);
+    m_particles[idx].ptcone20 =                   m_ptcone20                  ->at(idx);
+    m_particles[idx].ptcone30 =                   m_ptcone30                  ->at(idx);
+    m_particles[idx].ptcone40 =                   m_ptcone40                  ->at(idx);
+    m_particles[idx].ptvarcone20 =                m_ptvarcone20               ->at(idx);
+    m_particles[idx].ptvarcone30 =                m_ptvarcone30               ->at(idx);
+    m_particles[idx].ptvarcone40 =                m_ptvarcone40               ->at(idx);
+    m_particles[idx].topoetcone20 =               m_topoetcone20              ->at(idx);
+    m_particles[idx].topoetcone30 =               m_topoetcone30              ->at(idx);
+    m_particles[idx].topoetcone40 =               m_topoetcone40              ->at(idx);
   }    
 
   // PID
   if(m_infoSwitch.m_PID){
-    photon.IsLoose =   m_IsLoose ->at(idx);
-    photon.IsMedium =  m_IsMedium->at(idx);
-    photon.IsTight =   m_IsTight ->at(idx);
+    m_particles[idx].IsLoose =   m_IsLoose ->at(idx);
+    m_particles[idx].IsMedium =  m_IsMedium->at(idx);
+    m_particles[idx].IsTight =   m_IsTight ->at(idx);
   }
 
   
   if(m_infoSwitch.m_purity){
-    photon.radhad1 = m_radhad1->at(idx);
-    photon.radhad =  m_radhad ->at(idx);
-    photon.e277 =    m_e277   ->at(idx);
-    photon.reta =    m_reta   ->at(idx);
-    photon.rphi =    m_rphi   ->at(idx);
-    photon.weta2 =   m_weta2  ->at(idx);
-    photon.f1 =      m_f1     ->at(idx);
-    photon.wtot =    m_wtot   ->at(idx);
-    photon.deltae =  m_deltae ->at(idx);
-    photon.eratio =  m_eratio ->at(idx);
+    m_particles[idx].radhad1 = m_radhad1->at(idx);
+    m_particles[idx].radhad =  m_radhad ->at(idx);
+    m_particles[idx].e277 =    m_e277   ->at(idx);
+    m_particles[idx].reta =    m_reta   ->at(idx);
+    m_particles[idx].rphi =    m_rphi   ->at(idx);
+    m_particles[idx].weta2 =   m_weta2  ->at(idx);
+    m_particles[idx].f1 =      m_f1     ->at(idx);
+    m_particles[idx].wtot =    m_wtot   ->at(idx);
+    m_particles[idx].deltae =  m_deltae ->at(idx);
+    m_particles[idx].eratio =  m_eratio ->at(idx);
   }
 
   if(m_infoSwitch.m_effSF && m_mc){
-    photon.LooseEffSF =m_LooseEffSF ->at(idx);
-    photon.MediumEffSF=m_MediumEffSF->at(idx);
-    photon.TightEffSF =m_TightEffSF ->at(idx);
+    m_particles[idx].LooseEffSF =m_LooseEffSF ->at(idx);
+    m_particles[idx].MediumEffSF=m_MediumEffSF->at(idx);
+    m_particles[idx].TightEffSF =m_TightEffSF ->at(idx);
 
-    photon.LooseEffSF_Error =m_LooseEffSF_Error ->at(idx);
-    photon.MediumEffSF_Error=m_MediumEffSF_Error->at(idx);
-    photon.TightEffSF_Error =m_TightEffSF_Error ->at(idx);
+    m_particles[idx].LooseEffSF_Error =m_LooseEffSF_Error ->at(idx);
+    m_particles[idx].MediumEffSF_Error=m_MediumEffSF_Error->at(idx);
+    m_particles[idx].TightEffSF_Error =m_TightEffSF_Error ->at(idx);
   }
 
   if(m_infoSwitch.m_trigger){
-    photon.trigMatched =m_trigMatched->at(idx);
+    m_particles[idx].trigMatched =m_trigMatched->at(idx);
   }
 
 }

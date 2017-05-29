@@ -286,45 +286,45 @@ void MuonContainer::setTree(TTree *tree)
 
 }
 
-void MuonContainer::updateParticle(uint idx, Muon& muon)
+void MuonContainer::updateParticle(uint idx)
 {
-  ParticleContainer::updateParticle(idx,muon);  
+  ParticleContainer::updateParticle(idx);  
 
   // trigger
   if ( m_infoSwitch.m_trigger ) {
-    muon.isTrigMatched         =     m_isTrigMatched         ->at(idx);
-    muon.isTrigMatchedToChain  =     m_isTrigMatchedToChain  ->at(idx);
-    muon.listTrigChains        =     m_listTrigChains        ->at(idx);
+    m_particles[idx].isTrigMatched         =     m_isTrigMatched         ->at(idx);
+    m_particles[idx].isTrigMatchedToChain  =     m_isTrigMatchedToChain  ->at(idx);
+    m_particles[idx].listTrigChains        =     m_listTrigChains        ->at(idx);
   }
     
   // isolation
   if ( m_infoSwitch.m_isolation ) {
-    muon.isIsolated_LooseTrackOnly                =     m_isIsolated_LooseTrackOnly                  ->at(idx);
-    muon.isIsolated_Loose                         =     m_isIsolated_Loose                           ->at(idx);
-    muon.isIsolated_Tight                         =     m_isIsolated_Tight                           ->at(idx);
-    muon.isIsolated_Gradient                      =     m_isIsolated_Gradient                        ->at(idx);
-    muon.isIsolated_GradientLoose                 =     m_isIsolated_GradientLoose                   ->at(idx);
-    muon.isIsolated_FixedCutLoose                 =     m_isIsolated_FixedCutLoose                   ->at(idx);
-    muon.isIsolated_FixedCutTightTrackOnly        =     m_isIsolated_FixedCutTightTrackOnly          ->at(idx);
-    muon.isIsolated_UserDefinedFixEfficiency      =     m_isIsolated_UserDefinedFixEfficiency        ->at(idx);
-    muon.isIsolated_UserDefinedCut                =     m_isIsolated_UserDefinedCut                  ->at(idx);
-    muon.ptcone20                                 =     m_ptcone20                                   ->at(idx);
-    muon.ptcone30                                 =     m_ptcone30                                   ->at(idx);
-    muon.ptcone40                                 =     m_ptcone40                                   ->at(idx);
-    muon.ptvarcone20                              =     m_ptvarcone20                                ->at(idx);
-    muon.ptvarcone30                              =     m_ptvarcone30                                ->at(idx);
-    muon.ptvarcone40                              =     m_ptvarcone40                                ->at(idx);
-    muon.topoetcone20                             =     m_topoetcone20                               ->at(idx);
-    muon.topoetcone30                             =     m_topoetcone30                               ->at(idx);
-    muon.topoetcone40                             =     m_topoetcone40                               ->at(idx);
+    m_particles[idx].isIsolated_LooseTrackOnly                =     m_isIsolated_LooseTrackOnly                  ->at(idx);
+    m_particles[idx].isIsolated_Loose                         =     m_isIsolated_Loose                           ->at(idx);
+    m_particles[idx].isIsolated_Tight                         =     m_isIsolated_Tight                           ->at(idx);
+    m_particles[idx].isIsolated_Gradient                      =     m_isIsolated_Gradient                        ->at(idx);
+    m_particles[idx].isIsolated_GradientLoose                 =     m_isIsolated_GradientLoose                   ->at(idx);
+    m_particles[idx].isIsolated_FixedCutLoose                 =     m_isIsolated_FixedCutLoose                   ->at(idx);
+    m_particles[idx].isIsolated_FixedCutTightTrackOnly        =     m_isIsolated_FixedCutTightTrackOnly          ->at(idx);
+    m_particles[idx].isIsolated_UserDefinedFixEfficiency      =     m_isIsolated_UserDefinedFixEfficiency        ->at(idx);
+    m_particles[idx].isIsolated_UserDefinedCut                =     m_isIsolated_UserDefinedCut                  ->at(idx);
+    m_particles[idx].ptcone20                                 =     m_ptcone20                                   ->at(idx);
+    m_particles[idx].ptcone30                                 =     m_ptcone30                                   ->at(idx);
+    m_particles[idx].ptcone40                                 =     m_ptcone40                                   ->at(idx);
+    m_particles[idx].ptvarcone20                              =     m_ptvarcone20                                ->at(idx);
+    m_particles[idx].ptvarcone30                              =     m_ptvarcone30                                ->at(idx);
+    m_particles[idx].ptvarcone40                              =     m_ptvarcone40                                ->at(idx);
+    m_particles[idx].topoetcone20                             =     m_topoetcone20                               ->at(idx);
+    m_particles[idx].topoetcone30                             =     m_topoetcone30                               ->at(idx);
+    m_particles[idx].topoetcone40                             =     m_topoetcone40                               ->at(idx);
   }
   
   // quality
   if ( m_infoSwitch.m_quality ) {
-    muon.isVeryLoose    = m_isVeryLoose  ->at(idx);   
-    muon.isLoose        = m_isLoose      ->at(idx);   
-    muon.isMedium       = m_isMedium     ->at(idx);   
-    muon.isTight        = m_isTight      ->at(idx);   
+    m_particles[idx].isVeryLoose    = m_isVeryLoose  ->at(idx);   
+    m_particles[idx].isLoose        = m_isLoose      ->at(idx);   
+    m_particles[idx].isMedium       = m_isMedium     ->at(idx);   
+    m_particles[idx].isTight        = m_isTight      ->at(idx);   
   }
   
   // scale factors w/ sys
@@ -332,55 +332,55 @@ void MuonContainer::updateParticle(uint idx, Muon& muon)
   if ( m_infoSwitch.m_effSF && m_mc ) {
     
     for (auto& reco : m_infoSwitch.m_recoWPs) {
-      muon.RecoEff_SF[ reco ] = (*m_RecoEff_SF)[ reco ].at(idx);
+      m_particles[idx].RecoEff_SF[ reco ] = (*m_RecoEff_SF)[ reco ].at(idx);
     }
     
     for (auto& isol : m_infoSwitch.m_isolWPs) {
-      muon.IsoEff_SF[ isol ] = (*m_IsoEff_SF)[ isol ].at(idx);
+      m_particles[idx].IsoEff_SF[ isol ] = (*m_IsoEff_SF)[ isol ].at(idx);
     }
     
     for (auto& trig : m_infoSwitch.m_trigWPs) {
-      muon.TrigEff_SF[ trig ] = (*m_TrigEff_SF)[ trig ].at(idx);
-      muon.TrigMCEff [ trig ] = (*m_TrigMCEff )[ trig ].at(idx);
+      m_particles[idx].TrigEff_SF[ trig ] = (*m_TrigEff_SF)[ trig ].at(idx);
+      m_particles[idx].TrigMCEff [ trig ] = (*m_TrigMCEff )[ trig ].at(idx);
     }
 
-    muon.TTVAEff_SF = m_TTVAEff_SF -> at(idx);
+    m_particles[idx].TTVAEff_SF = m_TTVAEff_SF -> at(idx);
   }
       // track parameters
   if ( m_infoSwitch.m_trackparams ) {
-    muon.trkd0             = m_trkd0            ->at(idx);
-    muon.trkd0sig          = m_trkd0sig         ->at(idx);
-    muon.trkz0             = m_trkz0            ->at(idx);
-    muon.trkz0sintheta     = m_trkz0sintheta    ->at(idx);
-    muon.trkphi0           = m_trkphi0          ->at(idx);
-    muon.trktheta          = m_trktheta         ->at(idx);
-    muon.trkcharge         = m_trkcharge        ->at(idx);
-    muon.trkqOverP         = m_trkqOverP        ->at(idx);
+    m_particles[idx].trkd0             = m_trkd0            ->at(idx);
+    m_particles[idx].trkd0sig          = m_trkd0sig         ->at(idx);
+    m_particles[idx].trkz0             = m_trkz0            ->at(idx);
+    m_particles[idx].trkz0sintheta     = m_trkz0sintheta    ->at(idx);
+    m_particles[idx].trkphi0           = m_trkphi0          ->at(idx);
+    m_particles[idx].trktheta          = m_trktheta         ->at(idx);
+    m_particles[idx].trkcharge         = m_trkcharge        ->at(idx);
+    m_particles[idx].trkqOverP         = m_trkqOverP        ->at(idx);
   }
 
       // track hit content
   if ( m_infoSwitch.m_trackhitcont ) {
-    muon.trknSiHits                 = m_trknSiHits                ->at(idx);
-    muon.trknPixHits                = m_trknPixHits               ->at(idx);
-    muon.trknPixHoles               = m_trknPixHoles              ->at(idx);
-    muon.trknSCTHits                = m_trknSCTHits               ->at(idx);
-    muon.trknSCTHoles               = m_trknSCTHoles              ->at(idx);
-    muon.trknTRTHits                = m_trknTRTHits               ->at(idx);
-    muon.trknTRTHoles               = m_trknTRTHoles              ->at(idx);
-    muon.trknBLayerHits             = m_trknBLayerHits            ->at(idx);
-    muon.trknInnermostPixLayHits    = m_trknInnermostPixLayHits   ->at(idx);         // not available in DC14
-    muon.trkPixdEdX                 = m_trkPixdEdX                ->at(idx);         // not available in DC14
+    m_particles[idx].trknSiHits                 = m_trknSiHits                ->at(idx);
+    m_particles[idx].trknPixHits                = m_trknPixHits               ->at(idx);
+    m_particles[idx].trknPixHoles               = m_trknPixHoles              ->at(idx);
+    m_particles[idx].trknSCTHits                = m_trknSCTHits               ->at(idx);
+    m_particles[idx].trknSCTHoles               = m_trknSCTHoles              ->at(idx);
+    m_particles[idx].trknTRTHits                = m_trknTRTHits               ->at(idx);
+    m_particles[idx].trknTRTHoles               = m_trknTRTHoles              ->at(idx);
+    m_particles[idx].trknBLayerHits             = m_trknBLayerHits            ->at(idx);
+    m_particles[idx].trknInnermostPixLayHits    = m_trknInnermostPixLayHits   ->at(idx);         // not available in DC14
+    m_particles[idx].trkPixdEdX                 = m_trkPixdEdX                ->at(idx);         // not available in DC14
   }
 
   if ( m_infoSwitch.m_energyLoss ) {
-    muon.EnergyLoss                    = m_EnergyLoss                   ->at(idx);
-    muon.EnergyLossSigma               = m_EnergyLossSigma              ->at(idx);
-    muon.energyLossType                = m_energyLossType               ->at(idx);
-    muon.MeasEnergyLoss                = m_MeasEnergyLoss               ->at(idx);
-    muon.MeasEnergyLossSigma           = m_MeasEnergyLossSigma          ->at(idx);
-    muon.ParamEnergyLoss               = m_ParamEnergyLoss              ->at(idx);
-    muon.ParamEnergyLossSigmaMinus     = m_ParamEnergyLossSigmaMinus    ->at(idx);
-    muon.ParamEnergyLossSigmaPlus      = m_ParamEnergyLossSigmaPlus     ->at(idx);
+    m_particles[idx].EnergyLoss                    = m_EnergyLoss                   ->at(idx);
+    m_particles[idx].EnergyLossSigma               = m_EnergyLossSigma              ->at(idx);
+    m_particles[idx].energyLossType                = m_energyLossType               ->at(idx);
+    m_particles[idx].MeasEnergyLoss                = m_MeasEnergyLoss               ->at(idx);
+    m_particles[idx].MeasEnergyLossSigma           = m_MeasEnergyLossSigma          ->at(idx);
+    m_particles[idx].ParamEnergyLoss               = m_ParamEnergyLoss              ->at(idx);
+    m_particles[idx].ParamEnergyLossSigmaMinus     = m_ParamEnergyLossSigmaMinus    ->at(idx);
+    m_particles[idx].ParamEnergyLossSigmaPlus      = m_ParamEnergyLossSigmaPlus     ->at(idx);
   }
 
 }

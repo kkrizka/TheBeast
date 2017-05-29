@@ -23,7 +23,7 @@ public:
   virtual void setBranches(TTree *tree);
   virtual void clear();
 
-  virtual void updateParticle(uint idx, Jet& jet);
+  virtual void updateParticle(uint idx);
 
 private:
 

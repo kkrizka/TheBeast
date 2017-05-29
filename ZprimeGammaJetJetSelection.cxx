@@ -19,8 +19,8 @@ bool ZprimeGammaJetJetSelection::passes()
 {
   //
   // dijet+gamma
-  uint njets    = m_event->m_jets->size();
-  uint nphotons = m_event->m_photons->size();
+  uint njets    = m_event->m_jets->m_n;
+  uint nphotons = m_event->m_photons->m_n;
 
   if(njets < 2)
     return false;

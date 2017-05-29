@@ -22,7 +22,7 @@ public:
   virtual void clear();
 
 protected:
-  virtual void updateParticle(uint idx, Photon& photon);
+  virtual void updateParticle(uint idx);
     
 private:
 

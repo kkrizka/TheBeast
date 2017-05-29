@@ -909,174 +909,174 @@ void JetContainer::setTree(TTree *tree, const std::string& tagger)
     }
 }
 
-void JetContainer::updateParticle(uint idx, Jet& jet)
+void JetContainer::updateParticle(uint idx)
 {
-  ParticleContainer::updateParticle(idx,jet);  
+  ParticleContainer::updateParticle(idx);  
 
   if(m_infoSwitch.m_rapidity)
     {
-      jet.rapidity                    =m_rapidity                    ->at(idx);
+      m_particles[idx].rapidity                    =m_rapidity                    ->at(idx);
     }
 
   if(m_infoSwitch.m_clean)
     {
-      jet.Timing                    =m_Timing                    ->at(idx);
-      jet.LArQuality                =m_LArQuality                ->at(idx);
-      jet.HECQuality                =m_HECQuality                ->at(idx);
-      jet.NegativeE                 =m_NegativeE                 ->at(idx);
-      jet.AverageLArQF              =m_AverageLArQF              ->at(idx);
-      jet.BchCorrCell               =m_BchCorrCell               ->at(idx);
-      jet.N90Constituents           =m_N90Constituents           ->at(idx);
-      jet.LArBadHVEFrac             =m_LArBadHVEnergyFrac       ->at(idx);
-      jet.LArBadHVNCell             =m_LArBadHVNCell             ->at(idx);
-      jet.OotFracClusters5          =m_OotFracClusters5          ->at(idx);
-      jet.OotFracClusters10         =m_OotFracClusters10         ->at(idx);
-      jet.LeadingClusterPt          =m_LeadingClusterPt          ->at(idx);
-      jet.LeadingClusterSecondLambda=m_LeadingClusterSecondLambda->at(idx);
-      jet.LeadingClusterCenterLambda=m_LeadingClusterCenterLambda->at(idx);
-      jet.LeadingClusterSecondR     =m_LeadingClusterSecondR     ->at(idx);
-      jet.clean_passLooseBad        =m_clean_passLooseBad        ->at(idx);
-      jet.clean_passLooseBadUgly    =m_clean_passLooseBadUgly    ->at(idx);
-      jet.clean_passTightBad        =m_clean_passTightBad        ->at(idx);
-      jet.clean_passTightBadUgly    =m_clean_passTightBadUgly    ->at(idx);
+      m_particles[idx].Timing                    =m_Timing                    ->at(idx);
+      m_particles[idx].LArQuality                =m_LArQuality                ->at(idx);
+      m_particles[idx].HECQuality                =m_HECQuality                ->at(idx);
+      m_particles[idx].NegativeE                 =m_NegativeE                 ->at(idx);
+      m_particles[idx].AverageLArQF              =m_AverageLArQF              ->at(idx);
+      m_particles[idx].BchCorrCell               =m_BchCorrCell               ->at(idx);
+      m_particles[idx].N90Constituents           =m_N90Constituents           ->at(idx);
+      m_particles[idx].LArBadHVEFrac             =m_LArBadHVEnergyFrac       ->at(idx);
+      m_particles[idx].LArBadHVNCell             =m_LArBadHVNCell             ->at(idx);
+      m_particles[idx].OotFracClusters5          =m_OotFracClusters5          ->at(idx);
+      m_particles[idx].OotFracClusters10         =m_OotFracClusters10         ->at(idx);
+      m_particles[idx].LeadingClusterPt          =m_LeadingClusterPt          ->at(idx);
+      m_particles[idx].LeadingClusterSecondLambda=m_LeadingClusterSecondLambda->at(idx);
+      m_particles[idx].LeadingClusterCenterLambda=m_LeadingClusterCenterLambda->at(idx);
+      m_particles[idx].LeadingClusterSecondR     =m_LeadingClusterSecondR     ->at(idx);
+      m_particles[idx].clean_passLooseBad        =m_clean_passLooseBad        ->at(idx);
+      m_particles[idx].clean_passLooseBadUgly    =m_clean_passLooseBadUgly    ->at(idx);
+      m_particles[idx].clean_passTightBad        =m_clean_passTightBad        ->at(idx);
+      m_particles[idx].clean_passTightBadUgly    =m_clean_passTightBadUgly    ->at(idx);
     }
 
   if(m_infoSwitch.m_energy)
     {
-      jet.HECFrac              =m_HECFrac              ->at(idx);
-      jet.EMFrac               =m_EMFrac               ->at(idx);
-      jet.CentroidR            =m_CentroidR            ->at(idx);
-      jet.FracSamplingMax      =m_FracSamplingMax      ->at(idx);
-      jet.FracSamplingMaxIndex =m_FracSamplingMaxIndex ->at(idx);
-      jet.LowEtConstituentsFrac=m_LowEtConstituentsFrac->at(idx);
-      jet.GhostMuonSegmentCount=m_GhostMuonSegmentCount->at(idx);
-      jet.Width                =m_Width                ->at(idx);
+      m_particles[idx].HECFrac              =m_HECFrac              ->at(idx);
+      m_particles[idx].EMFrac               =m_EMFrac               ->at(idx);
+      m_particles[idx].CentroidR            =m_CentroidR            ->at(idx);
+      m_particles[idx].FracSamplingMax      =m_FracSamplingMax      ->at(idx);
+      m_particles[idx].FracSamplingMaxIndex =m_FracSamplingMaxIndex ->at(idx);
+      m_particles[idx].LowEtConstituentsFrac=m_LowEtConstituentsFrac->at(idx);
+      m_particles[idx].GhostMuonSegmentCount=m_GhostMuonSegmentCount->at(idx);
+      m_particles[idx].Width                =m_Width                ->at(idx);
     }
   
   if(m_infoSwitch.m_trackPV)
     {
-      jet.NumTrkPt1000PV    =m_NumTrkPt1000PV    ->at(idx);
-      jet.SumPtTrkPt1000PV  =m_SumPtTrkPt1000PV  ->at(idx);
-      jet.TrackWidthPt1000PV=m_TrackWidthPt1000PV->at(idx);
-      jet.NumTrkPt500PV     =m_NumTrkPt500PV     ->at(idx);
-      jet.SumPtTrkPt500PV   =m_SumPtTrkPt500PV   ->at(idx);
-      jet.TrackWidthPt500PV =m_TrackWidthPt500PV ->at(idx);
-      jet.JVFPV             =m_JVFPV             ->at(idx);
+      m_particles[idx].NumTrkPt1000PV    =m_NumTrkPt1000PV    ->at(idx);
+      m_particles[idx].SumPtTrkPt1000PV  =m_SumPtTrkPt1000PV  ->at(idx);
+      m_particles[idx].TrackWidthPt1000PV=m_TrackWidthPt1000PV->at(idx);
+      m_particles[idx].NumTrkPt500PV     =m_NumTrkPt500PV     ->at(idx);
+      m_particles[idx].SumPtTrkPt500PV   =m_SumPtTrkPt500PV   ->at(idx);
+      m_particles[idx].TrackWidthPt500PV =m_TrackWidthPt500PV ->at(idx);
+      m_particles[idx].JVFPV             =m_JVFPV             ->at(idx);
     }
 
   if(m_infoSwitch.m_trackPV || m_infoSwitch.m_trackAll)
     {
-      jet.Jvt       =m_Jvt       ->at(idx);
-      jet.JvtJvfcorr=m_JvtJvfcorr->at(idx);
-      jet.JvtRpt    =m_JvtRpt    ->at(idx);
+      m_particles[idx].Jvt       =m_Jvt       ->at(idx);
+      m_particles[idx].JvtJvfcorr=m_JvtJvfcorr->at(idx);
+      m_particles[idx].JvtRpt    =m_JvtRpt    ->at(idx);
     }
   
   if( m_infoSwitch.m_JVC ) {
-    jet.JVC = m_JetVertexCharge_discriminant->at(idx);
+    m_particles[idx].JVC = m_JetVertexCharge_discriminant->at(idx);
   }
 
   if(m_infoSwitch.m_flavTag  || m_infoSwitch.m_flavTagHLT)
     {
-      jet.MV2c00                    =m_MV2c00               ->at(idx);
-      jet.MV2c10                    =m_MV2c10               ->at(idx);
-      jet.MV2c20                    =m_MV2c20               ->at(idx);
-      jet.MV2c100                   =m_MV2c100              ->at(idx);
-      jet.MV2                       =m_MV2                  ->at(idx);
+      m_particles[idx].MV2c00                    =m_MV2c00               ->at(idx);
+      m_particles[idx].MV2c10                    =m_MV2c10               ->at(idx);
+      m_particles[idx].MV2c20                    =m_MV2c20               ->at(idx);
+      m_particles[idx].MV2c100                   =m_MV2c100              ->at(idx);
+      m_particles[idx].MV2                       =m_MV2                  ->at(idx);
 
-      jet.HadronConeExclTruthLabelID=m_HadronConeExclTruthLabelID->at(idx);
+      m_particles[idx].HadronConeExclTruthLabelID=m_HadronConeExclTruthLabelID->at(idx);
     }
 
 
   if(m_infoSwitch.m_flavTagHLT)
     {
-      jet.bs_online_vx                      =m_bs_online_vx                  ->at(idx);
-      jet.bs_online_vy                      =m_bs_online_vy                  ->at(idx);
-      jet.bs_online_vz                      =m_bs_online_vz                  ->at(idx);
-      jet.vtxHadDummy                       =m_vtxHadDummy                   ->at(idx);
-      jet.vtx_offline_x0                    =m_vtx_offline_x0                  ->at(idx);
-      jet.vtx_offline_y0                    =m_vtx_offline_y0                  ->at(idx);
-      jet.vtx_offline_z0                    =m_vtx_offline_z0                  ->at(idx);
+      m_particles[idx].bs_online_vx                      =m_bs_online_vx                  ->at(idx);
+      m_particles[idx].bs_online_vy                      =m_bs_online_vy                  ->at(idx);
+      m_particles[idx].bs_online_vz                      =m_bs_online_vz                  ->at(idx);
+      m_particles[idx].vtxHadDummy                       =m_vtxHadDummy                   ->at(idx);
+      m_particles[idx].vtx_offline_x0                    =m_vtx_offline_x0                  ->at(idx);
+      m_particles[idx].vtx_offline_y0                    =m_vtx_offline_y0                  ->at(idx);
+      m_particles[idx].vtx_offline_z0                    =m_vtx_offline_z0                  ->at(idx);
 
-      jet.vtx_online_x0                     =m_vtx_online_x0                  ->at(idx);
-      jet.vtx_online_y0                     =m_vtx_online_y0                  ->at(idx);
-      jet.vtx_online_z0                     =m_vtx_online_z0                  ->at(idx);
+      m_particles[idx].vtx_online_x0                     =m_vtx_online_x0                  ->at(idx);
+      m_particles[idx].vtx_online_y0                     =m_vtx_online_y0                  ->at(idx);
+      m_particles[idx].vtx_online_z0                     =m_vtx_online_z0                  ->at(idx);
 
     }
 
   if(m_infoSwitch.m_jetFitterDetails)
     {
-      jet.JetFitter_nVTX                  =m_JetFitter_nVTX           ->at(idx);
-      jet.JetFitter_nSingleTracks         =m_JetFitter_nSingleTracks  ->at(idx);
-      jet.JetFitter_nTracksAtVtx          =m_JetFitter_nTracksAtVtx   ->at(idx);
-      jet.JetFitter_mass                  =m_JetFitter_mass           ->at(idx);
-      jet.JetFitter_energyFraction        =m_JetFitter_energyFraction ->at(idx);
-      jet.JetFitter_significance3d        =m_JetFitter_significance3d ->at(idx);
-      jet.JetFitter_deltaeta              =m_JetFitter_deltaeta       ->at(idx);
-      jet.JetFitter_deltaphi              =m_JetFitter_deltaphi       ->at(idx);
-      jet.JetFitter_N2Tpar                =m_JetFitter_N2Tpar         ->at(idx);
+      m_particles[idx].JetFitter_nVTX                  =m_JetFitter_nVTX           ->at(idx);
+      m_particles[idx].JetFitter_nSingleTracks         =m_JetFitter_nSingleTracks  ->at(idx);
+      m_particles[idx].JetFitter_nTracksAtVtx          =m_JetFitter_nTracksAtVtx   ->at(idx);
+      m_particles[idx].JetFitter_mass                  =m_JetFitter_mass           ->at(idx);
+      m_particles[idx].JetFitter_energyFraction        =m_JetFitter_energyFraction ->at(idx);
+      m_particles[idx].JetFitter_significance3d        =m_JetFitter_significance3d ->at(idx);
+      m_particles[idx].JetFitter_deltaeta              =m_JetFitter_deltaeta       ->at(idx);
+      m_particles[idx].JetFitter_deltaphi              =m_JetFitter_deltaphi       ->at(idx);
+      m_particles[idx].JetFitter_N2Tpar                =m_JetFitter_N2Tpar         ->at(idx);
 
     }
 
   if(m_infoSwitch.m_svDetails){
 
-    jet.SV0            = m_SV0           ->at(idx);
-    jet.sv0_NGTinSvx   = m_sv0_NGTinSvx  ->at(idx);
-    jet.sv0_N2Tpair    = m_sv0_N2Tpair   ->at(idx);
-    jet.sv0_massvx     = m_sv0_massvx    ->at(idx);
-    jet.sv0_efracsvx   = m_sv0_efracsvx  ->at(idx);
-    jet.sv0_normdist   = m_sv0_normdist  ->at(idx);
+    m_particles[idx].SV0            = m_SV0           ->at(idx);
+    m_particles[idx].sv0_NGTinSvx   = m_sv0_NGTinSvx  ->at(idx);
+    m_particles[idx].sv0_N2Tpair    = m_sv0_N2Tpair   ->at(idx);
+    m_particles[idx].sv0_massvx     = m_sv0_massvx    ->at(idx);
+    m_particles[idx].sv0_efracsvx   = m_sv0_efracsvx  ->at(idx);
+    m_particles[idx].sv0_normdist   = m_sv0_normdist  ->at(idx);
 
-    jet.SV1            = m_SV1           ->at(idx);
-    jet.SV1IP3D        = m_SV1IP3D       ->at(idx);
-    jet.sv1_pu         = m_sv1_pu        ->at(idx);
-    jet.sv1_pb         = m_sv1_pb        ->at(idx);
-    jet.sv1_pc         = m_sv1_pc        ->at(idx);
-    jet.sv1_c          = m_sv1_c         ->at(idx);
-    jet.sv1_cu         = m_sv1_cu        ->at(idx);
-    jet.sv1_NGTinSvx   = m_sv1_NGTinSvx  ->at(idx);
-    jet.sv1_N2Tpair    = m_sv1_N2Tpair   ->at(idx);
-    jet.sv1_massvx     = m_sv1_massvx    ->at(idx);
-    jet.sv1_efracsvx   = m_sv1_efracsvx  ->at(idx);
-    jet.sv1_normdist   = m_sv1_normdist  ->at(idx);
-    jet.sv1_Lxy        = m_sv1_Lxy       ->at(idx);
-    jet.sv1_L3d        = m_sv1_L3d       ->at(idx);
-    jet.sv1_distmatlay = m_sv1_distmatlay->at(idx);
-    jet.sv1_dR         = m_sv1_dR        ->at(idx);
+    m_particles[idx].SV1            = m_SV1           ->at(idx);
+    m_particles[idx].SV1IP3D        = m_SV1IP3D       ->at(idx);
+    m_particles[idx].sv1_pu         = m_sv1_pu        ->at(idx);
+    m_particles[idx].sv1_pb         = m_sv1_pb        ->at(idx);
+    m_particles[idx].sv1_pc         = m_sv1_pc        ->at(idx);
+    m_particles[idx].sv1_c          = m_sv1_c         ->at(idx);
+    m_particles[idx].sv1_cu         = m_sv1_cu        ->at(idx);
+    m_particles[idx].sv1_NGTinSvx   = m_sv1_NGTinSvx  ->at(idx);
+    m_particles[idx].sv1_N2Tpair    = m_sv1_N2Tpair   ->at(idx);
+    m_particles[idx].sv1_massvx     = m_sv1_massvx    ->at(idx);
+    m_particles[idx].sv1_efracsvx   = m_sv1_efracsvx  ->at(idx);
+    m_particles[idx].sv1_normdist   = m_sv1_normdist  ->at(idx);
+    m_particles[idx].sv1_Lxy        = m_sv1_Lxy       ->at(idx);
+    m_particles[idx].sv1_L3d        = m_sv1_L3d       ->at(idx);
+    m_particles[idx].sv1_distmatlay = m_sv1_distmatlay->at(idx);
+    m_particles[idx].sv1_dR         = m_sv1_dR        ->at(idx);
   }
 
   if(m_infoSwitch.m_ipDetails){
-    jet.IP2D_pu                          = m_IP2D_pu                   ->at(idx);
-    jet.IP2D_pb                          = m_IP2D_pb                   ->at(idx);
-    jet.IP2D_pc                          = m_IP2D_pc                   ->at(idx);
-    jet.IP2D                             = m_IP2D                      ->at(idx);
-    jet.IP2D_c                           = m_IP2D_c                    ->at(idx);
-    jet.IP2D_cu                          = m_IP2D_cu                   ->at(idx);
-    jet.nIP2DTracks                      = m_IP2D_gradeOfTracks        ->at(idx).size();
+    m_particles[idx].IP2D_pu                          = m_IP2D_pu                   ->at(idx);
+    m_particles[idx].IP2D_pb                          = m_IP2D_pb                   ->at(idx);
+    m_particles[idx].IP2D_pc                          = m_IP2D_pc                   ->at(idx);
+    m_particles[idx].IP2D                             = m_IP2D                      ->at(idx);
+    m_particles[idx].IP2D_c                           = m_IP2D_c                    ->at(idx);
+    m_particles[idx].IP2D_cu                          = m_IP2D_cu                   ->at(idx);
+    m_particles[idx].nIP2DTracks                      = m_IP2D_gradeOfTracks        ->at(idx).size();
 
-    jet.IP2D_gradeOfTracks               = m_IP2D_gradeOfTracks        ->at(idx);
-    jet.IP2D_flagFromV0ofTracks          = m_IP2D_flagFromV0ofTracks   ->at(idx);
-    jet.IP2D_valD0wrtPVofTracks          = m_IP2D_valD0wrtPVofTracks   ->at(idx);
-    jet.IP2D_sigD0wrtPVofTracks          = m_IP2D_sigD0wrtPVofTracks   ->at(idx);
-    jet.IP2D_weightBofTracks             = m_IP2D_weightBofTracks      ->at(idx);
-    jet.IP2D_weightCofTracks             = m_IP2D_weightCofTracks      ->at(idx);
-    jet.IP2D_weightUofTracks             = m_IP2D_weightUofTracks      ->at(idx);
+    m_particles[idx].IP2D_gradeOfTracks               = m_IP2D_gradeOfTracks        ->at(idx);
+    m_particles[idx].IP2D_flagFromV0ofTracks          = m_IP2D_flagFromV0ofTracks   ->at(idx);
+    m_particles[idx].IP2D_valD0wrtPVofTracks          = m_IP2D_valD0wrtPVofTracks   ->at(idx);
+    m_particles[idx].IP2D_sigD0wrtPVofTracks          = m_IP2D_sigD0wrtPVofTracks   ->at(idx);
+    m_particles[idx].IP2D_weightBofTracks             = m_IP2D_weightBofTracks      ->at(idx);
+    m_particles[idx].IP2D_weightCofTracks             = m_IP2D_weightCofTracks      ->at(idx);
+    m_particles[idx].IP2D_weightUofTracks             = m_IP2D_weightUofTracks      ->at(idx);
 
-    jet.IP3D                             = m_IP3D                      ->at(idx);
-    jet.IP3D_pu                          = m_IP3D_pu                   ->at(idx);
-    jet.IP3D_pb                          = m_IP3D_pb                   ->at(idx);
-    jet.IP3D_pc                          = m_IP3D_pc                   ->at(idx);
-    jet.IP3D_c                           = m_IP3D_c                    ->at(idx);
-    jet.IP3D_cu                          = m_IP3D_cu                   ->at(idx);
-    jet.nIP3DTracks                      = m_IP3D_gradeOfTracks        ->at(idx).size();
-    jet.IP3D_gradeOfTracks               = m_IP3D_gradeOfTracks        ->at(idx);
-    jet.IP3D_flagFromV0ofTracks          = m_IP3D_flagFromV0ofTracks   ->at(idx);
-    jet.IP3D_valD0wrtPVofTracks          = m_IP3D_valD0wrtPVofTracks   ->at(idx);
-    jet.IP3D_sigD0wrtPVofTracks          = m_IP3D_sigD0wrtPVofTracks   ->at(idx);
-    jet.IP3D_valZ0wrtPVofTracks          = m_IP3D_valZ0wrtPVofTracks   ->at(idx);
-    jet.IP3D_sigZ0wrtPVofTracks          = m_IP3D_sigZ0wrtPVofTracks   ->at(idx);
-    jet.IP3D_weightBofTracks             = m_IP3D_weightBofTracks      ->at(idx);
-    jet.IP3D_weightCofTracks             = m_IP3D_weightCofTracks      ->at(idx);
-    jet.IP3D_weightUofTracks             = m_IP3D_weightUofTracks      ->at(idx);
+    m_particles[idx].IP3D                             = m_IP3D                      ->at(idx);
+    m_particles[idx].IP3D_pu                          = m_IP3D_pu                   ->at(idx);
+    m_particles[idx].IP3D_pb                          = m_IP3D_pb                   ->at(idx);
+    m_particles[idx].IP3D_pc                          = m_IP3D_pc                   ->at(idx);
+    m_particles[idx].IP3D_c                           = m_IP3D_c                    ->at(idx);
+    m_particles[idx].IP3D_cu                          = m_IP3D_cu                   ->at(idx);
+    m_particles[idx].nIP3DTracks                      = m_IP3D_gradeOfTracks        ->at(idx).size();
+    m_particles[idx].IP3D_gradeOfTracks               = m_IP3D_gradeOfTracks        ->at(idx);
+    m_particles[idx].IP3D_flagFromV0ofTracks          = m_IP3D_flagFromV0ofTracks   ->at(idx);
+    m_particles[idx].IP3D_valD0wrtPVofTracks          = m_IP3D_valD0wrtPVofTracks   ->at(idx);
+    m_particles[idx].IP3D_sigD0wrtPVofTracks          = m_IP3D_sigD0wrtPVofTracks   ->at(idx);
+    m_particles[idx].IP3D_valZ0wrtPVofTracks          = m_IP3D_valZ0wrtPVofTracks   ->at(idx);
+    m_particles[idx].IP3D_sigZ0wrtPVofTracks          = m_IP3D_sigZ0wrtPVofTracks   ->at(idx);
+    m_particles[idx].IP3D_weightBofTracks             = m_IP3D_weightBofTracks      ->at(idx);
+    m_particles[idx].IP3D_weightCofTracks             = m_IP3D_weightCofTracks      ->at(idx);
+    m_particles[idx].IP3D_weightUofTracks             = m_IP3D_weightUofTracks      ->at(idx);
   }
 
   static const std::vector<float> dummy1 = {1.};
@@ -1085,36 +1085,36 @@ void JetContainer::updateParticle(uint idx, Jet& jet)
       switch( m_infoSwitch.m_sfFTagFix[i] ) 
         {
         case 30:
-          jet.MV2c20_isFix30       =m_btag_Fix30->m_isTag->at(idx);
-          jet.MV2c20_sfFix30       =(m_mc)?m_btag_Fix30->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix30       =m_btag_Fix30->m_isTag->at(idx);
+          m_particles[idx].MV2c20_sfFix30       =(m_mc)?m_btag_Fix30->m_sf->at(idx):dummy1;
           break;
         case 50:
-          jet.MV2c20_isFix50       =m_btag_Fix50->m_isTag->at(idx);
-          jet.MV2c20_sfFix50       =(m_mc)?m_btag_Fix50->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix50       =m_btag_Fix50->m_isTag->at(idx);
+          m_particles[idx].MV2c20_sfFix50       =(m_mc)?m_btag_Fix50->m_sf->at(idx):dummy1;
           break;
         case 60:
-          jet.MV2c20_isFix60       =m_btag_Fix60->m_isTag->at(idx);
-          jet.MV2c20_sfFix60       =(m_mc)?m_btag_Fix60->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix60       =m_btag_Fix60->m_isTag->at(idx);
+          m_particles[idx].MV2c20_sfFix60       =(m_mc)?m_btag_Fix60->m_sf->at(idx):dummy1;
           break;
         case 70: 
-          jet.MV2c20_isFix70       =m_btag_Fix70->m_isTag->at(idx);
-          jet.MV2c20_sfFix70       =(m_mc)?m_btag_Fix70->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix70       =m_btag_Fix70->m_isTag->at(idx);
+          m_particles[idx].MV2c20_sfFix70       =(m_mc)?m_btag_Fix70->m_sf->at(idx):dummy1;
           break;
         case 77:
-          jet.MV2c20_isFix77       =m_btag_Fix77->m_isTag->at(idx);
-          jet.MV2c20_sfFix77       =(m_mc)?m_btag_Fix77->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix77       =m_btag_Fix77->m_isTag->at(idx);
+          m_particles[idx].MV2c20_sfFix77       =(m_mc)?m_btag_Fix77->m_sf->at(idx):dummy1;
           break;
         case 80:
-          jet.MV2c20_isFix80       =m_btag_Fix80->m_isTag->at(idx);
-          jet.MV2c20_sfFix80       =(m_mc)?m_btag_Fix80->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix80       =m_btag_Fix80->m_isTag->at(idx);
+          m_particles[idx].MV2c20_sfFix80       =(m_mc)?m_btag_Fix80->m_sf->at(idx):dummy1;
           break;
         case 85:
-          jet.MV2c20_isFix85       =m_btag_Fix85->m_isTag ->at(idx);
-          jet.MV2c20_sfFix85       =(m_mc)?m_btag_Fix85->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix85       =m_btag_Fix85->m_isTag ->at(idx);
+          m_particles[idx].MV2c20_sfFix85       =(m_mc)?m_btag_Fix85->m_sf->at(idx):dummy1;
           break;
         case 90:
-          jet.MV2c20_isFix90       =m_btag_Fix90->m_isTag       ->at(idx);
-          jet.MV2c20_sfFix90       =(m_mc)?m_btag_Fix90->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFix90       =m_btag_Fix90->m_isTag       ->at(idx);
+          m_particles[idx].MV2c20_sfFix90       =(m_mc)?m_btag_Fix90->m_sf->at(idx):dummy1;
           break;
         }
     }
@@ -1124,28 +1124,28 @@ void JetContainer::updateParticle(uint idx, Jet& jet)
       switch( m_infoSwitch.m_sfFTagFlt[i] ) 
         {
         case 30:
-          jet.MV2c20_isFlt30       =m_btag_Flt30->m_isTag       ->at(idx);
-          jet.MV2c20_sfFlt30       =(m_mc)?m_btag_Flt30->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFlt30       =m_btag_Flt30->m_isTag       ->at(idx);
+          m_particles[idx].MV2c20_sfFlt30       =(m_mc)?m_btag_Flt30->m_sf->at(idx):dummy1;
           break;
         case 50:
-          jet.MV2c20_isFlt50       =m_btag_Flt50->m_isTag       ->at(idx);
-          jet.MV2c20_sfFlt50       =(m_mc)?m_btag_Flt50->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFlt50       =m_btag_Flt50->m_isTag       ->at(idx);
+          m_particles[idx].MV2c20_sfFlt50       =(m_mc)?m_btag_Flt50->m_sf->at(idx):dummy1;
           break;
         case 60:
-          jet.MV2c20_isFlt60       =m_btag_Flt60->m_isTag       ->at(idx);
-          jet.MV2c20_sfFlt60       =(m_mc)?m_btag_Flt60->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFlt60       =m_btag_Flt60->m_isTag       ->at(idx);
+          m_particles[idx].MV2c20_sfFlt60       =(m_mc)?m_btag_Flt60->m_sf->at(idx):dummy1;
           break;
         case 70:
-          jet.MV2c20_isFlt70       =m_btag_Flt70->m_isTag       ->at(idx);
-          jet.MV2c20_sfFlt70       =(m_mc)?m_btag_Flt70->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFlt70       =m_btag_Flt70->m_isTag       ->at(idx);
+          m_particles[idx].MV2c20_sfFlt70       =(m_mc)?m_btag_Flt70->m_sf->at(idx):dummy1;
           break;
         case 77:
-          jet.MV2c20_isFlt77       =m_btag_Flt77->m_isTag       ->at(idx);
-          jet.MV2c20_sfFlt77       =(m_mc)?m_btag_Flt77->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFlt77       =m_btag_Flt77->m_isTag       ->at(idx);
+          m_particles[idx].MV2c20_sfFlt77       =(m_mc)?m_btag_Flt77->m_sf->at(idx):dummy1;
           break;
         case 85:
-          jet.MV2c20_isFlt85       =m_btag_Flt85->m_isTag       ->at(idx);
-          jet.MV2c20_sfFlt85       =(m_mc)?m_btag_Flt85->m_sf->at(idx):dummy1;
+          m_particles[idx].MV2c20_isFlt85       =m_btag_Flt85->m_isTag       ->at(idx);
+          m_particles[idx].MV2c20_sfFlt85       =(m_mc)?m_btag_Flt85->m_sf->at(idx):dummy1;
           break;
         }
     }
@@ -1154,15 +1154,15 @@ void JetContainer::updateParticle(uint idx, Jet& jet)
   // truth
   if(m_infoSwitch.m_truth)
     {
-      jet.ConeTruthLabelID  =m_ConeTruthLabelID->at(idx);
-      jet.TruthCount        =m_TruthCount      ->at(idx);
-      jet.TruthLabelDeltaR_B=m_TruthLabelDeltaR_B->at(idx);
-      jet.TruthLabelDeltaR_C=m_TruthLabelDeltaR_C->at(idx);
-      jet.TruthLabelDeltaR_T=m_TruthLabelDeltaR_T->at(idx);
-      jet.PartonTruthLabelID=m_PartonTruthLabelID->at(idx);
-      jet.GhostTruthAssociationFraction= m_GhostTruthAssociationFraction->at(idx);
+      m_particles[idx].ConeTruthLabelID  =m_ConeTruthLabelID->at(idx);
+      m_particles[idx].TruthCount        =m_TruthCount      ->at(idx);
+      m_particles[idx].TruthLabelDeltaR_B=m_TruthLabelDeltaR_B->at(idx);
+      m_particles[idx].TruthLabelDeltaR_C=m_TruthLabelDeltaR_C->at(idx);
+      m_particles[idx].TruthLabelDeltaR_T=m_TruthLabelDeltaR_T->at(idx);
+      m_particles[idx].PartonTruthLabelID=m_PartonTruthLabelID->at(idx);
+      m_particles[idx].GhostTruthAssociationFraction= m_GhostTruthAssociationFraction->at(idx);
 
-      jet.truth_p4.SetPtEtaPhiE(m_truth_pt ->at(idx),
+      m_particles[idx].truth_p4.SetPtEtaPhiE(m_truth_pt ->at(idx),
                                 m_truth_eta->at(idx),
                                 m_truth_phi->at(idx),
                                 m_truth_E  ->at(idx));
@@ -1171,7 +1171,7 @@ void JetContainer::updateParticle(uint idx, Jet& jet)
   // charge
   if(m_infoSwitch.m_charge)
     {
-      jet.charge=m_charge->at(idx);
+      m_particles[idx].charge=m_charge->at(idx);
     }
 
   return;

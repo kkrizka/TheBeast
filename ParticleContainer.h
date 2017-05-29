@@ -10,6 +10,8 @@
 
 #include "Particle.h"
 
+#define MAX_PARTICLES 100
+
 template <class T_PARTICLE, class T_INFOSWITCH>
 class ParticleContainer
 {
@@ -108,13 +110,11 @@ public:
 
   void updateEntry()
   {
-    m_particles.clear();
-    
     for(int i=0;i<m_n;i++)
       {
-	T_PARTICLE particle;
-	updateParticle(i,particle);
-	m_particles.push_back(particle);
+	//T_PARTICLE particle;
+	updateParticle(i);
+	//m_particles.push_back(particle);
       }
   }
     
@@ -126,9 +126,6 @@ public:
   
   const T_PARTICLE& operator[](uint idx) const
   { return m_particles[idx]; }
-
-  uint size() const
-  { return m_particles.size(); }
 
 
 protected:
@@ -151,28 +148,28 @@ protected:
     tree->Branch(name.c_str(),        localVectorPtr);
   }
 
-  virtual void updateParticle(uint idx, T_PARTICLE& particle)
+  virtual void updateParticle(uint idx)
   {
     if(m_infoSwitch.m_kinematic)
       {
 	if(m_useMass){
-	  particle.p4.SetPtEtaPhiM(m_pt ->at(idx),
-				   m_eta->at(idx),
-				   m_phi->at(idx),
-				   m_M  ->at(idx));
+	  m_particles[idx].p4.SetPtEtaPhiM(m_pt ->at(idx),
+					   m_eta->at(idx),
+					   m_phi->at(idx),
+					   m_M  ->at(idx));
 
 	} else{
-	  particle.p4.SetPtEtaPhiE(m_pt ->at(idx),
-				   m_eta->at(idx),
-				   m_phi->at(idx),
-				   m_E  ->at(idx));
+	  m_particles[idx].p4.SetPtEtaPhiE(m_pt ->at(idx),
+					   m_eta->at(idx),
+					   m_phi->at(idx),
+					   m_E  ->at(idx));
 	}
       }
   }
     
   std::string m_name;
-    
-  std::vector<T_PARTICLE> m_particles;
+
+  T_PARTICLE m_particles[MAX_PARTICLES];
     
 public:
   T_INFOSWITCH m_infoSwitch;

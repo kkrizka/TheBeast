@@ -17,6 +17,8 @@ SET(HEADERS
 
   DijetISREvent.h
   EventHists.h
+  IParticleHists.h
+  JetHists.h
   ZprimeResonanceHists.h
   ZprimeGammaJetJetSelection.h)
 
@@ -39,6 +41,8 @@ SET(SRCS TheBeast.cxx
   Jet.cxx
   Photon.cxx
   EventHists.cxx
+  IParticleHists.cxx
+  JetHists.cxx
   ZprimeResonanceHists.cxx
   ZprimeGammaJetJetSelection.cxx)
 

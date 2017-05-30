@@ -26,7 +26,7 @@ def main():
     #
     # data16 sample
     dataevent=ROOT.DijetISREvent(False, False)
-    dataevent.initializeJets   ('jet','kinematic')
+    dataevent.initializeJets   ('jet','kinematic clean layer trackPV energy flavTag')
     dataevent.initializePhotons('ph' ,'kinematic')
 
     bigsample=ROOT.TheSampleList('filelists/data16.gammajet.NTUP.txt',"outTree",dataevent)
@@ -40,9 +40,10 @@ def main():
     # histograms
     thebeast.ratPack().addHists("event", ROOT.EventHists());
     thebeast.ratPack().addHists("reso" , ROOT.ZprimeResonanceHists());
+    thebeast.ratPack().addHists("jet0" , ROOT.JetHists(ROOT.DijetISREvent.jet, 0, "leading jet"));
 
     #
     # plot
-    h=thebeast.get('big','reso/mjj')
+    h=thebeast.get('big','jet0/Pt')
     plottools.plot(h)
 

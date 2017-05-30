@@ -16,6 +16,8 @@
 class DijetISREvent : public TheEvent
 {
 public:
+  enum Container {jet, photon};
+
   DijetISREvent(bool mc, bool truthOnly);
   virtual ~DijetISREvent();
 

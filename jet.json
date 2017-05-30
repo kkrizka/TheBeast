@@ -1,0 +1,38 @@
+{
+    "rapidity" : {
+	"rapidity" : ["rapidity", 120, -3.0, 3.0]
+    },
+
+    "clean" : {
+	"Timing"                     : ["Timming"                   , 120, -80  ,   80],
+	"LArQuality"                 : ["LAr Quality"               , 120,-600  ,  600],
+	"HECQuality"                 : ["HEC Quality"               , 120, -10  ,   10],
+	"NegativeE"                  : ["Negative Energy"           , 120, -10  ,   10],
+	"AverageLArQF"               : ["<LAr Quality Factor>"      , 120,   0  , 1000],
+	"BchCorrCell"                : ["BCH Corr Cell"             , 120,   0  ,  600],
+	"N90Constituents"            : ["N90 Constituents"          , 120,   0  ,   40],
+	"LArBadHVEFrac"              : ["LAr Bad HV Energy Fraction", 120,   0  ,    1],
+	"LArBadHVNCell"              : ["LAr Bad HV N_{cells}",       120,  -0.5,  499.5],
+	"OotFracClusters5"           : ["OotFracClusters5"          , 120,   0  ,    1],
+	"OotFracClusters10"          : ["OotFracClusters10"         , 120,   0  ,    1],
+	"LeadingClusterPt"           : ["Leading Cluster P_{T}"     , 120,   0  , 1000],
+	"LeadingClusterSecondLambda" : ["LeadingClusterSecondLambda",  20,   0  , 1000e3],
+	"LeadingClusterCenterLambda" : ["LeadingClusterCenterLambda", 120,   0  , 5000],
+	"LeadingClusterSecondR"      : ["LeadingClusterSecondR"     , 120,   0  ,  300e3],
+	"clean_passLooseBad"         : ["LooseBad Cleaning Flag"    ,   2,  -0.5,    1.5],
+	"clean_passLooseBadUgly"     : ["LooseBadUgly Cleaning Flag",   2,  -0.5,    1.5],
+	"clean_passTightBad"         : ["TightBad Cleaning Flag"    ,   2,  -0.5,   1.5],
+	"clean_passTightBadUgly"     : ["TightBadUgly Cleaning Flag",   2,  -0.5,   1.5]
+    },
+
+    "energy" : {
+	"HECFrac"               : ["HEC Fraction"         , 120,  0  ,   5],
+	"EMFrac"                : ["EM Fraction"          , 120,  0  ,   2],
+	"CentroidR"             : ["CentroidR"            , 120,  0  , 600],
+	"FracSamplingMax"       : ["FracSamplingMax"      , 120,  0  ,   1],
+	"FracSamplingMaxIndex"  : ["FracSamplingMaxIndex" ,  22, -0.5,  21.5],
+	"LowEtConstituentsFrac" : ["LowEtConstituentsFrac", 120,  0  ,   1],
+	"GhostMuonSegmentCount" : ["GhostMuonSegmentCount",  10, -0.5,   9.5],
+	"Width"                 : ["Width"                , 100,  0  ,   0.5]
+    }
+}

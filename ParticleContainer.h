@@ -111,11 +111,7 @@ public:
   void updateEntry()
   {
     for(int i=0;i<m_n;i++)
-      {
-	//T_PARTICLE particle;
-	updateParticle(i);
-	//m_particles.push_back(particle);
-      }
+      updateParticle(i);
   }
     
   T_PARTICLE& at_nonConst(uint idx)

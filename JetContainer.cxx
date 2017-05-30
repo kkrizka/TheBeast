@@ -5,7 +5,7 @@ JetContainer::JetContainer(const std::string& name, const std::string& detailStr
 {
   // rapidity
   if(m_infoSwitch.m_rapidity) {
-    m_rapidity                    =new std::vector<float>();
+    m_rapidity                  =new std::vector<float>();
   }
 
   // clean

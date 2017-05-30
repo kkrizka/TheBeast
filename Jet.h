@@ -2,7 +2,6 @@
 #define JET_H_
 
 #include "Particle.h"
-#include "MuonContainer.h"
 
 class Jet : public Particle
 {

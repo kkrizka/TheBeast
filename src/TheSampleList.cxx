@@ -16,6 +16,10 @@ TheSampleList::TheSampleList(const std::string& path, const std::string& tree, T
       m_chain->Add(line.c_str());
     }
   m_event->setTree(m_chain);
+
+  m_chain->SetCacheSize(128*1024*1024);
+  m_chain->SetCacheLearnEntries(10000);
+  m_chain->AddBranchToCache("*");
 }
 
 TheSampleList::~TheSampleList()

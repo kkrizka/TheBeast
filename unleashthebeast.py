@@ -5,7 +5,7 @@ from prot import plottools
 thebeast=ROOT.TheBeast.rawr()
 
 def main():
-    ROOT.gSystem.Load('libTheBeast.so')
+    ROOT.gSystem.Load('src/libTheBeast.so')
 
     testevent=ROOT.DijetISREvent(True, False)
     testevent.initializeJets   ('jet','kinematic useTheS')
@@ -41,6 +41,8 @@ def main():
     thebeast.ratPack().addHists("event", ROOT.EventHists());
     thebeast.ratPack().addHists("reso" , ROOT.ZprimeResonanceHists());
     thebeast.ratPack().addHists("jet0" , ROOT.JetHists(ROOT.DijetISREvent.jet, 0, "leading jet"));
+    thebeast.ratPack().addHists("jet1" , ROOT.JetHists(ROOT.DijetISREvent.jet, 1, "subleading jet"));
+    thebeast.ratPack().addHists("jet2" , ROOT.JetHists(ROOT.DijetISREvent.jet, 2, "third jet"));
 
     #
     # plot

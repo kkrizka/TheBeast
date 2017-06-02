@@ -10,6 +10,8 @@ SET(HEADERS
   TheSelection.h
 
   DijetISREvent.h
+  Particle.h
+  Jet.h
   EventHists.h
   IParticleHists.h
   JetHists.h

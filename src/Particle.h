@@ -3,12 +3,12 @@
 
 #include <TLorentzVector.h>
 
-class Particle
+class Particle : public TObject
 {
-    
- public:
+  ClassDef(Particle, 1);
+public:
 
-  //Particle() {};
+  Particle() {};
   virtual ~Particle() {}
 
   TLorentzVector p4;

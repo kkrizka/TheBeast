@@ -5,8 +5,11 @@
 
 class Jet : public Particle
 {
+  ClassDef(Jet, 1);
 public:
-      
+  Jet() : Particle() {}
+  virtual ~Jet() {}
+
   float rapidity;
 
   // clean

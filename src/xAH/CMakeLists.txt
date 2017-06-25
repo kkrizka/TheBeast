@@ -3,6 +3,8 @@ SET(HEADERS
   Jet.h
   Photon.h
   Muon.h
+  TrackParticle.h
+  JetConstituent.h
 )
 
 SET(SRCS)

@@ -165,31 +165,31 @@ JetContainer::JetContainer(const std::string& name, const std::string& detailStr
     // SV Details
     if( m_infoSwitch.m_svDetails){
 
-      m_SV0               = new      std::vector<float>();
+      m_SV0                     = new      std::vector<float>();
 
 
-      m_sv0_NGTinSvx      = new     std::vector<float>(); 
-      m_sv0_N2Tpair       = new     std::vector<float>(); 
-      m_sv0_massvx        = new     std::vector<float>(); 
-      m_sv0_efracsvx      = new     std::vector<float>(); 
-      m_sv0_normdist      = new     std::vector<float>(); 
+      m_SV0_NGTinSvx            = new     std::vector<float>(); 
+      m_SV0_N2Tpair             = new     std::vector<float>(); 
+      m_SV0_masssvx             = new     std::vector<float>(); 
+      m_SV0_efracsvx            = new     std::vector<float>(); 
+      m_SV0_normdist            = new     std::vector<float>(); 
 
-      m_SV1               = new     std::vector<float>();
-      m_SV1IP3D           = new     std::vector<float>();
-      m_sv1_pu            = new     std::vector<float>(); 
-      m_sv1_pb            = new     std::vector<float>(); 
-      m_sv1_pc            = new     std::vector<float>(); 
-      m_sv1_c             = new     std::vector<float>(); 
-      m_sv1_cu            = new     std::vector<float>(); 
-      m_sv1_NGTinSvx      = new     std::vector<float>(); 
-      m_sv1_N2Tpair       = new     std::vector<float>(); 
-      m_sv1_massvx        = new     std::vector<float>(); 
-      m_sv1_efracsvx      = new     std::vector<float>(); 
-      m_sv1_normdist      = new     std::vector<float>(); 
-      m_sv1_Lxy           = new     std::vector<float>(); 
-      m_sv1_L3d           = new     std::vector<float>(); 
-      m_sv1_distmatlay    = new     std::vector<float>(); 
-      m_sv1_dR            = new     std::vector<float>(); 
+      m_SV1                     = new     std::vector<float>();
+      m_SV1plusIP3D_discriminant= new     std::vector<float>();
+      m_SV1_pu                  = new     std::vector<float>(); 
+      m_SV1_pb                  = new     std::vector<float>(); 
+      m_SV1_pc                  = new     std::vector<float>(); 
+      m_SV1_c                   = new     std::vector<float>(); 
+      m_SV1_cu                  = new     std::vector<float>(); 
+      m_SV1_NGTinSvx            = new     std::vector<float>(); 
+      m_SV1_N2Tpair             = new     std::vector<float>(); 
+      m_SV1_masssvx             = new     std::vector<float>(); 
+      m_SV1_efracsvx            = new     std::vector<float>(); 
+      m_SV1_normdist            = new     std::vector<float>(); 
+      m_SV1_Lxy                 = new     std::vector<float>(); 
+      m_SV1_L3d                 = new     std::vector<float>(); 
+      m_SV1_distmatlay          = new     std::vector<float>(); 
+      m_SV1_dR                  = new     std::vector<float>(); 
     }
 
     // IP3D
@@ -502,28 +502,28 @@ JetContainer::~JetContainer()
     if( m_infoSwitch.m_svDetails){
 
       delete m_SV0;
-      delete m_sv0_NGTinSvx  ; 
-      delete m_sv0_N2Tpair   ; 
-      delete m_sv0_massvx    ; 
-      delete m_sv0_efracsvx  ; 
-      delete m_sv0_normdist  ; 
+      delete m_SV0_NGTinSvx            ;
+      delete m_SV0_N2Tpair             ;
+      delete m_SV0_masssvx             ;
+      delete m_SV0_efracsvx            ;
+      delete m_SV0_normdist            ;
 
-      delete m_SV1;
-      delete m_SV1IP3D;
-      delete m_sv1_pu        ; 
-      delete m_sv1_pb        ; 
-      delete m_sv1_pc        ; 
-      delete m_sv1_c         ; 
-      delete m_sv1_cu        ; 
-      delete m_sv1_NGTinSvx  ; 
-      delete m_sv1_N2Tpair   ; 
-      delete m_sv1_massvx    ; 
-      delete m_sv1_efracsvx  ; 
-      delete m_sv1_normdist  ; 
-      delete m_sv1_Lxy       ; 
-      delete m_sv1_L3d       ; 
-      delete m_sv1_distmatlay; 
-      delete m_sv1_dR        ; 
+      delete m_SV1                     ;
+      delete m_SV1plusIP3D_discriminant;
+      delete m_SV1_pu                  ;
+      delete m_SV1_pb                  ;
+      delete m_SV1_pc                  ;
+      delete m_SV1_c                   ;
+      delete m_SV1_cu                  ;
+      delete m_SV1_NGTinSvx            ;
+      delete m_SV1_N2Tpair             ;
+      delete m_SV1_masssvx             ;
+      delete m_SV1_efracsvx            ;
+      delete m_SV1_normdist            ;
+      delete m_SV1_Lxy                 ;
+      delete m_SV1_L3d                 ;
+      delete m_SV1_distmatlay          ;
+      delete m_SV1_dR                  ;
     }
 
     // IP3D
@@ -797,28 +797,28 @@ void JetContainer::setTree(TTree *tree, const std::string& tagger)
     if( m_infoSwitch.m_svDetails){
 
       connectBranch<float>(tree, "SV0",               &m_SV0);
-      connectBranch<float>(tree, "sv0_NGTinSvx",      &m_sv0_NGTinSvx  );
-      connectBranch<float>(tree, "sv0_N2Tpair",       &m_sv0_N2Tpair   );
-      connectBranch<float>(tree, "sv0_massvx",        &m_sv0_massvx    );
-      connectBranch<float>(tree, "sv0_efracsvx",      &m_sv0_efracsvx  );
-      connectBranch<float>(tree, "sv0_normdist",      &m_sv0_normdist  );
+      connectBranch<float>(tree, "SV0_NGTinSvx",      &m_SV0_NGTinSvx            );
+      connectBranch<float>(tree, "SV0_N2Tpair",       &m_SV0_N2Tpair             );
+      connectBranch<float>(tree, "SV0_massvx",        &m_SV0_masssvx             );
+      connectBranch<float>(tree, "SV0_efracsvx",      &m_SV0_efracsvx            );
+      connectBranch<float>(tree, "SV0_normdist",      &m_SV0_normdist            );
 
-      connectBranch<float>(tree, "SV1",               &m_SV1);
-      connectBranch<float>(tree, "SV1IP3D",           &m_SV1IP3D);
-      connectBranch<float>(tree, "sv1_pu",            &m_sv1_pu        );
-      connectBranch<float>(tree, "sv1_pb",            &m_sv1_pb        );
-      connectBranch<float>(tree, "sv1_pc",            &m_sv1_pc        );
-      connectBranch<float>(tree, "sv1_c",             &m_sv1_c         );
-      connectBranch<float>(tree, "sv1_cu",            &m_sv1_cu        );
-      connectBranch<float>(tree, "sv1_NGTinSvx",      &m_sv1_NGTinSvx  );
-      connectBranch<float>(tree, "sv1_N2Tpair",       &m_sv1_N2Tpair   );
-      connectBranch<float>(tree, "sv1_massvx",        &m_sv1_massvx    );
-      connectBranch<float>(tree, "sv1_efracsvx",      &m_sv1_efracsvx  );
-      connectBranch<float>(tree, "sv1_normdist",      &m_sv1_normdist  );
-      connectBranch<float>(tree, "sv1_Lxy",           &m_sv1_Lxy       );
-      connectBranch<float>(tree, "sv1_L3d",           &m_sv1_L3d       );
-      connectBranch<float>(tree, "sv1_distmatlay",    &m_sv1_distmatlay);
-      connectBranch<float>(tree, "sv1_dR",            &m_sv1_dR        );
+      connectBranch<float>(tree, "SV1",               &m_SV1                     );
+      connectBranch<float>(tree, "SV1IP3D",           &m_SV1plusIP3D_discriminant);
+      connectBranch<float>(tree, "SV1_pu",            &m_SV1_pu                  );
+      connectBranch<float>(tree, "SV1_pb",            &m_SV1_pb                  );
+      connectBranch<float>(tree, "SV1_pc",            &m_SV1_pc                  );
+      connectBranch<float>(tree, "SV1_c",             &m_SV1_c                   );
+      connectBranch<float>(tree, "SV1_cu",            &m_SV1_cu                  );
+      connectBranch<float>(tree, "SV1_NGTinSvx",      &m_SV1_NGTinSvx            );
+      connectBranch<float>(tree, "SV1_N2Tpair",       &m_SV1_N2Tpair             );
+      connectBranch<float>(tree, "SV1_massvx",        &m_SV1_masssvx             );
+      connectBranch<float>(tree, "SV1_efracsvx",      &m_SV1_efracsvx            );
+      connectBranch<float>(tree, "SV1_normdist",      &m_SV1_normdist            );
+      connectBranch<float>(tree, "SV1_Lxy",           &m_SV1_Lxy                 );
+      connectBranch<float>(tree, "SV1_L3d",           &m_SV1_L3d                 );
+      connectBranch<float>(tree, "SV1_distmatlay",    &m_SV1_distmatlay          );
+      connectBranch<float>(tree, "SV1_dR",            &m_SV1_dR                  );
 
     }
 
@@ -927,7 +927,7 @@ void JetContainer::updateParticle(uint idx)
       m_particles[idx].AverageLArQF              =m_AverageLArQF              ->at(idx);
       m_particles[idx].BchCorrCell               =m_BchCorrCell               ->at(idx);
       m_particles[idx].N90Constituents           =m_N90Constituents           ->at(idx);
-      m_particles[idx].LArBadHVEFrac             =m_LArBadHVEnergyFrac       ->at(idx);
+      m_particles[idx].LArBadHVEnergyFrac        =m_LArBadHVEnergyFrac       ->at(idx);
       m_particles[idx].LArBadHVNCell             =m_LArBadHVNCell             ->at(idx);
       m_particles[idx].OotFracClusters5          =m_OotFracClusters5          ->at(idx);
       m_particles[idx].OotFracClusters10         =m_OotFracClusters10         ->at(idx);
@@ -972,7 +972,7 @@ void JetContainer::updateParticle(uint idx)
     }
   
   if( m_infoSwitch.m_JVC ) {
-    m_particles[idx].JVC = m_JetVertexCharge_discriminant->at(idx);
+    m_particles[idx].JetVertexCharge_discriminant = m_JetVertexCharge_discriminant->at(idx);
   }
 
   if(m_infoSwitch.m_flavTag  || m_infoSwitch.m_flavTagHLT)
@@ -1019,29 +1019,29 @@ void JetContainer::updateParticle(uint idx)
 
   if(m_infoSwitch.m_svDetails){
 
-    m_particles[idx].SV0            = m_SV0           ->at(idx);
-    m_particles[idx].sv0_NGTinSvx   = m_sv0_NGTinSvx  ->at(idx);
-    m_particles[idx].sv0_N2Tpair    = m_sv0_N2Tpair   ->at(idx);
-    m_particles[idx].sv0_massvx     = m_sv0_massvx    ->at(idx);
-    m_particles[idx].sv0_efracsvx   = m_sv0_efracsvx  ->at(idx);
-    m_particles[idx].sv0_normdist   = m_sv0_normdist  ->at(idx);
+    m_particles[idx].SV0                      = m_SV0           ->at(idx);
+    m_particles[idx].SV0_NGTinSvx             = m_SV0_NGTinSvx  ->at(idx);
+    m_particles[idx].SV0_N2Tpair              = m_SV0_N2Tpair   ->at(idx);
+    m_particles[idx].SV0_masssvx              = m_SV0_masssvx   ->at(idx);
+    m_particles[idx].SV0_efracsvx             = m_SV0_efracsvx  ->at(idx);
+    m_particles[idx].SV0_normdist             = m_SV0_normdist  ->at(idx);
 
-    m_particles[idx].SV1            = m_SV1           ->at(idx);
-    m_particles[idx].SV1IP3D        = m_SV1IP3D       ->at(idx);
-    m_particles[idx].sv1_pu         = m_sv1_pu        ->at(idx);
-    m_particles[idx].sv1_pb         = m_sv1_pb        ->at(idx);
-    m_particles[idx].sv1_pc         = m_sv1_pc        ->at(idx);
-    m_particles[idx].sv1_c          = m_sv1_c         ->at(idx);
-    m_particles[idx].sv1_cu         = m_sv1_cu        ->at(idx);
-    m_particles[idx].sv1_NGTinSvx   = m_sv1_NGTinSvx  ->at(idx);
-    m_particles[idx].sv1_N2Tpair    = m_sv1_N2Tpair   ->at(idx);
-    m_particles[idx].sv1_massvx     = m_sv1_massvx    ->at(idx);
-    m_particles[idx].sv1_efracsvx   = m_sv1_efracsvx  ->at(idx);
-    m_particles[idx].sv1_normdist   = m_sv1_normdist  ->at(idx);
-    m_particles[idx].sv1_Lxy        = m_sv1_Lxy       ->at(idx);
-    m_particles[idx].sv1_L3d        = m_sv1_L3d       ->at(idx);
-    m_particles[idx].sv1_distmatlay = m_sv1_distmatlay->at(idx);
-    m_particles[idx].sv1_dR         = m_sv1_dR        ->at(idx);
+    m_particles[idx].SV1                      = m_SV1           ->at(idx);
+    m_particles[idx].SV1plusIP3D_discriminant = m_SV1plusIP3D_discriminant       ->at(idx);
+    m_particles[idx].SV1_pu                   = m_SV1_pu        ->at(idx);
+    m_particles[idx].SV1_pb                   = m_SV1_pb        ->at(idx);
+    m_particles[idx].SV1_pc                   = m_SV1_pc        ->at(idx);
+    m_particles[idx].SV1_c                    = m_SV1_c         ->at(idx);
+    m_particles[idx].SV1_cu                   = m_SV1_cu        ->at(idx);
+    m_particles[idx].SV1_NGTinSvx             = m_SV1_NGTinSvx  ->at(idx);
+    m_particles[idx].SV1_N2Tpair              = m_SV1_N2Tpair   ->at(idx);
+    m_particles[idx].SV1_masssvx              = m_SV1_masssvx   ->at(idx);
+    m_particles[idx].SV1_efracsvx             = m_SV1_efracsvx  ->at(idx);
+    m_particles[idx].SV1_normdist             = m_SV1_normdist  ->at(idx);
+    m_particles[idx].SV1_Lxy                  = m_SV1_Lxy       ->at(idx);
+    m_particles[idx].SV1_L3d                  = m_SV1_L3d       ->at(idx);
+    m_particles[idx].SV1_distmatlay           = m_SV1_distmatlay->at(idx);
+    m_particles[idx].SV1_dR                   = m_SV1_dR        ->at(idx);
   }
 
   if(m_infoSwitch.m_ipDetails){
@@ -1053,8 +1053,8 @@ void JetContainer::updateParticle(uint idx)
     m_particles[idx].IP2D_cu                          = m_IP2D_cu                   ->at(idx);
     m_particles[idx].nIP2DTracks                      = m_IP2D_gradeOfTracks        ->at(idx).size();
 
-    m_particles[idx].IP2D_gradeOfTracks               = m_IP2D_gradeOfTracks        ->at(idx);
-    m_particles[idx].IP2D_flagFromV0ofTracks          = m_IP2D_flagFromV0ofTracks   ->at(idx);
+    //m_particles[idx].IP2D_gradeOfTracks               = m_IP2D_gradeOfTracks        ->at(idx);
+    //m_particles[idx].IP2D_flagFromV0ofTracks          = m_IP2D_flagFromV0ofTracks   ->at(idx);
     m_particles[idx].IP2D_valD0wrtPVofTracks          = m_IP2D_valD0wrtPVofTracks   ->at(idx);
     m_particles[idx].IP2D_sigD0wrtPVofTracks          = m_IP2D_sigD0wrtPVofTracks   ->at(idx);
     m_particles[idx].IP2D_weightBofTracks             = m_IP2D_weightBofTracks      ->at(idx);
@@ -1068,8 +1068,8 @@ void JetContainer::updateParticle(uint idx)
     m_particles[idx].IP3D_c                           = m_IP3D_c                    ->at(idx);
     m_particles[idx].IP3D_cu                          = m_IP3D_cu                   ->at(idx);
     m_particles[idx].nIP3DTracks                      = m_IP3D_gradeOfTracks        ->at(idx).size();
-    m_particles[idx].IP3D_gradeOfTracks               = m_IP3D_gradeOfTracks        ->at(idx);
-    m_particles[idx].IP3D_flagFromV0ofTracks          = m_IP3D_flagFromV0ofTracks   ->at(idx);
+    //m_particles[idx].IP3D_gradeOfTracks               = m_IP3D_gradeOfTracks        ->at(idx);
+    //m_particles[idx].IP3D_flagFromV0ofTracks          = m_IP3D_flagFromV0ofTracks   ->at(idx);
     m_particles[idx].IP3D_valD0wrtPVofTracks          = m_IP3D_valD0wrtPVofTracks   ->at(idx);
     m_particles[idx].IP3D_sigD0wrtPVofTracks          = m_IP3D_sigD0wrtPVofTracks   ->at(idx);
     m_particles[idx].IP3D_valZ0wrtPVofTracks          = m_IP3D_valZ0wrtPVofTracks   ->at(idx);
@@ -1085,36 +1085,36 @@ void JetContainer::updateParticle(uint idx)
       switch( m_infoSwitch.m_sfFTagFix[i] ) 
         {
         case 30:
-          m_particles[idx].MV2c20_isFix30       =m_btag_Fix30->m_isTag->at(idx);
-          m_particles[idx].MV2c20_sfFix30       =(m_mc)?m_btag_Fix30->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix30       =m_btag_Fix30->m_isTag->at(idx);
+          m_particles[idx].sfFix30       =(m_mc)?m_btag_Fix30->m_sf->at(idx):dummy1;
           break;
         case 50:
-          m_particles[idx].MV2c20_isFix50       =m_btag_Fix50->m_isTag->at(idx);
-          m_particles[idx].MV2c20_sfFix50       =(m_mc)?m_btag_Fix50->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix50       =m_btag_Fix50->m_isTag->at(idx);
+          m_particles[idx].sfFix50       =(m_mc)?m_btag_Fix50->m_sf->at(idx):dummy1;
           break;
         case 60:
-          m_particles[idx].MV2c20_isFix60       =m_btag_Fix60->m_isTag->at(idx);
-          m_particles[idx].MV2c20_sfFix60       =(m_mc)?m_btag_Fix60->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix60       =m_btag_Fix60->m_isTag->at(idx);
+          m_particles[idx].sfFix60       =(m_mc)?m_btag_Fix60->m_sf->at(idx):dummy1;
           break;
         case 70: 
-          m_particles[idx].MV2c20_isFix70       =m_btag_Fix70->m_isTag->at(idx);
-          m_particles[idx].MV2c20_sfFix70       =(m_mc)?m_btag_Fix70->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix70       =m_btag_Fix70->m_isTag->at(idx);
+          m_particles[idx].sfFix70       =(m_mc)?m_btag_Fix70->m_sf->at(idx):dummy1;
           break;
         case 77:
-          m_particles[idx].MV2c20_isFix77       =m_btag_Fix77->m_isTag->at(idx);
-          m_particles[idx].MV2c20_sfFix77       =(m_mc)?m_btag_Fix77->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix77       =m_btag_Fix77->m_isTag->at(idx);
+          m_particles[idx].sfFix77       =(m_mc)?m_btag_Fix77->m_sf->at(idx):dummy1;
           break;
         case 80:
-          m_particles[idx].MV2c20_isFix80       =m_btag_Fix80->m_isTag->at(idx);
-          m_particles[idx].MV2c20_sfFix80       =(m_mc)?m_btag_Fix80->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix80       =m_btag_Fix80->m_isTag->at(idx);
+          m_particles[idx].sfFix80       =(m_mc)?m_btag_Fix80->m_sf->at(idx):dummy1;
           break;
         case 85:
-          m_particles[idx].MV2c20_isFix85       =m_btag_Fix85->m_isTag ->at(idx);
-          m_particles[idx].MV2c20_sfFix85       =(m_mc)?m_btag_Fix85->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix85       =m_btag_Fix85->m_isTag ->at(idx);
+          m_particles[idx].sfFix85       =(m_mc)?m_btag_Fix85->m_sf->at(idx):dummy1;
           break;
         case 90:
-          m_particles[idx].MV2c20_isFix90       =m_btag_Fix90->m_isTag       ->at(idx);
-          m_particles[idx].MV2c20_sfFix90       =(m_mc)?m_btag_Fix90->m_sf->at(idx):dummy1;
+          m_particles[idx].isFix90       =m_btag_Fix90->m_isTag       ->at(idx);
+          m_particles[idx].sfFix90       =(m_mc)?m_btag_Fix90->m_sf->at(idx):dummy1;
           break;
         }
     }
@@ -1124,28 +1124,28 @@ void JetContainer::updateParticle(uint idx)
       switch( m_infoSwitch.m_sfFTagFlt[i] ) 
         {
         case 30:
-          m_particles[idx].MV2c20_isFlt30       =m_btag_Flt30->m_isTag       ->at(idx);
-          m_particles[idx].MV2c20_sfFlt30       =(m_mc)?m_btag_Flt30->m_sf->at(idx):dummy1;
+          m_particles[idx].isFlt30       =m_btag_Flt30->m_isTag       ->at(idx);
+          m_particles[idx].sfFlt30       =(m_mc)?m_btag_Flt30->m_sf->at(idx):dummy1;
           break;
         case 50:
-          m_particles[idx].MV2c20_isFlt50       =m_btag_Flt50->m_isTag       ->at(idx);
-          m_particles[idx].MV2c20_sfFlt50       =(m_mc)?m_btag_Flt50->m_sf->at(idx):dummy1;
+          m_particles[idx].isFlt50       =m_btag_Flt50->m_isTag       ->at(idx);
+          m_particles[idx].sfFlt50       =(m_mc)?m_btag_Flt50->m_sf->at(idx):dummy1;
           break;
         case 60:
-          m_particles[idx].MV2c20_isFlt60       =m_btag_Flt60->m_isTag       ->at(idx);
-          m_particles[idx].MV2c20_sfFlt60       =(m_mc)?m_btag_Flt60->m_sf->at(idx):dummy1;
+          m_particles[idx].isFlt60       =m_btag_Flt60->m_isTag       ->at(idx);
+          m_particles[idx].sfFlt60       =(m_mc)?m_btag_Flt60->m_sf->at(idx):dummy1;
           break;
         case 70:
-          m_particles[idx].MV2c20_isFlt70       =m_btag_Flt70->m_isTag       ->at(idx);
-          m_particles[idx].MV2c20_sfFlt70       =(m_mc)?m_btag_Flt70->m_sf->at(idx):dummy1;
+          m_particles[idx].isFlt70       =m_btag_Flt70->m_isTag       ->at(idx);
+          m_particles[idx].sfFlt70       =(m_mc)?m_btag_Flt70->m_sf->at(idx):dummy1;
           break;
         case 77:
-          m_particles[idx].MV2c20_isFlt77       =m_btag_Flt77->m_isTag       ->at(idx);
-          m_particles[idx].MV2c20_sfFlt77       =(m_mc)?m_btag_Flt77->m_sf->at(idx):dummy1;
+          m_particles[idx].isFlt77       =m_btag_Flt77->m_isTag       ->at(idx);
+          m_particles[idx].sfFlt77       =(m_mc)?m_btag_Flt77->m_sf->at(idx):dummy1;
           break;
         case 85:
-          m_particles[idx].MV2c20_isFlt85       =m_btag_Flt85->m_isTag       ->at(idx);
-          m_particles[idx].MV2c20_sfFlt85       =(m_mc)?m_btag_Flt85->m_sf->at(idx):dummy1;
+          m_particles[idx].isFlt85       =m_btag_Flt85->m_isTag       ->at(idx);
+          m_particles[idx].sfFlt85       =(m_mc)?m_btag_Flt85->m_sf->at(idx):dummy1;
           break;
         }
     }
@@ -1339,29 +1339,29 @@ void JetContainer::setBranches(TTree *tree)
     }
 
     if( m_infoSwitch.m_svDetails){
-      setBranch<float>(tree, "SV0",               m_SV0);
-      setBranch<float>(tree, "sv0_NGTinSvx",      m_sv0_NGTinSvx  );
-      setBranch<float>(tree, "sv0_N2Tpair",       m_sv0_N2Tpair   );
-      setBranch<float>(tree, "sv0_massvx",        m_sv0_massvx    );
-      setBranch<float>(tree, "sv0_efracsvx",      m_sv0_efracsvx  );
-      setBranch<float>(tree, "sv0_normdist",      m_sv0_normdist  );
+      setBranch<float>(tree, "SV0",               m_SV0                     );
+      setBranch<float>(tree, "SV0_NGTinSvx",      m_SV0_NGTinSvx            );
+      setBranch<float>(tree, "SV0_N2Tpair",       m_SV0_N2Tpair             );
+      setBranch<float>(tree, "SV0_massvx",        m_SV0_masssvx             );
+      setBranch<float>(tree, "SV0_efracsvx",      m_SV0_efracsvx            );
+      setBranch<float>(tree, "SV0_normdist",      m_SV0_normdist            );
 
-      setBranch<float>(tree, "SV1",               m_SV1);
-      setBranch<float>(tree, "SV1IP3D",           m_SV1IP3D);
-      setBranch<float>(tree, "sv1_pu",            m_sv1_pu        );
-      setBranch<float>(tree, "sv1_pb",            m_sv1_pb        );
-      setBranch<float>(tree, "sv1_pc",            m_sv1_pc        );
-      setBranch<float>(tree, "sv1_c",             m_sv1_c         );
-      setBranch<float>(tree, "sv1_cu",            m_sv1_cu        );
-      setBranch<float>(tree, "sv1_NGTinSvx",      m_sv1_NGTinSvx  );
-      setBranch<float>(tree, "sv1_N2Tpair",       m_sv1_N2Tpair   );
-      setBranch<float>(tree, "sv1_massvx",        m_sv1_massvx    );
-      setBranch<float>(tree, "sv1_efracsvx",      m_sv1_efracsvx  );
-      setBranch<float>(tree, "sv1_normdist",      m_sv1_normdist  );
-      setBranch<float>(tree, "sv1_Lxy",           m_sv1_Lxy       );
-      setBranch<float>(tree, "sv1_L3d",           m_sv1_L3d       );
-      setBranch<float>(tree, "sv1_distmatlay",    m_sv1_distmatlay);
-      setBranch<float>(tree, "sv1_dR",            m_sv1_dR        );
+      setBranch<float>(tree, "SV1",               m_SV1                     );
+      setBranch<float>(tree, "SV1IP3D",           m_SV1plusIP3D_discriminant);
+      setBranch<float>(tree, "SV1_pu",            m_SV1_pu                  );
+      setBranch<float>(tree, "SV1_pb",            m_SV1_pb                  );
+      setBranch<float>(tree, "SV1_pc",            m_SV1_pc                  );
+      setBranch<float>(tree, "SV1_c",             m_SV1_c                   );
+      setBranch<float>(tree, "SV1_cu",            m_SV1_cu                  );
+      setBranch<float>(tree, "SV1_NGTinSvx",      m_SV1_NGTinSvx            );
+      setBranch<float>(tree, "SV1_N2Tpair",       m_SV1_N2Tpair             );
+      setBranch<float>(tree, "SV1_massvx",        m_SV1_masssvx             );
+      setBranch<float>(tree, "SV1_efracsvx",      m_SV1_efracsvx            );
+      setBranch<float>(tree, "SV1_normdist",      m_SV1_normdist            );
+      setBranch<float>(tree, "SV1_Lxy",           m_SV1_Lxy                 );
+      setBranch<float>(tree, "SV1_L3d",           m_SV1_L3d                 );
+      setBranch<float>(tree, "SV1_distmatlay",    m_SV1_distmatlay          );
+      setBranch<float>(tree, "SV1_dR",            m_SV1_dR                  );
     }
 
     if( m_infoSwitch.m_ipDetails){    
@@ -1672,29 +1672,29 @@ void JetContainer::clear()
     }
 
     if( m_infoSwitch.m_svDetails){
-      m_SV0               ->clear();
-      m_sv0_NGTinSvx      ->clear(); 
-      m_sv0_N2Tpair       ->clear(); 
-      m_sv0_massvx        ->clear(); 
-      m_sv0_efracsvx      ->clear(); 
-      m_sv0_normdist      ->clear(); 
+      m_SV0                     ->clear();
+      m_SV0_NGTinSvx            ->clear(); 
+      m_SV0_N2Tpair             ->clear(); 
+      m_SV0_masssvx             ->clear(); 
+      m_SV0_efracsvx            ->clear(); 
+      m_SV0_normdist            ->clear(); 
       
-      m_SV1               ->clear();
-      m_SV1IP3D           ->clear();
-      m_sv1_pu            ->clear(); 
-      m_sv1_pb            ->clear(); 
-      m_sv1_pc            ->clear(); 
-      m_sv1_c             ->clear(); 
-      m_sv1_cu            ->clear(); 
-      m_sv1_NGTinSvx      ->clear(); 
-      m_sv1_N2Tpair       ->clear(); 
-      m_sv1_massvx        ->clear(); 
-      m_sv1_efracsvx      ->clear(); 
-      m_sv1_normdist      ->clear(); 
-      m_sv1_Lxy           ->clear(); 
-      m_sv1_L3d           ->clear(); 
-      m_sv1_distmatlay    ->clear(); 
-      m_sv1_dR            ->clear(); 
+      m_SV1                     ->clear();
+      m_SV1plusIP3D_discriminant->clear();
+      m_SV1_pu                  ->clear(); 
+      m_SV1_pb                  ->clear(); 
+      m_SV1_pc                  ->clear(); 
+      m_SV1_c                   ->clear(); 
+      m_SV1_cu                  ->clear(); 
+      m_SV1_NGTinSvx            ->clear(); 
+      m_SV1_N2Tpair             ->clear(); 
+      m_SV1_masssvx             ->clear(); 
+      m_SV1_efracsvx            ->clear(); 
+      m_SV1_normdist            ->clear(); 
+      m_SV1_Lxy                 ->clear(); 
+      m_SV1_L3d                 ->clear(); 
+      m_SV1_distmatlay          ->clear(); 
+      m_SV1_dR                  ->clear(); 
     }
 
     if( m_infoSwitch.m_ipDetails){

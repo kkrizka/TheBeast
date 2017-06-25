@@ -9,5 +9,7 @@
 #pragma link C++ defined_in "Jet.h";
 #pragma link C++ defined_in "Photon.h";
 #pragma link C++ defined_in "Muon.h";
+#pragma link C++ defined_in "TrackParticle.h";
+#pragma link C++ defined_in "JetConstituent.h";
 
 #endif

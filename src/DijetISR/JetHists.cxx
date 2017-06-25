@@ -23,7 +23,7 @@ void JetHists::initialize(TheEvent *event)
     h_HECQuality = book("HECQuality", m_title+"HEC Quality", 120, -10.000000, 10.000000);
     h_N90Constituents = book("N90Constituents", m_title+"N90 Constituents", 120, 0.000000, 40.000000);
     h_Timing = book("Timing", m_title+"Timming", 120, -80.000000, 80.000000);
-    h_LArBadHVEFrac = book("LArBadHVEFrac", m_title+"LAr Bad HV Energy Fraction", 120, 0.000000, 1.000000);
+    h_LArBadHVEnergyFrac = book("LArBadHVEnergyFrac", m_title+"LAr Bad HV Energy Fraction", 120, 0.000000, 1.000000);
     h_AverageLArQF = book("AverageLArQF", m_title+"<LAr Quality Factor>", 120, 0.000000, 1000.000000);
     h_LeadingClusterSecondLambda = book("LeadingClusterSecondLambda", m_title+"LeadingClusterSecondLambda", 20, 0.000000, 1000000.000000);
     h_LeadingClusterPt = book("LeadingClusterPt", m_title+"Leading Cluster P_{T}", 120, 0.000000, 1000.000000);
@@ -81,7 +81,7 @@ void JetHists::execute()
       h_HECQuality->Fill(particle->HECQuality,eventWeight);
       h_N90Constituents->Fill(particle->N90Constituents,eventWeight);
       h_Timing->Fill(particle->Timing,eventWeight);
-      h_LArBadHVEFrac->Fill(particle->LArBadHVEFrac,eventWeight);
+      h_LArBadHVEnergyFrac->Fill(particle->LArBadHVEnergyFrac,eventWeight);
       h_AverageLArQF->Fill(particle->AverageLArQF,eventWeight);
       h_LeadingClusterSecondLambda->Fill(particle->LeadingClusterSecondLambda,eventWeight);
       h_LeadingClusterPt->Fill(particle->LeadingClusterPt,eventWeight);

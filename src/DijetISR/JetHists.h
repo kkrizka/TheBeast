@@ -20,7 +20,7 @@ namespace DijetISR
     TH1 *h_HECQuality;
     TH1 *h_N90Constituents;
     TH1 *h_Timing;
-    TH1 *h_LArBadHVEFrac;
+    TH1 *h_LArBadHVEnergyFrac;
     TH1 *h_AverageLArQF;
     TH1 *h_LeadingClusterSecondLambda;
     TH1 *h_LeadingClusterPt;

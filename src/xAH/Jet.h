@@ -2,11 +2,14 @@
 #define JET_H_
 
 #include "Particle.h"
+#include "Muon.h"
+#include "TrackParticle.h"
+#include "JetConstituent.h"
 
 namespace xAH {
   class Jet : public Particle
   {
-    ClassDef(Jet, 2);
+    ClassDef(Jet, 1);
   public:
     Jet() : Particle() {}
     virtual ~Jet() {}
@@ -21,7 +24,7 @@ namespace xAH {
     float AverageLArQF;
     float BchCorrCell;
     float N90Constituents;
-    float LArBadHVEFrac;
+    float LArBadHVEnergyFrac;
     int   LArBadHVNCell;
     float OotFracClusters5;
     float OotFracClusters10;
@@ -44,6 +47,16 @@ namespace xAH {
     float GhostMuonSegmentCount;
     float Width;
 
+    // unknown
+    TLorentzVector JetEMScaleMomentum; //
+    TLorentzVector JetConstitScaleMomentum; //
+    TLorentzVector JetPileupScaleMomentum; //
+    TLorentzVector JetOriginConstitScaleMomentum; //
+    TLorentzVector JetEtaJESScaleMomentum; //
+    TLorentzVector JetGSCScaleMomentum; //
+    TLorentzVector JetInsituScaleMomentum; //
+    std::vector<float> EnergyPerSampling; //
+
     // trackPV
     float NumTrkPt1000PV;
     float SumPtTrkPt1000PV;
@@ -53,25 +66,48 @@ namespace xAH {
     float TrackWidthPt500PV;
     float JVFPV;
 
+    // unknown
+    std::vector<int> NumTrkPt1000; //
+    std::vector<float> SumPtTrkPt1000; //
+    std::vector<float> TrackWidthPt1000; //
+    std::vector<int> NumTrkPt500; //
+    std::vector<float> SumPtTrkPt500; //
+    std::vector<float> TrackWidthPt500; //
+    std::vector<float> JVF; //
+
+    int GhostTrackCount; //
+    float GhostTrackPt; //
+    std::vector<xAH::TrackParticle> GhostTrack; //
+
     // trackAll or trackPV
     float Jvt;
     float JvtJvfcorr;
     float JvtRpt;
 
+    // unknown
+    std::vector<float> JetJvtEfficiency_JVTSyst_JVT_Loose; //
+    std::vector<float> JetJvtEfficiency_JVTSyst_JVT_Medium; //
+    std::vector<float> JetJvtEfficiency_JVTSyst_JVT_Tight; //
+
+    int numConstituents; //
+    std::vector<float> constituentWeights; //
+    std::vector<xAH::JetConstituent> constituents; //
+    
     //JVC
-    float JVC;
+float JetVertexCharge_discriminant;
 
     // flavTag
-    float SV0;
+    double SV0;
     float SV1;
     float IP3D;
-    float SV1IP3D;
     float MV1;
-    float MV2c00;
-    float MV2c10;
-    float MV2c20;
-    float MV2c100;
+    double MV2c00;
+    double MV2c10;
+    double MV2c20;
+    double MV2c100;
     float MV2;
+    float SV1plusIP3D_discriminant; //
+    float IP3D_loglikelihoodratio; //
     int  HadronConeExclTruthLabelID;
 
     float vtxOnlineValid;
@@ -89,6 +125,10 @@ namespace xAH {
     float vtx_online_y0;
     float vtx_online_z0;
 
+    float vtx_online_bkg_x0; //
+    float vtx_online_bkg_y0; //
+    float vtx_online_bkg_z0; //
+
     float JetFitter_nVTX           ;
     float JetFitter_nSingleTracks  ;
     float JetFitter_nTracksAtVtx   ;
@@ -99,51 +139,51 @@ namespace xAH {
     float JetFitter_deltaphi       ;
     float JetFitter_N2Tpar         ;
 
-    float sv0_NGTinSvx  ;
-    float sv0_N2Tpair   ;
-    float sv0_massvx    ;
-    float sv0_efracsvx  ;
-    float sv0_normdist  ;
-    float sv1_pu        ;
-    float sv1_pb        ;
-    float sv1_pc        ;
-    float sv1_c         ;
-    float sv1_cu        ;
-    float sv1_NGTinSvx  ;
-    float sv1_N2Tpair   ;
-    float sv1_massvx    ;
-    float sv1_efracsvx  ;
-    float sv1_normdist  ;
-    float sv1_Lxy       ;
-    float sv1_L3d       ;
-    float sv1_distmatlay;
-    float sv1_dR        ;
+    float SV0_NGTinSvx  ;
+    float SV0_N2Tpair   ;
+    float SV0_masssvx    ;
+    float SV0_efracsvx  ;
+    float SV0_normdist  ;
+    double SV1_pu        ;
+    double SV1_pb        ;
+    double SV1_pc        ;
+    float SV1_c         ;
+    float SV1_cu        ;
+    float SV1_NGTinSvx  ;
+    float SV1_N2Tpair   ;
+    float SV1_masssvx    ;
+    float SV1_efracsvx  ;
+    float SV1_normdist  ;
+    float SV1_Lxy       ;
+    float SV1_L3d       ;
+    float SV1_distmatlay;
+    float SV1_dR        ;
 
-    float IP2D_pu     ;
-    float IP2D_pb     ;
-    float IP2D_pc     ;
+    double IP2D_pu     ;
+    double IP2D_pb     ;
+    double IP2D_pc     ;
     float IP2D        ;
     float IP2D_c      ;
     float IP2D_cu     ;
     float nIP2DTracks ;
 
-    std::vector<float> IP2D_gradeOfTracks         ;
-    std::vector<float> IP2D_flagFromV0ofTracks    ;
+    std::vector<int  > IP2D_gradeOfTracks         ;
+    std::vector<bool > IP2D_flagFromV0ofTracks    ;
     std::vector<float> IP2D_valD0wrtPVofTracks    ;
     std::vector<float> IP2D_sigD0wrtPVofTracks    ;
     std::vector<float> IP2D_weightBofTracks       ;
     std::vector<float> IP2D_weightCofTracks       ;
     std::vector<float> IP2D_weightUofTracks       ;
 
-    float IP3D_pu     ;
-    float IP3D_pb     ;
-    float IP3D_pc     ;
+    double IP3D_pu     ;
+    double IP3D_pb     ;
+    double IP3D_pc     ;
     float IP3D_c      ;
     float IP3D_cu     ;
     float nIP3DTracks ;
 
-    std::vector<float> IP3D_gradeOfTracks      ;
-    std::vector<float> IP3D_flagFromV0ofTracks ;
+    std::vector<int  > IP3D_gradeOfTracks      ;
+    std::vector<bool > IP3D_flagFromV0ofTracks ;
     std::vector<float> IP3D_valD0wrtPVofTracks ;
     std::vector<float> IP3D_sigD0wrtPVofTracks ;
     std::vector<float> IP3D_valZ0wrtPVofTracks ;
@@ -152,50 +192,58 @@ namespace xAH {
     std::vector<float> IP3D_weightCofTracks    ;
     std::vector<float> IP3D_weightUofTracks    ;
 
-    int MV2c20_isFix30;
-    std::vector<float> MV2c20_sfFix30;
+    char isFix30;
+    std::vector<float> sfFix30;
 
-    int MV2c20_isFix50;
-    std::vector<float> MV2c20_sfFix50;
+    char isFix50;
+    std::vector<float> sfFix50;
 
-    int MV2c20_isFix60;
-    std::vector<float> MV2c20_sfFix60;
+    char isFix60;
+    std::vector<float> sfFix60;
 
-    int MV2c20_isFix70;
-    std::vector<float> MV2c20_sfFix70;
+    char isFix70;
+    std::vector<float> sfFix70;
 
-    int MV2c20_isFix77;
-    std::vector<float> MV2c20_sfFix77;
+    char isFix77;
+    std::vector<float> sfFix77;
 
-    int MV2c20_isFix80;
-    std::vector<float> MV2c20_sfFix80;
+    char isFix80;
+    std::vector<float> sfFix80;
 
-    int MV2c20_isFix85;
-    std::vector<float> MV2c20_sfFix85;
+    char isFix85;
+    std::vector<float> sfFix85;
 
-    int MV2c20_isFix90;
-    std::vector<float> MV2c20_sfFix90;
+    char isFix90;
+    std::vector<float> sfFix90;
 
-    int MV2c20_isFlt30;
-    std::vector<float> MV2c20_sfFlt30;
+    char isFlt30;
+    std::vector<float> sfFlt30;
 
-    int MV2c20_isFlt40;
-    std::vector<float> MV2c20_sfFlt40;
+    char isFlt40;
+    std::vector<float> sfFlt40;
 
-    int MV2c20_isFlt50;
-    std::vector<float> MV2c20_sfFlt50;
+    char isFlt50;
+    std::vector<float> sfFlt50;
 
-    int MV2c20_isFlt60;
-    std::vector<float> MV2c20_sfFlt60;
+    char isFlt60;
+    std::vector<float> sfFlt60;
 
-    int MV2c20_isFlt70;
-    std::vector<float> MV2c20_sfFlt70;
+    char isFlt70;
+    std::vector<float> sfFlt70;
 
-    int MV2c20_isFlt77;
-    std::vector<float> MV2c20_sfFlt77;
+    char isFlt77;
+    std::vector<float> sfFlt77;
 
-    int MV2c20_isFlt85;
-    std::vector<float> MV2c20_sfFlt85;
+    char isFlt85;
+    std::vector<float> sfFlt85;
+
+    float JetGhostArea; //
+    float ActiveArea; //
+    float VoronoiArea; //
+    float ActiveArea4vec_pt; //
+    float ActiveArea4vec_eta; //
+    float ActiveArea4vec_phi; //
+    float ActiveArea4vec_m; //
 
     // truth
     int   ConeTruthLabelID;
@@ -205,10 +253,31 @@ namespace xAH {
     float TruthLabelDeltaR_T;
     int   PartonTruthLabelID;
     float GhostTruthAssociationFraction;
+    int GhostBHadronsFinalCount; //
+    int GhostBHadronsInitialCount; //
+    int GhostBQuarksFinalCount; //
+    float GhostBHadronsFinalPt; //
+    float GhostBHadronsInitialPt; //
+    float GhostBQuarksFinalPt; //
+    int GhostCHadronsFinalCount; //
+    int GhostCHadronsInitialCount; //
+    int GhostCQuarksFinalCount; //
+    float GhostCHadronsFinalPt; //
+    float GhostCHadronsInitialPt; //
+    float GhostCQuarksFinalPt; //
+    int GhostTausFinalCount; //
+    float GhostTausFinalPt; //
+
     TLorentzVector truth_p4;
+    int truth_pdgId; //
+    double truth_partonPt; //
+    double truth_partonDR; //
 
     // charge
     double charge;
+
+    xAH::Muon* matchedMuon; //
+    xAH::Jet* matchedJet; //
   };
 }
 #endif // JET_H_

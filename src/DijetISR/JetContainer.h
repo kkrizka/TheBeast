@@ -160,29 +160,29 @@ private:
   std::vector<float>  *m_JetFitter_N2Tpar         ;
 
   // SV Details
-  std::vector<float> *m_SV0;
-  std::vector<float> *m_sv0_NGTinSvx  ;
-  std::vector<float> *m_sv0_N2Tpair   ;
-  std::vector<float> *m_sv0_massvx    ;
-  std::vector<float> *m_sv0_efracsvx  ;
-  std::vector<float> *m_sv0_normdist  ;
+  std::vector<float> *m_SV0                     ;
+  std::vector<float> *m_SV0_NGTinSvx            ;
+  std::vector<float> *m_SV0_N2Tpair             ;
+  std::vector<float> *m_SV0_masssvx             ;
+  std::vector<float> *m_SV0_efracsvx            ;
+  std::vector<float> *m_SV0_normdist            ;
 
-  std::vector<float> *m_SV1;
-  std::vector<float> *m_SV1IP3D;
-  std::vector<float> *m_sv1_pu        ;
-  std::vector<float> *m_sv1_pb        ;
-  std::vector<float> *m_sv1_pc        ;
-  std::vector<float> *m_sv1_c         ;
-  std::vector<float> *m_sv1_cu        ;
-  std::vector<float> *m_sv1_NGTinSvx  ;
-  std::vector<float> *m_sv1_N2Tpair   ;
-  std::vector<float> *m_sv1_massvx    ;
-  std::vector<float> *m_sv1_efracsvx  ;
-  std::vector<float> *m_sv1_normdist  ;
-  std::vector<float> *m_sv1_Lxy       ;
-  std::vector<float> *m_sv1_L3d       ;
-  std::vector<float> *m_sv1_distmatlay;
-  std::vector<float> *m_sv1_dR        ;
+  std::vector<float> *m_SV1                     ;
+  std::vector<float> *m_SV1plusIP3D_discriminant;
+  std::vector<float> *m_SV1_pu                  ;
+  std::vector<float> *m_SV1_pb                  ;
+  std::vector<float> *m_SV1_pc                  ;
+  std::vector<float> *m_SV1_c                   ;
+  std::vector<float> *m_SV1_cu                  ;
+  std::vector<float> *m_SV1_NGTinSvx            ;
+  std::vector<float> *m_SV1_N2Tpair             ;
+  std::vector<float> *m_SV1_masssvx             ;
+  std::vector<float> *m_SV1_efracsvx            ;
+  std::vector<float> *m_SV1_normdist            ;
+  std::vector<float> *m_SV1_Lxy                 ;
+  std::vector<float> *m_SV1_L3d                 ;
+  std::vector<float> *m_SV1_distmatlay          ;
+  std::vector<float> *m_SV1_dR                  ;
 
   // IP3D
   std::vector<float> *m_IP2D_pu                   ;

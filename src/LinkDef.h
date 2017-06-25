@@ -12,9 +12,4 @@
 #pragma link C++ defined_in "TheSampleList.h";
 #pragma link C++ defined_in "TheSampleSelection.h";
 
-#pragma link C++ defined_in "DijetISREvent.h";
-
-#pragma link C++ defined_in "Particle.h";
-#pragma link C++ defined_in "Jet.h";
-
 #endif

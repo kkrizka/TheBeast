@@ -2,50 +2,36 @@ import ROOT
 
 from prot import plottools
 
+ROOT.gSystem.Load('src/libTheBeast.so')
+ROOT.gSystem.Load('src/xAH/libxAH.so')
+ROOT.gSystem.Load('src/TCA/libTCA.so')
 thebeast=ROOT.TheBeast.rawr()
 
 def main():
-    ROOT.gSystem.Load('src/libTheBeast.so')
-
-    testevent=ROOT.DijetISREvent(True, False)
-    testevent.initializeJets   ('jet','kinematic useTheS')
-    testevent.initializePhotons('ph' ,'kinematic')
-
+    testevent=ROOT.TCA.Event(True, False)
+    
+    selection_ystar=ROOT.TCA.ZprimeGammaJetJetSelection()
+    selection_ystar.m_minPhotonPt=200;
+    
     #
     # small sample
-    testsample=ROOT.TheSampleFile("user.kkrizka.10914515._000001.tree.root","outTree",testevent)
+    testsample=ROOT.TheSampleFile("mc15_13TeV.305159.MGPy8EG_N30LO_A14N23LO_dmA_jja_Ph100_mRp1_mD10_gSp3_gD1.merge.DAOD_EXOT6.e4900_s2726_r7772_r7676_p2952.root","outTree",testevent)
     thebeast.addSample('test',testsample)
-
-    selection_ystar=ROOT.ZprimeGammaJetJetSelection()
-    selection_ystar.m_minPhotonPt=200;
     
     redsample=ROOT.TheSampleSelection(testsample,selection_ystar)
     redsample.runSelection()
     thebeast.addSample('red',redsample)
 
     #
-    # data16 sample
-    dataevent=ROOT.DijetISREvent(False, False)
-    dataevent.initializeJets   ('jet','kinematic clean layer trackPV energy flavTag')
-    dataevent.initializePhotons('ph' ,'kinematic')
-
-    bigsample=ROOT.TheSampleList('filelists/data16.gammajet.NTUP.txt',"outTree",dataevent)
-    thebeast.addSample('big',bigsample)
-
-    bigredsample=ROOT.TheSampleSelection(testsample,selection_ystar)
-    bigredsample.runSelection()
-    thebeast.addSample('bigred',bigredsample)    
-
-    #
     # histograms
-    thebeast.ratPack().addHists("event", ROOT.EventHists());
-    thebeast.ratPack().addHists("reso" , ROOT.ZprimeResonanceHists());
-    thebeast.ratPack().addHists("jet0" , ROOT.JetHists(ROOT.DijetISREvent.jet, 0, "leading jet"));
-    thebeast.ratPack().addHists("jet1" , ROOT.JetHists(ROOT.DijetISREvent.jet, 1, "subleading jet"));
-    thebeast.ratPack().addHists("jet2" , ROOT.JetHists(ROOT.DijetISREvent.jet, 2, "third jet"));
+    thebeast.ratPack().addHists("event", ROOT.TCA.EventHists());
+    thebeast.ratPack().addHists("reso" , ROOT.TCA.ZprimeResonanceHists());
+    thebeast.ratPack().addHists("jet0" , ROOT.TCA.JetHists(ROOT.TCA.Event.jet, 0, "leading jet"));
+    thebeast.ratPack().addHists("jet1" , ROOT.TCA.JetHists(ROOT.TCA.Event.jet, 1, "subleading jet"));
+    thebeast.ratPack().addHists("jet2" , ROOT.TCA.JetHists(ROOT.TCA.Event.jet, 2, "third jet"));
 
     #
     # plot
-    h=thebeast.get('big','jet0/Pt')
+    h=thebeast.get('test','jet0/Pt')
     plottools.plot(h)
 

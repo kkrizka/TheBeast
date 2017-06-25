@@ -1,6 +1,5 @@
 #include "TheSampleSelection.h"
 
-#include "DijetISREvent.h"
 #include <iostream>
 
 TheSampleSelection::TheSampleSelection(TheSample *source, TheSelection *selection)
@@ -32,8 +31,4 @@ void TheSampleSelection::runSelection()
 }
 
 bool TheSampleSelection::passes()
-{
-  DijetISREvent *anevent=dynamic_cast<DijetISREvent*>(event());
-  if(anevent->m_jets->m_n<2) return false;
-  return true;
-}
+{ return true; }

@@ -39,7 +39,6 @@ void IParticleHists::initialize(TheEvent *event)
 
 void IParticleHists::execute()
 {
-  IParticleInfoSwitch *infoSwitch;
   const xAH::Particle *particle=0;
   switch(m_container)
     {

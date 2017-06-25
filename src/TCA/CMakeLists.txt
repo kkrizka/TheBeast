@@ -9,9 +9,6 @@ SET(HEADERS
 SET(SRCS
   InfoSwitch.cxx
   Event.cxx  
-  JetContainer.cxx
-  MuonContainer.cxx
-  PhotonContainer.cxx
   EventHists.cxx
   IParticleHists.cxx
   JetHists.cxx

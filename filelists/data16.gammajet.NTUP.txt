@@ -1,0 +1,10 @@
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodA.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodB.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodC.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodD.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodE.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodF.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodG.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodI.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodK.gammajet.20170314-01_tree.root
+/run/media/kkrizka/My Passport/mergedata/user.kkrizka.data16.periodL.gammajet.20170314-01_tree.root

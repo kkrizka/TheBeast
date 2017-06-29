@@ -23,8 +23,8 @@ bool ZprimeGammaJetJetSelection::passes()
 {
   //
   // dijet+gamma
-  uint njets    = m_event->m_jets->GetEntries();
-  uint nphotons = m_event->m_photons->GetEntries();
+  uint njets    = m_event->m_jets.GetSize();
+  uint nphotons = m_event->m_photons.GetSize();
 
   if(njets < 2)
     return false;
@@ -34,11 +34,11 @@ bool ZprimeGammaJetJetSelection::passes()
     return false;
   //m_cutflow->execute(m_cf_nphotons,m_eventWeight);
 
-  const xAH::Photon* photon0=dynamic_cast<xAH::Photon*>(m_event->m_photons->At(0));
+  const xAH::Photon photon0=m_event->m_photons[0];
 
   //
   // photon
-  if(photon0->p4.Pt() < m_minPhotonPt)
+  if(photon0.p4.Pt() < m_minPhotonPt)
     return false;
   //if(m_mc) m_eventWeight*=photon0.TightEffSF;
   //m_cutflow->execute(m_cf_photon,m_eventWeight);
@@ -84,12 +84,12 @@ bool ZprimeGammaJetJetSelection::passes()
  switch(m_doBarrelEndCap)
    {
    case 1:
-     if(!(fabs(photon0->p4.Eta())<1.37))
+     if(!(fabs(photon0.p4.Eta())<1.37))
        return false;
      //m_cutflow->execute(m_cf_barrelendcap,m_eventWeight);
      break;
    case 2:
-     if(!(1.52<fabs(photon0->p4.Eta()) && fabs(photon0->p4.Eta())<2.37))
+     if(!(1.52<fabs(photon0.p4.Eta()) && fabs(photon0.p4.Eta())<2.37))
        return false;
      //m_cutflow->execute(m_cf_barrelendcap,m_eventWeight);
      break;

@@ -69,12 +69,12 @@ void ZprimeResonanceHists::execute()
   // Figure out event stuff
   double eventWeight=1.;
 
-  const xAH::Jet *reso0=dynamic_cast<xAH::Jet*>(m_event->m_jets->At(0));
-  const xAH::Jet *reso1=dynamic_cast<xAH::Jet*>(m_event->m_jets->At(1));
+  const xAH::Jet reso0=m_event->m_jets[0];
+  const xAH::Jet reso1=m_event->m_jets[1];
 
   //
   // Fill histograms
-  TLorentzVector p4_Zprime=reso0->p4+reso1->p4;
+  TLorentzVector p4_Zprime=reso0.p4+reso1.p4;
 
   h_ptjj    ->Fill(p4_Zprime.Pt() , eventWeight);
   h_ptjj_l  ->Fill(p4_Zprime.Pt() , eventWeight);
@@ -85,54 +85,54 @@ void ZprimeResonanceHists::execute()
   //h_mjj_fine->Fill(p4_Zprime.M()  , eventWeight);
 
   // Deltas
-  float dEtajj = fabs(reso0->p4.Eta()-reso1->p4.Eta());
+  float dEtajj = fabs(reso0.p4.Eta()-reso1.p4.Eta());
   h_dEtajj ->Fill(dEtajj , eventWeight);
 
-  float dPhijj = fabs(reso0->p4.DeltaPhi(reso1->p4));
+  float dPhijj = fabs(reso0.p4.DeltaPhi(reso1.p4));
   h_dPhijj ->Fill(dPhijj , eventWeight);
 
-  float dRjj = reso0->p4.DeltaR(reso1->p4);
+  float dRjj = reso0.p4.DeltaR(reso1.p4);
   h_dRjj   ->Fill(dRjj  , eventWeight);
 
   // Y's
-  double yStarjj =fabs(reso0->p4.Rapidity()-reso1->p4.Rapidity())/2.;
+  double yStarjj =fabs(reso0.p4.Rapidity()-reso1.p4.Rapidity())/2.;
   h_yStarjj ->Fill(yStarjj                   , eventWeight);
 
-  double yBoostjj=fabs(reso0->p4.Rapidity()+reso1->p4.Rapidity())/2.;
+  double yBoostjj=fabs(reso0.p4.Rapidity()+reso1.p4.Rapidity())/2.;
   h_yBoostjj->Fill(yBoostjj                  , eventWeight);
 
   double chijj=exp(2*fabs(yStarjj));
   h_chijj   ->Fill(chijj                     , eventWeight);
 
-  TLorentzVector p4_reso0deboostjj=reso0->p4;
+  TLorentzVector p4_reso0deboostjj=reso0.p4;
   p4_reso0deboostjj.Boost(-p4_Zprime.BoostVector());
-  TLorentzVector p4_reso1deboostjj=reso1->p4;
+  TLorentzVector p4_reso1deboostjj=reso1.p4;
   p4_reso1deboostjj.Boost(-p4_Zprime.BoostVector());
 
   float yStarjjBoostjj    = fabs(p4_reso0deboostjj.Rapidity()-p4_reso1deboostjj.Rapidity())/2.;
   h_yStarjjBoostjj  ->Fill( yStarjjBoostjj, eventWeight);
 
   // Asym
-  double asymjj = (reso0->p4.Pt()-reso1->p4.Pt())/(reso0->p4.Pt()+reso1->p4.Pt());
+  double asymjj = (reso0.p4.Pt()-reso1.p4.Pt())/(reso0.p4.Pt()+reso1.p4.Pt());
   h_asymjj->Fill( asymjj, eventWeight);
 
-  double vecasymjj = (reso0->p4-reso1->p4).Pt()/(reso0->p4+reso1->p4).Pt();
+  double vecasymjj = (reso0.p4-reso1.p4).Pt()/(reso0.p4+reso1.p4).Pt();
   h_vecasymjj->Fill( vecasymjj, eventWeight);
 
   TVector3 p3_Zprime=p4_Zprime.Vect();
   p3_Zprime.SetZ(0);
   p3_Zprime.SetMag(1.);
-  double projasymjj = ((reso0->p4-reso1->p4).Vect().Dot(p3_Zprime))/p4_Zprime.Pt();
+  double projasymjj = ((reso0.p4-reso1.p4).Vect().Dot(p3_Zprime))/p4_Zprime.Pt();
   h_projasymjj->Fill( projasymjj, eventWeight);
 
-  h_chargediff->Fill(fabs(reso0->charge-reso1->charge), eventWeight);
-  h_chargesum ->Fill(fabs(reso0->charge+reso1->charge), eventWeight);
+  h_chargediff->Fill(fabs(reso0.charge-reso1.charge), eventWeight);
+  h_chargesum ->Fill(fabs(reso0.charge+reso1.charge), eventWeight);
 
   //
   // 2D plots
   //
-  h_mjj_vs_reso0->Fill(reso0->p4.Pt(),p4_Zprime.M(), eventWeight);
-  h_mjj_vs_reso1->Fill(reso1->p4.Pt(),p4_Zprime.M(), eventWeight);
+  h_mjj_vs_reso0->Fill(reso0.p4.Pt(),p4_Zprime.M(), eventWeight);
+  h_mjj_vs_reso1->Fill(reso1.p4.Pt(),p4_Zprime.M(), eventWeight);
 
   h_mjj_vs_dEtajj->Fill(dEtajj, p4_Zprime.M(), eventWeight);
   h_mjj_vs_dPhijj->Fill(dPhijj, p4_Zprime.M(), eventWeight);

@@ -15,26 +15,31 @@ TheSampleList::TheSampleList(const std::string& path, const std::string& tree, T
       std::cout << line << std::endl;
       m_chain->Add(line.c_str());
     }
-  m_event->setTree(m_chain);
 
   m_chain->SetCacheSize(128*1024*1024);
   m_chain->SetCacheLearnEntries(10000);
   m_chain->AddBranchToCache("*");
+
+  // Create the reader
+  m_reader=new TTreeReader(m_chain);
+  m_event->setReader(m_reader);
 }
 
 TheSampleList::~TheSampleList()
 {
-  delete m_chain; m_chain=0;
+  delete m_chain;
+  delete m_reader;
 }
 
 TheEvent* TheSampleList::event() const
 { return m_event; }
 
 uint TheSampleList::nEvents() const
-{ return m_chain->GetEntries(); }
+{ return m_reader->GetEntries(false); }
 
 void TheSampleList::loadEvent(uint eidx) const
 {
-  m_chain->GetEntry(eidx);
+  //m_chain->GetEntry(eidx);
+  m_reader->SetEntry(eidx);
   m_event->updateEntry();
 }

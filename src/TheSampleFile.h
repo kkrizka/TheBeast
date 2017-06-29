@@ -19,6 +19,7 @@ public:
   void loadEvent(uint eidx) const;
 
 private:
+  TTreeReader *m_reader;
   TFile *m_fh;
   TTree *m_tree;
   TheEvent *m_event;

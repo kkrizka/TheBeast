@@ -3,6 +3,7 @@
 
 #include <TFile.h>
 #include <TChain.h>
+#include <TTreeReader.h>
 
 #include "TheSample.h"
 #include "TheEvent.h"
@@ -19,6 +20,7 @@ public:
   void loadEvent(uint eidx) const;
 
 private:
+  TTreeReader *m_reader;
   TChain *m_chain;
   TheEvent *m_event;
 };

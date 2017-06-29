@@ -28,7 +28,7 @@ TH1* TheBeast::get(const std::string& samplename, const std::string& histname)
       return 0;
     }
   std::string histmaker=histname.substr(0, pos);
-  
+
   TDirectory *histdir=dynamic_cast<TDirectory*>(m_cave.get(samplename, histmaker));
   if(!histdir)
     {

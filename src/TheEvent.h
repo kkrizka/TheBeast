@@ -1,7 +1,7 @@
 #ifndef THEEVENT_H_
 #define THEEVENT_H_
 
-#include <TTree.h>
+#include <TTreeReader.h>
 
 class TheEvent
 {
@@ -9,13 +9,11 @@ public:
   TheEvent();  
   virtual ~TheEvent();
 
-  virtual void setTree(TTree *t);
+  virtual void setReader(TTreeReader *reader);
   virtual void updateEntry();
 
 protected:
-  void setBranchAddress(const std::string& branch, void *addr);
-  
-  TTree *m_tree;
+  TTreeReader *m_reader;
 };
 
 #endif // THEEVENT_H_

@@ -24,9 +24,9 @@ void EventHists::execute()
 {
   double eventWeight=1.;
 
-  h_NPV    ->Fill(m_event->m_NPV                           , eventWeight);
-  h_mu_ave ->Fill(m_event->m_averageInteractionsPerCrossing, eventWeight);
-  h_mu_act ->Fill(m_event->m_actualInteractionsPerCrossing , eventWeight);
+  h_NPV    ->Fill(*m_event->m_NPV                           , eventWeight);
+  h_mu_ave ->Fill(*m_event->m_averageInteractionsPerCrossing, eventWeight);
+  h_mu_act ->Fill(*m_event->m_actualInteractionsPerCrossing , eventWeight);
 
-  h_weight ->Fill(m_event->m_weight/m_event->m_weight_xs   , eventWeight);
+  h_weight ->Fill(*m_event->m_weight/(*m_event->m_weight_xs), eventWeight);
 }

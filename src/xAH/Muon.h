@@ -1,23 +1,25 @@
-#ifndef MUON_H_
-#define MUON_H_
-
-#include "Particle.h"
+#ifndef xAODAnaHelpers_Muon_H
+#define xAODAnaHelpers_Muon_H
 
 #include <map>
 
+#include "Particle.h"
+
 namespace xAH {
+  
   class Muon : public Particle
   {
-    ClassDef(Muon,1);
+    ClassDef(Muon, 1);
   public:
-    Muon() : Particle() {};
+
+    Muon() {};
     virtual ~Muon() { };
 
     // trigger
     int               isTrigMatched;
     std::vector<int>  isTrigMatchedToChain;
     std::string       listTrigChains;
-
+    
     // isolation
     int   isIsolated_LooseTrackOnly;
     int   isIsolated_Loose;
@@ -37,20 +39,20 @@ namespace xAH {
     float topoetcone20;
     float topoetcone30;
     float topoetcone40;
-
+    
     // quality
     int   isVeryLoose;
     int   isLoose;
     int   isMedium;
     int   isTight;
-
+    
     // scale factors w/ sys
     // per object
     std::map< std::string, std::vector< float > > RecoEff_SF;
     std::map< std::string, std::vector< float > > IsoEff_SF;
     std::map< std::string, std::vector< float > > TrigEff_SF;
     std::map< std::string, std::vector< float > > TrigMCEff;
-
+    
     std::vector< float >  TTVAEff_SF;
 
     // track parameters
@@ -62,8 +64,8 @@ namespace xAH {
     float trktheta;
     float trkcharge;
     float trkqOverP;
-
-    // track hit content
+    
+      // track hit content
     int   trknSiHits;
     int   trknPixHits;
     int   trknPixHoles;
@@ -74,7 +76,7 @@ namespace xAH {
     int   trknBLayerHits;
     int   trknInnermostPixLayHits; // not available in DC14
     float trkPixdEdX;            // not available in DC14
-
+    
     float         EnergyLoss;
     float         EnergyLossSigma;
     unsigned char energyLossType;
@@ -84,7 +86,8 @@ namespace xAH {
     float         ParamEnergyLossSigmaMinus;
     float         ParamEnergyLossSigmaPlus;
 
-    TLorentzVector vec_eLoss() const {
+
+    TLorentzVector vec_eLoss() const{
 
       float theta_muon = p4.Theta();
       float phi_muon   = p4.Phi();
@@ -96,7 +99,9 @@ namespace xAH {
 
       return muonELoss;
     }
-  };
-}
 
-#endif // MUON_H_
+
+  };
+
+}//xAH
+#endif // xAODAnaHelpers_Muon_H

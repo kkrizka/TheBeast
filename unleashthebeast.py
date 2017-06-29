@@ -1,5 +1,7 @@
 import ROOT
 
+import timeit
+
 from prot import plottools
 
 ROOT.gSystem.Load('src/libTheBeast.so')
@@ -31,7 +33,19 @@ def main():
     thebeast.ratPack().addHists("jet2" , ROOT.TCA.JetHists(ROOT.TCA.Event.jet, 2, "third jet"));
 
     #
+    # data16 sample
+    dataevent=ROOT.TCA.Event(False, False)
+
+    bigsample=ROOT.TheSampleList('filelists/data16.gammajet.TCA.txt',"outTree",dataevent)
+    thebeast.addSample('big',bigsample)
+
+    bigredsample=ROOT.TheSampleSelection(testsample,selection_ystar)
+    bigredsample.runSelection()
+    thebeast.addSample('bigred',bigredsample)
+    
+    #
     # plot
-    h=thebeast.get('test','jet0/Pt')
+    print(timeit.timeit(lambda:thebeast.get('big','jet0/Pt'),number=1))
+    h=thebeast.get('big','jet0/Pt')
     plottools.plot(h)
 

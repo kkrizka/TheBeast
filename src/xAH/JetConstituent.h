@@ -1,16 +1,20 @@
-#ifndef JETCONSTITUENT_H_
-#define JETCONSTITUENT_H_
+#ifndef xAODAnaHelpers_JetConstituent_H
+#define xAODAnaHelpers_JetConstituent_H
 
 #include "Particle.h"
+#include "TrackParticle.h"
+
 
 namespace xAH {
+
   class JetConstituent : public Particle
   {
     ClassDef(JetConstituent, 1);
-  public:
+
+  public:      
     JetConstituent() : Particle() {};
     virtual ~JetConstituent() {};
   };
-};
 
-#endif // JETCONSTITUENT_H_
+} //xAH
+#endif // xAODAnaHelpers_JetConstituent_H

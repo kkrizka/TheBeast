@@ -1,19 +1,21 @@
-#ifndef PARTICLE_H_
-#define PARTICLE_H_
+#ifndef xAODAnaHelpers_Particle_H
+#define xAODAnaHelpers_Particle_H
 
 #include <TLorentzVector.h>
 
 namespace xAH {
+  
   class Particle : public TObject
   {
     ClassDef(Particle, 1);
+    
   public:
 
-    Particle() {};
-    virtual ~Particle() {}
+    Particle() : TObject() {};
+    virtual ~Particle() {};
 
     TLorentzVector p4;
   };
-}
 
-#endif // PARTICLE_H_
+}//xAH
+#endif // xAODAnaHelpers_Particle_H

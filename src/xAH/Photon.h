@@ -1,17 +1,24 @@
-#ifndef PHOTON_H_
-#define PHOTON_H_
+#ifndef xAODAnaHelpers_Photon_H
+#define xAODAnaHelpers_Photon_H
 
 #include "Particle.h"
 
+
 namespace xAH {
+  
   class Photon : public Particle
   {
     ClassDef(Photon, 1);
+
   public:
+    Photon() : Particle() {};
+    virtual ~Photon() {};
+
     // isolation
-    char   isIsolated_FixedCutTightCaloOnly;
-    char   isIsolated_FixedCutTight;
-    char   isIsolated_FixedCutLoose;
+    char isIsolated_FixedCutTightCaloOnly;
+    char isIsolated_FixedCutTight;
+    char isIsolated_FixedCutLoose;
+
     float  ptcone20;
     float  ptcone30;
     float  ptcone40;
@@ -21,12 +28,12 @@ namespace xAH {
     float  topoetcone20;
     float  topoetcone30;
     float  topoetcone40;
-  
+
     // PID
-    bool  PhotonID_Loose;
-    bool  PhotonID_Medium;
-    bool  PhotonID_Tight;
-  
+    bool   PhotonID_Loose;
+    bool   PhotonID_Medium;
+    bool   PhotonID_Tight;
+
     //Purity
     float  Rhad1;
     float  Rhad;
@@ -51,6 +58,6 @@ namespace xAH {
     // trigger
     std::vector<std::string> trigMatched;
   };
-};
 
-#endif // PHOTON_H_
+}//xAH
+#endif // xAODAnaHelpers_Photon_H

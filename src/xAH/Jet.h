@@ -1,18 +1,22 @@
-#ifndef JET_H_
-#define JET_H_
+#ifndef xAODAnaHelpers_Jet_H
+#define xAODAnaHelpers_Jet_H
 
 #include "Particle.h"
-#include "Muon.h"
 #include "TrackParticle.h"
 #include "JetConstituent.h"
+#include "Muon.h"
+
 
 namespace xAH {
+
   class Jet : public Particle
   {
     ClassDef(Jet, 1);
+
   public:
-    Jet() : Particle() {}
-    virtual ~Jet() {}
+      
+    Jet() : Particle() {};
+    virtual ~Jet() {};
 
     float rapidity;
 
@@ -47,15 +51,17 @@ namespace xAH {
     float GhostMuonSegmentCount;
     float Width;
 
-    // unknown
-    TLorentzVector JetEMScaleMomentum; //
-    TLorentzVector JetConstitScaleMomentum; //
-    TLorentzVector JetPileupScaleMomentum; //
-    TLorentzVector JetOriginConstitScaleMomentum; //
-    TLorentzVector JetEtaJESScaleMomentum; //
-    TLorentzVector JetGSCScaleMomentum; //
-    TLorentzVector JetInsituScaleMomentum; //
-    std::vector<float> EnergyPerSampling; //
+    // scales
+    TLorentzVector JetEMScaleMomentum;
+    TLorentzVector JetConstitScaleMomentum;
+    TLorentzVector JetPileupScaleMomentum;
+    TLorentzVector JetOriginConstitScaleMomentum;
+    TLorentzVector JetEtaJESScaleMomentum;
+    TLorentzVector JetGSCScaleMomentum;
+    TLorentzVector JetInsituScaleMomentum;
+
+    // layers
+    std::vector<float> EnergyPerSampling;
 
     // trackPV
     float NumTrkPt1000PV;
@@ -66,35 +72,36 @@ namespace xAH {
     float TrackWidthPt500PV;
     float JVFPV;
 
-    // unknown
-    std::vector<int> NumTrkPt1000; //
-    std::vector<float> SumPtTrkPt1000; //
-    std::vector<float> TrackWidthPt1000; //
-    std::vector<int> NumTrkPt500; //
-    std::vector<float> SumPtTrkPt500; //
-    std::vector<float> TrackWidthPt500; //
-    std::vector<float> JVF; //
+    // trackAll
+    std::vector<int>   NumTrkPt1000;
+    std::vector<float> SumPtTrkPt1000;
+    std::vector<float> TrackWidthPt1000;
+    std::vector<int>   NumTrkPt500;
+    std::vector<float> SumPtTrkPt500;
+    std::vector<float> TrackWidthPt500;
+    std::vector<float> JVF;
 
-    int GhostTrackCount; //
-    float GhostTrackPt; //
-    std::vector<xAH::TrackParticle> GhostTrack; //
+    int GhostTrackCount;
+    float GhostTrackPt;
+    std::vector<xAH::TrackParticle> GhostTrack;
 
     // trackAll or trackPV
     float Jvt;
     float JvtJvfcorr;
     float JvtRpt;
+    std::vector< float > JetJvtEfficiency_JVTSyst_JVT_Loose;
+    std::vector< float > JetJvtEfficiency_JVTSyst_JVT_Medium;
+    std::vector< float > JetJvtEfficiency_JVTSyst_JVT_Tight;
 
-    // unknown
-    std::vector<float> JetJvtEfficiency_JVTSyst_JVT_Loose; //
-    std::vector<float> JetJvtEfficiency_JVTSyst_JVT_Medium; //
-    std::vector<float> JetJvtEfficiency_JVTSyst_JVT_Tight; //
+    // constituent
+    int numConstituents;
 
-    int numConstituents; //
-    std::vector<float> constituentWeights; //
-    std::vector<xAH::JetConstituent> constituents; //
-    
+    // constituentAll
+    std::vector<float> constituentWeights;
+    std::vector<JetConstituent> constituents;
+
     //JVC
-float JetVertexCharge_discriminant;
+    float JetVertexCharge_discriminant;
 
     // flavTag
     double SV0;
@@ -106,13 +113,13 @@ float JetVertexCharge_discriminant;
     double MV2c20;
     double MV2c100;
     float MV2;
-    float SV1plusIP3D_discriminant; //
-    float IP3D_loglikelihoodratio; //
+    float SV1plusIP3D_discriminant;
+    float IP3D_loglikelihoodratio;
     int  HadronConeExclTruthLabelID;
 
     float vtxOnlineValid;
     float vtxHadDummy;
-
+  
     float bs_online_vx;
     float bs_online_vy;
     float bs_online_vz;
@@ -125,9 +132,9 @@ float JetVertexCharge_discriminant;
     float vtx_online_y0;
     float vtx_online_z0;
 
-    float vtx_online_bkg_x0; //
-    float vtx_online_bkg_y0; //
-    float vtx_online_bkg_z0; //
+    float vtx_online_bkg_x0;
+    float vtx_online_bkg_y0;
+    float vtx_online_bkg_z0;
 
     float JetFitter_nVTX           ;
     float JetFitter_nSingleTracks  ;
@@ -141,17 +148,17 @@ float JetVertexCharge_discriminant;
 
     float SV0_NGTinSvx  ;
     float SV0_N2Tpair   ;
-    float SV0_masssvx    ;
+    float SV0_masssvx   ;
     float SV0_efracsvx  ;
     float SV0_normdist  ;
-    double SV1_pu        ;
-    double SV1_pb        ;
-    double SV1_pc        ;
+    double SV1_pu       ;
+    double SV1_pb       ;
+    double SV1_pc       ;
     float SV1_c         ;
     float SV1_cu        ;
     float SV1_NGTinSvx  ;
     float SV1_N2Tpair   ;
-    float SV1_masssvx    ;
+    float SV1_masssvx   ;
     float SV1_efracsvx  ;
     float SV1_normdist  ;
     float SV1_Lxy       ;
@@ -237,13 +244,14 @@ float JetVertexCharge_discriminant;
     char isFlt85;
     std::vector<float> sfFlt85;
 
-    float JetGhostArea; //
-    float ActiveArea; //
-    float VoronoiArea; //
-    float ActiveArea4vec_pt; //
-    float ActiveArea4vec_eta; //
-    float ActiveArea4vec_phi; //
-    float ActiveArea4vec_m; //
+    // area
+    float JetGhostArea;
+    float ActiveArea;
+    float VoronoiArea;
+    float ActiveArea4vec_pt;
+    float ActiveArea4vec_eta;
+    float ActiveArea4vec_phi;
+    float ActiveArea4vec_m;
 
     // truth
     int   ConeTruthLabelID;
@@ -253,31 +261,36 @@ float JetVertexCharge_discriminant;
     float TruthLabelDeltaR_T;
     int   PartonTruthLabelID;
     float GhostTruthAssociationFraction;
-    int GhostBHadronsFinalCount; //
-    int GhostBHadronsInitialCount; //
-    int GhostBQuarksFinalCount; //
-    float GhostBHadronsFinalPt; //
-    float GhostBHadronsInitialPt; //
-    float GhostBQuarksFinalPt; //
-    int GhostCHadronsFinalCount; //
-    int GhostCHadronsInitialCount; //
-    int GhostCQuarksFinalCount; //
-    float GhostCHadronsFinalPt; //
-    float GhostCHadronsInitialPt; //
-    float GhostCQuarksFinalPt; //
-    int GhostTausFinalCount; //
-    float GhostTausFinalPt; //
+
+    int GhostBHadronsFinalCount;
+    int GhostBHadronsInitialCount;
+    int GhostBQuarksFinalCount;
+    float GhostBHadronsFinalPt;
+    float GhostBHadronsInitialPt;
+    float GhostBQuarksFinalPt;
+
+    int GhostCHadronsFinalCount;
+    int GhostCHadronsInitialCount;
+    int GhostCQuarksFinalCount;
+    float GhostCHadronsFinalPt;
+    float GhostCHadronsInitialPt;
+    float GhostCQuarksFinalPt;
+
+    int GhostTausFinalCount;
+    float GhostTausFinalPt;
 
     TLorentzVector truth_p4;
-    int truth_pdgId; //
-    double truth_partonPt; //
-    double truth_partonDR; //
+    int truth_pdgId;
+    double truth_partonPt;
+    double truth_partonDR;
 
     // charge
     double charge;
 
-    xAH::Muon* matchedMuon; //
-    xAH::Jet* matchedJet; //
+    const Muon* matchedMuon;
+    const Jet * matchedJet;
+
   };
-}
-#endif // JET_H_
+
+} //xAH
+#endif // xAODAnaHelpers_Jet_H

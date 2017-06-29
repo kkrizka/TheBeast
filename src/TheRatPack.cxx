@@ -32,22 +32,21 @@ void TheRatPack::execute(const std::string& histname, TheSample *sample, TDirect
   for(uint eidx=0; eidx<sample->nEvents(); eidx++)
     {
       sample->loadEvent(eidx);
-      //for(auto kv : m_hists)
-      //kv.second->execute();
+
       hists->execute();
 
-      if(eidx%10000==0)
-	{
-	  std::cout << "Processing event " << eidx;
-	  if(eidx>0)
-	    {
-	      std::clock_t end = std::clock();
-	      double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-	      std::cout << " (rate: " << 10./elapsed_secs << " kHz)";
-	    }
-	  std::cout << std::endl;
-	  begin = std::clock();
-	}
+      if(eidx%100000==0)
+      	{
+      	  std::cout << "Processing event " << eidx;
+      	  if(eidx>0)
+      	    {
+      	      std::clock_t end = std::clock();
+      	      double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+      	      std::cout << " (rate: " << 100./elapsed_secs << " kHz)";
+      	    }
+      	  std::cout << std::endl;
+      	  begin = std::clock();
+      	}
     }
 
   outdir->Write();

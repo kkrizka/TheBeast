@@ -1,5 +1,7 @@
 import ROOT
 
+import timeit
+
 from prot import plottools
 
 ROOT.gSystem.Load('src/libTheBeast.so')
@@ -47,6 +49,7 @@ def main():
 
     #
     # plot
-    h=thebeast.get('test','jet0/Pt')
+    print(timeit.timeit(lambda:thebeast.get('big','jet0/Pt'),number=1))
+    h=thebeast.get('big','jet0/Pt')
     plottools.plot(h)
 

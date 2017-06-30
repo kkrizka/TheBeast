@@ -1,7 +1,8 @@
 #ifndef Event_H_
 #define Event_H_
 
-#include <TTree.h>
+#include <TTreeReader.h>
+#include <TTreeReaderArray.h>
 #include <TLorentzVector.h>
 
 #include <vector>
@@ -23,7 +24,7 @@ namespace DijetISR
     Event(bool mc, bool truthOnly);
     virtual ~Event();
 
-    void setTree(TTree *t);
+    void setReader(TTreeReader *reader);
     void updateEntry();
 
     void setTriggerDetail(const std::string& detailStr);
@@ -35,26 +36,26 @@ namespace DijetISR
 
   public:
     // Event variables
-    float m_ht;
-    int m_NPV;
-    float m_actualInteractionsPerCrossing;
-    float m_averageInteractionsPerCrossing;
-    int m_runNumber;
-    long long m_eventNumber;
-    int m_lumiBlock;
+    TTreeReaderValue<float> m_ht;
+    TTreeReaderValue<int  > m_NPV;
+    TTreeReaderValue<float> m_actualInteractionsPerCrossing;
+    TTreeReaderValue<float> m_averageInteractionsPerCrossing;
+    TTreeReaderValue<int  > m_runNumber;
+    TTreeReaderValue<long long> m_eventNumber;
+    TTreeReaderValue<int  > m_lumiBlock;
 
-    int m_mcEventNumber;
-    int m_mcChannelNumber;
-    float m_mcEventWeight;
+    TTreeReaderValue<int  > m_mcEventNumber;
+    TTreeReaderValue<int  > m_mcChannelNumber;
+    TTreeReaderValue<float> m_mcEventWeight;
 
     // trigger
-    std::vector<std::string> *m_passedTriggers;
-    std::vector<float>       *m_triggerPrescales;
+    TTreeReaderValue<std::vector<std::string> > m_passedTriggers;
+    TTreeReaderValue<std::vector<float> >       m_triggerPrescales;
 
     // weights
-    float m_weight;
-    float m_weight_xs;
-    float m_weight_pileup;
+    TTreeReaderValue<float> m_weight;
+    TTreeReaderValue<float> m_weight_xs;
+    TTreeReaderValue<float> m_weight_pileup;
 
     // particles
     JetContainer    *m_jets;
@@ -63,10 +64,11 @@ namespace DijetISR
     //xAH::JetContainer    *m_trigJets;
 
     // custom
-    float m_Zprime_pt;
-    float m_Zprime_eta;
-    float m_Zprime_phi;
-    float m_Zprime_m;
+    bool m_haveZprime;
+    TTreeReaderValue<float> m_Zprime_pt;
+    TTreeReaderValue<float> m_Zprime_eta;
+    TTreeReaderValue<float> m_Zprime_phi;
+    TTreeReaderValue<float> m_Zprime_m;
 
     TLorentzVector m_Zprime;
 

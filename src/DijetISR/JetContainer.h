@@ -3,6 +3,7 @@
 
 #include <TTree.h>
 #include <TLorentzVector.h>
+#include <TTreeReader.h>
 
 #include <vector>
 #include <string>
@@ -18,10 +19,8 @@ public:
   JetContainer(const std::string& name = "jet", const std::string& detailStr="", float units = 1e3, bool mc = false);
   virtual ~JetContainer();
     
-  virtual void setTree    (TTree *tree);
-  virtual void setTree    (TTree *tree, const std::string& tagger/*="MV2c10"*/);
-  virtual void setBranches(TTree *tree);
-  virtual void clear();
+  virtual void setReader  (TTreeReader *reader);
+  virtual void setReader  (TTreeReader *reader, const std::string& tagger/*="MV2c10"*/);
 
   virtual void updateParticle(uint idx);
 
@@ -33,266 +32,234 @@ private:
   // Vector branches
     
   // rapidity
-  std::vector<float> *m_rapidity;
-
+  TTreeReaderArray<float> m_rapidity;
+  
   // clean
-  std::vector<float> *m_Timing;
-  std::vector<float> *m_LArQuality;
-  std::vector<float> *m_HECQuality;
-  std::vector<float> *m_NegativeE;
-  std::vector<float> *m_AverageLArQF;
-  std::vector<float> *m_BchCorrCell;
-  std::vector<float> *m_N90Constituents;
-  std::vector<float> *m_LArBadHVEnergyFrac;
-  std::vector<int>   *m_LArBadHVNCell;
-  std::vector<float> *m_OotFracClusters5;
-  std::vector<float> *m_OotFracClusters10;
-  std::vector<float> *m_LeadingClusterPt;
-  std::vector<float> *m_LeadingClusterSecondLambda;
-  std::vector<float> *m_LeadingClusterCenterLambda;
-  std::vector<float> *m_LeadingClusterSecondR;
-  std::vector<int>   *m_clean_passLooseBad;
-  std::vector<int>   *m_clean_passLooseBadUgly;
-  std::vector<int>   *m_clean_passTightBad;
-  std::vector<int>   *m_clean_passTightBadUgly;
+  TTreeReaderArray<float> m_Timing;
+  TTreeReaderArray<float> m_LArQuality;
+  TTreeReaderArray<float> m_HECQuality;
+  TTreeReaderArray<float> m_NegativeE;
+  TTreeReaderArray<float> m_AverageLArQF;
+  TTreeReaderArray<float> m_BchCorrCell;
+  TTreeReaderArray<float> m_N90Constituents;
+  TTreeReaderArray<float> m_LArBadHVEnergyFrac;
+  TTreeReaderArray<int  > m_LArBadHVNCell;
+  TTreeReaderArray<float> m_OotFracClusters5;
+  TTreeReaderArray<float> m_OotFracClusters10;
+  TTreeReaderArray<float> m_LeadingClusterPt;
+  TTreeReaderArray<float> m_LeadingClusterSecondLambda;
+  TTreeReaderArray<float> m_LeadingClusterCenterLambda;
+  TTreeReaderArray<float> m_LeadingClusterSecondR;
+  TTreeReaderArray<int  > m_clean_passLooseBad;
+  TTreeReaderArray<int  > m_clean_passLooseBadUgly;
+  TTreeReaderArray<int  > m_clean_passTightBad;
+  TTreeReaderArray<int  > m_clean_passTightBadUgly;
 
   // energy
-  std::vector<float> *m_HECFrac;
-  std::vector<float> *m_EMFrac;
-  std::vector<float> *m_CentroidR;
-  std::vector<float> *m_FracSamplingMax;
-  std::vector<float> *m_FracSamplingMaxIndex;
-  std::vector<float> *m_LowEtConstituentsFrac;
-  std::vector<float> *m_GhostMuonSegmentCount;
-  std::vector<float> *m_Width;
+  TTreeReaderArray<float> m_HECFrac;
+  TTreeReaderArray<float> m_EMFrac;
+  TTreeReaderArray<float> m_CentroidR;
+  TTreeReaderArray<float> m_FracSamplingMax;
+  TTreeReaderArray<float> m_FracSamplingMaxIndex;
+  TTreeReaderArray<float> m_LowEtConstituentsFrac;
+  TTreeReaderArray<float> m_GhostMuonSegmentCount;
+  TTreeReaderArray<float> m_Width;
 
   // sclaes
-  std::vector<float> *m_emScalePt;
-  std::vector<float> *m_constScalePt;
-  std::vector<float> *m_pileupScalePt;
-  std::vector<float> *m_originConstitScalePt;
-  std::vector<float> *m_etaJESScalePt;
-  std::vector<float> *m_gscScalePt;
-  std::vector<float> *m_insituScalePt;
+  TTreeReaderArray<float> m_emScalePt;
+  TTreeReaderArray<float> m_constScalePt;
+  TTreeReaderArray<float> m_pileupScalePt;
+  TTreeReaderArray<float> m_originConstitScalePt;
+  TTreeReaderArray<float> m_etaJESScalePt;
+  TTreeReaderArray<float> m_gscScalePt;
+  TTreeReaderArray<float> m_insituScalePt;
 
   // constScale Eta
-  std::vector<float> *m_constScaleEta;
+  TTreeReaderArray<float> m_constScaleEta;
 
 
   // layer
-  std::vector< std::vector<float> > *m_EnergyPerSampling;
+  TTreeReaderArray<std::vector<float>> m_EnergyPerSampling;
 
   // tracksAll
-  std::vector< std::vector<int> >   *m_NumTrkPt1000;
-  std::vector< std::vector<float> > *m_SumPtTrkPt1000;
-  std::vector< std::vector<float> > *m_TrackWidthPt1000;
-  std::vector< std::vector<int> >   *m_NumTrkPt500;
-  std::vector< std::vector<float> > *m_SumPtTrkPt500;
-  std::vector< std::vector<float> > *m_TrackWidthPt500;
-  std::vector< std::vector<float> > *m_JVF;
+  TTreeReaderArray<std::vector<int  >> m_NumTrkPt1000;
+  TTreeReaderArray<std::vector<float>> m_SumPtTrkPt1000;
+  TTreeReaderArray<std::vector<float>> m_TrackWidthPt1000;
+  TTreeReaderArray<std::vector<int  >> m_NumTrkPt500;
+  TTreeReaderArray<std::vector<float>> m_SumPtTrkPt500;
+  TTreeReaderArray<std::vector<float>> m_TrackWidthPt500;
+  TTreeReaderArray<std::vector<float>> m_JVF;
 
   // trackPV
-  std::vector<float> *m_NumTrkPt1000PV;
-  std::vector<float> *m_SumPtTrkPt1000PV;
-  std::vector<float> *m_TrackWidthPt1000PV;
-  std::vector<float> *m_NumTrkPt500PV;
-  std::vector<float> *m_SumPtTrkPt500PV;
-  std::vector<float> *m_TrackWidthPt500PV;
-  std::vector<float> *m_JVFPV;
+  TTreeReaderArray<float> m_NumTrkPt1000PV;
+  TTreeReaderArray<float> m_SumPtTrkPt1000PV;
+  TTreeReaderArray<float> m_TrackWidthPt1000PV;
+  TTreeReaderArray<float> m_NumTrkPt500PV;
+  TTreeReaderArray<float> m_SumPtTrkPt500PV;
+  TTreeReaderArray<float> m_TrackWidthPt500PV;
+  TTreeReaderArray<float> m_JVFPV;
 
   // trackAll or trackPV
-  std::vector<float> *m_Jvt;
-  std::vector< std::vector<float> > *m_JvtEff_SF_Loose;
-  std::vector< std::vector<float> > *m_JvtEff_SF_Medium;
-  std::vector< std::vector<float> > *m_JvtEff_SF_Tight;
-  std::vector<float> *m_JvtJvfcorr;
-  std::vector<float> *m_JvtRpt;
+  TTreeReaderArray<float> m_Jvt;
+  TTreeReaderArray<std::vector<float> > m_JvtEff_SF_Loose;
+  TTreeReaderArray<std::vector<float> > m_JvtEff_SF_Medium;
+  TTreeReaderArray<std::vector<float> > m_JvtEff_SF_Tight;
+  TTreeReaderArray<float> m_JvtJvfcorr;
+  TTreeReaderArray<float> m_JvtRpt;
 
   // allTrack
-  std::vector<int>                  *m_GhostTrackCount;
-  std::vector<float>                *m_GhostTrackPt;
-  std::vector< std::vector<float> > *m_GhostTrack_pt;
-  std::vector< std::vector<float> > *m_GhostTrack_qOverP;
-  std::vector< std::vector<float> > *m_GhostTrack_eta;
-  std::vector< std::vector<float> > *m_GhostTrack_phi;
-  std::vector< std::vector<float> > *m_GhostTrack_e;
-  std::vector< std::vector<float> > *m_GhostTrack_d0;
-  std::vector< std::vector<float> > *m_GhostTrack_z0;
+  TTreeReaderArray<int  >              m_GhostTrackCount;
+  TTreeReaderArray<float>              m_GhostTrackPt;
+  TTreeReaderArray<std::vector<float>> m_GhostTrack_pt;
+  TTreeReaderArray<std::vector<float>> m_GhostTrack_qOverP;
+  TTreeReaderArray<std::vector<float>> m_GhostTrack_eta;
+  TTreeReaderArray<std::vector<float>> m_GhostTrack_phi;
+  TTreeReaderArray<std::vector<float>> m_GhostTrack_e;
+  TTreeReaderArray<std::vector<float>> m_GhostTrack_d0;
+  TTreeReaderArray<std::vector<float>> m_GhostTrack_z0;
 
   // allTrackDetail
-  std::vector< std::vector<int> > *m_GhostTrack_nPixelHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nSCTHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nTRTHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nPixelSharedHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nPixelSplitHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nInnermostPixelLayerHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nInnermostPixelLayerSharedHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nInnermostPixelLayerSplitHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nNextToInnermostPixelLayerHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nNextToInnermostPixelLayerSharedHits;
-  std::vector< std::vector<int> > *m_GhostTrack_nNextToInnermostPixelLayerSplitHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nPixelHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nSCTHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nTRTHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nPixelSharedHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nPixelSplitHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nInnermostPixelLayerHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nInnermostPixelLayerSharedHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nInnermostPixelLayerSplitHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nNextToInnermostPixelLayerHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nNextToInnermostPixelLayerSharedHits;
+  TTreeReaderArray<std::vector<int> > m_GhostTrack_nNextToInnermostPixelLayerSplitHits;
 
   // constituent
-  std::vector< int >                *m_numConstituents;
-  std::vector< std::vector<float> > *m_constituentWeights;
-  std::vector< std::vector<float> > *m_constituent_pt;
-  std::vector< std::vector<float> > *m_constituent_eta;
-  std::vector< std::vector<float> > *m_constituent_phi;
-  std::vector< std::vector<float> > *m_constituent_e;
+  TTreeReaderArray< int >              m_numConstituents;
+  TTreeReaderArray<std::vector<float>> m_constituentWeights;
+  TTreeReaderArray<std::vector<float>> m_constituent_pt;
+  TTreeReaderArray<std::vector<float>> m_constituent_eta;
+  TTreeReaderArray<std::vector<float>> m_constituent_phi;
+  TTreeReaderArray<std::vector<float>> m_constituent_e;
 
   // flavTag
-  std::vector<float> *m_MV2c00;
-  std::vector<float> *m_MV2c10;
-  std::vector<float> *m_MV2c20;
-  std::vector<float> *m_MV2c100;
-  std::vector<float> *m_MV2;
-  std::vector<int>   *m_HadronConeExclTruthLabelID;
+  TTreeReaderArray<float> m_MV2c00;
+  TTreeReaderArray<float> m_MV2c10;
+  TTreeReaderArray<float> m_MV2c20;
+  TTreeReaderArray<float> m_MV2c100;
+  TTreeReaderArray<float> m_MV2;
+  TTreeReaderArray<int  > m_HadronConeExclTruthLabelID;
     
   // Jet Fitter 
-  std::vector<float>  *m_JetFitter_nVTX           ;
-  std::vector<float>  *m_JetFitter_nSingleTracks  ;
-  std::vector<float>  *m_JetFitter_nTracksAtVtx   ;
-  std::vector<float>  *m_JetFitter_mass           ;
-  std::vector<float>  *m_JetFitter_energyFraction ;
-  std::vector<float>  *m_JetFitter_significance3d ;
-  std::vector<float>  *m_JetFitter_deltaeta       ;
-  std::vector<float>  *m_JetFitter_deltaphi       ;
-  std::vector<float>  *m_JetFitter_N2Tpar         ;
+  TTreeReaderArray<float> m_JetFitter_nVTX           ;
+  TTreeReaderArray<float> m_JetFitter_nSingleTracks  ;
+  TTreeReaderArray<float> m_JetFitter_nTracksAtVtx   ;
+  TTreeReaderArray<float> m_JetFitter_mass           ;
+  TTreeReaderArray<float> m_JetFitter_energyFraction ;
+  TTreeReaderArray<float> m_JetFitter_significance3d ;
+  TTreeReaderArray<float> m_JetFitter_deltaeta       ;
+  TTreeReaderArray<float> m_JetFitter_deltaphi       ;
+  TTreeReaderArray<float> m_JetFitter_N2Tpar         ;
 
   // SV Details
-  std::vector<float> *m_SV0                     ;
-  std::vector<float> *m_SV0_NGTinSvx            ;
-  std::vector<float> *m_SV0_N2Tpair             ;
-  std::vector<float> *m_SV0_masssvx             ;
-  std::vector<float> *m_SV0_efracsvx            ;
-  std::vector<float> *m_SV0_normdist            ;
+  TTreeReaderArray<float> m_SV0                     ;
+  TTreeReaderArray<float> m_SV0_NGTinSvx            ;
+  TTreeReaderArray<float> m_SV0_N2Tpair             ;
+  TTreeReaderArray<float> m_SV0_masssvx             ;
+  TTreeReaderArray<float> m_SV0_efracsvx            ;
+  TTreeReaderArray<float> m_SV0_normdist            ;
 
-  std::vector<float> *m_SV1                     ;
-  std::vector<float> *m_SV1plusIP3D_discriminant;
-  std::vector<float> *m_SV1_pu                  ;
-  std::vector<float> *m_SV1_pb                  ;
-  std::vector<float> *m_SV1_pc                  ;
-  std::vector<float> *m_SV1_c                   ;
-  std::vector<float> *m_SV1_cu                  ;
-  std::vector<float> *m_SV1_NGTinSvx            ;
-  std::vector<float> *m_SV1_N2Tpair             ;
-  std::vector<float> *m_SV1_masssvx             ;
-  std::vector<float> *m_SV1_efracsvx            ;
-  std::vector<float> *m_SV1_normdist            ;
-  std::vector<float> *m_SV1_Lxy                 ;
-  std::vector<float> *m_SV1_L3d                 ;
-  std::vector<float> *m_SV1_distmatlay          ;
-  std::vector<float> *m_SV1_dR                  ;
+  TTreeReaderArray<float> m_SV1                     ;
+  TTreeReaderArray<float> m_SV1plusIP3D_discriminant;
+  TTreeReaderArray<float> m_SV1_pu                  ;
+  TTreeReaderArray<float> m_SV1_pb                  ;
+  TTreeReaderArray<float> m_SV1_pc                  ;
+  TTreeReaderArray<float> m_SV1_c                   ;
+  TTreeReaderArray<float> m_SV1_cu                  ;
+  TTreeReaderArray<float> m_SV1_NGTinSvx            ;
+  TTreeReaderArray<float> m_SV1_N2Tpair             ;
+  TTreeReaderArray<float> m_SV1_masssvx             ;
+  TTreeReaderArray<float> m_SV1_efracsvx            ;
+  TTreeReaderArray<float> m_SV1_normdist            ;
+  TTreeReaderArray<float> m_SV1_Lxy                 ;
+  TTreeReaderArray<float> m_SV1_L3d                 ;
+  TTreeReaderArray<float> m_SV1_distmatlay          ;
+  TTreeReaderArray<float> m_SV1_dR                  ;
 
   // IP3D
-  std::vector<float> *m_IP2D_pu                   ;
-  std::vector<float> *m_IP2D_pb                   ;
-  std::vector<float> *m_IP2D_pc                   ;
-  std::vector<float> *m_IP2D                      ;
-  std::vector<float> *m_IP2D_c                    ;
-  std::vector<float> *m_IP2D_cu                   ;
-  std::vector<float> *m_nIP2DTracks               ;
+  TTreeReaderArray<float> m_IP2D_pu                   ;
+  TTreeReaderArray<float> m_IP2D_pb                   ;
+  TTreeReaderArray<float> m_IP2D_pc                   ;
+  TTreeReaderArray<float> m_IP2D                      ;
+  TTreeReaderArray<float> m_IP2D_c                    ;
+  TTreeReaderArray<float> m_IP2D_cu                   ;
+  TTreeReaderArray<float> m_nIP2DTracks               ;
 
-  std::vector<std::vector<float> > *m_IP2D_gradeOfTracks        ;
-  std::vector<std::vector<float> > *m_IP2D_flagFromV0ofTracks   ;
-  std::vector<std::vector<float> > *m_IP2D_valD0wrtPVofTracks   ;
-  std::vector<std::vector<float> > *m_IP2D_sigD0wrtPVofTracks   ;
-  std::vector<std::vector<float> > *m_IP2D_weightBofTracks      ;
-  std::vector<std::vector<float> > *m_IP2D_weightCofTracks      ;
-  std::vector<std::vector<float> > *m_IP2D_weightUofTracks      ;
+  TTreeReaderArray<std::vector<float> > m_IP2D_gradeOfTracks        ;
+  TTreeReaderArray<std::vector<float> > m_IP2D_flagFromV0ofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP2D_valD0wrtPVofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP2D_sigD0wrtPVofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP2D_weightBofTracks      ;
+  TTreeReaderArray<std::vector<float> > m_IP2D_weightCofTracks      ;
+  TTreeReaderArray<std::vector<float> > m_IP2D_weightUofTracks      ;
 
-  std::vector<float> *m_IP3D_pu                   ;
-  std::vector<float> *m_IP3D_pb                   ;
-  std::vector<float> *m_IP3D_pc                   ;
-  std::vector<float> *m_IP3D                      ;
-  std::vector<float> *m_IP3D_c                    ;
-  std::vector<float> *m_IP3D_cu                   ;
-  std::vector<float> *m_nIP3DTracks               ;
-  std::vector<std::vector<float> > *m_IP3D_gradeOfTracks        ;
-  std::vector<std::vector<float> > *m_IP3D_flagFromV0ofTracks   ;
-  std::vector<std::vector<float> > *m_IP3D_valD0wrtPVofTracks   ;
-  std::vector<std::vector<float> > *m_IP3D_sigD0wrtPVofTracks   ;
-  std::vector<std::vector<float> > *m_IP3D_valZ0wrtPVofTracks   ;
-  std::vector<std::vector<float> > *m_IP3D_sigZ0wrtPVofTracks   ;
-  std::vector<std::vector<float> > *m_IP3D_weightBofTracks      ;
-  std::vector<std::vector<float> > *m_IP3D_weightCofTracks      ;
-  std::vector<std::vector<float> > *m_IP3D_weightUofTracks      ;
+  TTreeReaderArray<float> m_IP3D_pu                   ;
+  TTreeReaderArray<float> m_IP3D_pb                   ;
+  TTreeReaderArray<float> m_IP3D_pc                   ;
+  TTreeReaderArray<float> m_IP3D                      ;
+  TTreeReaderArray<float> m_IP3D_c                    ;
+  TTreeReaderArray<float> m_IP3D_cu                   ;
+  TTreeReaderArray<float> m_nIP3DTracks               ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_gradeOfTracks        ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_flagFromV0ofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_valD0wrtPVofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_sigD0wrtPVofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_valZ0wrtPVofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_sigZ0wrtPVofTracks   ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_weightBofTracks      ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_weightCofTracks      ;
+  TTreeReaderArray<std::vector<float> > m_IP3D_weightUofTracks      ;
 
-  std::vector<float> *m_vtxOnlineValid;
-  std::vector<float> *m_vtxHadDummy;
+  TTreeReaderArray<float> m_vtxOnlineValid;
+  TTreeReaderArray<float> m_vtxHadDummy;
 
       
-  std::vector<float> *m_bs_online_vx;
-  std::vector<float> *m_bs_online_vy;
-  std::vector<float> *m_bs_online_vz;
+  TTreeReaderArray<float> m_bs_online_vx;
+  TTreeReaderArray<float> m_bs_online_vy;
+  TTreeReaderArray<float> m_bs_online_vz;
 
 
-  std::vector<float> *m_vtx_offline_x0;
-  std::vector<float> *m_vtx_offline_y0;
-  std::vector<float> *m_vtx_offline_z0;
+  TTreeReaderArray<float> m_vtx_offline_x0;
+  TTreeReaderArray<float> m_vtx_offline_y0;
+  TTreeReaderArray<float> m_vtx_offline_z0;
 
-  std::vector<float> *m_vtx_online_x0;
-  std::vector<float> *m_vtx_online_y0;
-  std::vector<float> *m_vtx_online_z0;
+  TTreeReaderArray<float> m_vtx_online_x0;
+  TTreeReaderArray<float> m_vtx_online_y0;
+  TTreeReaderArray<float> m_vtx_online_z0;
 
-  std::vector<float> *m_vtx_online_bkg_x0;
-  std::vector<float> *m_vtx_online_bkg_y0;
-  std::vector<float> *m_vtx_online_bkg_z0;
+  TTreeReaderArray<float> m_vtx_online_bkg_x0;
+  TTreeReaderArray<float> m_vtx_online_bkg_y0;
+  TTreeReaderArray<float> m_vtx_online_bkg_z0;
 
   struct btagOpPoint {
     std::string m_name;
     bool m_mc;
     std::string m_acessorName;
     std::string m_tagger;
-    int m_njets;
-    std::vector<int>*                  m_isTag;
-    std::vector<float>                 m_weight_sf;
-    std::vector< std::vector<float> >* m_sf;
+    TTreeReaderValue<int> m_njets;
+    TTreeReaderArray<int>                m_isTag;
+    TTreeReaderArray<std::vector<float>> m_sf;
+    TTreeReaderArray<float>              m_weight_sf;
 
-    btagOpPoint(std::string name, bool mc, std::string acessorName, std::string tagger="mv2c10"): m_name(name), m_mc(mc), m_acessorName(acessorName), m_tagger(tagger) {
-      m_isTag = new std::vector<int>();
-      m_sf    = new std::vector< std::vector<float> >();
-    }
+    btagOpPoint(std::string name, bool mc, std::string acessorName, std::string tagger="mv2c10"): m_name(name), m_mc(mc), m_acessorName(acessorName), m_tagger(tagger) { }
 
-    ~btagOpPoint(){
-      delete m_isTag;
-      delete m_sf;
-    }
+    ~btagOpPoint() { }
 
-    void setTree(TTree *tree, std::string jetName){
-      //tree->SetBranchStatus  (("n"+jetName+"s_"+m_tagger+"_"+m_name).c_str(), 1);
-      //tree->SetBranchAddress (("n"+jetName+"s_"+m_tagger+"_"+m_name).c_str(), &m_njets);
-      tree->SetBranchStatus  (("n"+jetName+"s_"+m_name).c_str(), 1);
-      tree->SetBranchAddress (("n"+jetName+"s_"+m_name).c_str(), &m_njets);
-
-      tree->SetBranchStatus  ((jetName+"_is"+m_name).c_str()  , 1);
-      tree->SetBranchAddress ((jetName+"_is"+m_name).c_str()  , &m_isTag);
+    void setReader(TTreeReader *reader, const std::string& jetName)
+    {
+      m_njets=TTreeReaderValue<int>(*reader, ("n"+jetName+"s_"+m_name).c_str());
+      m_isTag=TTreeReaderArray<int>(*reader, (jetName+"_is"+m_name).c_str());
 
       if(m_mc)
-	{
-	  tree->SetBranchStatus  ((jetName+"_SF"+m_name).c_str()  , 1);
-	  tree->SetBranchAddress ((jetName+"_SF"+m_name).c_str()  , &m_sf);
-	}
+	m_sf=TTreeReaderArray<std::vector<float> >(*reader, (jetName+"_SF"+m_name).c_str());
     }
-
-
-    void setBranch(TTree *tree, std::string jetName){
-      tree->Branch(("n"+jetName+"s_"+m_name).c_str(), &m_njets, ("n"+jetName+"s_"+m_name+"/I").c_str());
-      tree->Branch((jetName+"_is"+m_name).c_str(),        &m_isTag);
-
-      if ( m_mc ) {
-	tree->Branch((jetName+"_SF"+m_name).c_str(),        &m_sf);
-	tree->Branch(("weight_"+jetName+"SF"+m_name).c_str(), &m_weight_sf);
-      }
-    }
-
-
-    void clear(){
-      m_njets = 0;
-      m_isTag->clear();
-      m_weight_sf.clear();
-      m_sf->clear();
-    }  
   };  //struct btagOpPoint
       
   btagOpPoint* m_btag_Fix30;
@@ -313,55 +280,55 @@ private:
   btagOpPoint* m_btag_Flt90;
 
   // JVC
-  std::vector<double> *m_JetVertexCharge_discriminant;
+  TTreeReaderArray<double> m_JetVertexCharge_discriminant;
 
   // area
-  std::vector<float> *m_GhostArea;
-  std::vector<float> *m_ActiveArea;
-  std::vector<float> *m_VoronoiArea;
-  std::vector<float> *m_ActiveArea4vec_pt;
-  std::vector<float> *m_ActiveArea4vec_eta;
-  std::vector<float> *m_ActiveArea4vec_phi;
-  std::vector<float> *m_ActiveArea4vec_m;
+  TTreeReaderArray<float> m_GhostArea;
+  TTreeReaderArray<float> m_ActiveArea;
+  TTreeReaderArray<float> m_VoronoiArea;
+  TTreeReaderArray<float> m_ActiveArea4vec_pt;
+  TTreeReaderArray<float> m_ActiveArea4vec_eta;
+  TTreeReaderArray<float> m_ActiveArea4vec_phi;
+  TTreeReaderArray<float> m_ActiveArea4vec_m;
 
   // truth
-  std::vector<int>   *m_ConeTruthLabelID;
-  std::vector<int>   *m_TruthCount;
-  std::vector<float> *m_TruthLabelDeltaR_B;
-  std::vector<float> *m_TruthLabelDeltaR_C;
-  std::vector<float> *m_TruthLabelDeltaR_T;
-  std::vector<int>   *m_PartonTruthLabelID;
-  std::vector<float> *m_GhostTruthAssociationFraction;
-  std::vector<float> *m_truth_E;
-  std::vector<float> *m_truth_pt;
-  std::vector<float> *m_truth_phi;
-  std::vector<float> *m_truth_eta;
+  TTreeReaderArray<int  > m_ConeTruthLabelID;
+  TTreeReaderArray<int  > m_TruthCount;
+  TTreeReaderArray<float> m_TruthLabelDeltaR_B;
+  TTreeReaderArray<float> m_TruthLabelDeltaR_C;
+  TTreeReaderArray<float> m_TruthLabelDeltaR_T;
+  TTreeReaderArray<int  > m_PartonTruthLabelID;
+  TTreeReaderArray<float> m_GhostTruthAssociationFraction;
+  TTreeReaderArray<float> m_truth_E;
+  TTreeReaderArray<float> m_truth_pt;
+  TTreeReaderArray<float> m_truth_phi;
+  TTreeReaderArray<float> m_truth_eta;
 
 
   // truth detail
-  std::vector<int>   *m_GhostBHadronsFinalCount;
-  std::vector<int>   *m_GhostBHadronsInitialCount;
-  std::vector<int>   *m_GhostBQuarksFinalCount;
-  std::vector<float> *m_GhostBHadronsFinalPt;
-  std::vector<float> *m_GhostBHadronsInitialPt;
-  std::vector<float> *m_GhostBQuarksFinalPt;
+  TTreeReaderArray<int  > m_GhostBHadronsFinalCount;
+  TTreeReaderArray<int  > m_GhostBHadronsInitialCount;
+  TTreeReaderArray<int  > m_GhostBQuarksFinalCount;
+  TTreeReaderArray<float> m_GhostBHadronsFinalPt;
+  TTreeReaderArray<float> m_GhostBHadronsInitialPt;
+  TTreeReaderArray<float> m_GhostBQuarksFinalPt;
 
-  std::vector<int>   *m_GhostCHadronsFinalCount;
-  std::vector<int>   *m_GhostCHadronsInitialCount;
-  std::vector<int>   *m_GhostCQuarksFinalCount;
-  std::vector<float> *m_GhostCHadronsFinalPt;
-  std::vector<float> *m_GhostCHadronsInitialPt;
-  std::vector<float> *m_GhostCQuarksFinalPt;
+  TTreeReaderArray<int  > m_GhostCHadronsFinalCount;
+  TTreeReaderArray<int  > m_GhostCHadronsInitialCount;
+  TTreeReaderArray<int  > m_GhostCQuarksFinalCount;
+  TTreeReaderArray<float> m_GhostCHadronsFinalPt;
+  TTreeReaderArray<float> m_GhostCHadronsInitialPt;
+  TTreeReaderArray<float> m_GhostCQuarksFinalPt;
 
-  std::vector<int>   *m_GhostTausFinalCount;
-  std::vector<float> *m_GhostTausFinalPt;
+  TTreeReaderArray<int  > m_GhostTausFinalCount;
+  TTreeReaderArray<float> m_GhostTausFinalPt;
 
-  std::vector<int>   *m_truth_pdgId;
-  std::vector<float> *m_truth_partonPt;
-  std::vector<float> *m_truth_partonDR;
+  TTreeReaderArray<int  > m_truth_pdgId;
+  TTreeReaderArray<float> m_truth_partonPt;
+  TTreeReaderArray<float> m_truth_partonDR;
 
   // charge
-  std::vector<double> *m_charge;
+  TTreeReaderArray<double> m_charge;
 };
 
 #endif // JETCONTAINER_H_

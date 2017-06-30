@@ -18,10 +18,7 @@ public:
   MuonContainer(const std::string& name = "muon", const std::string& detailStr="", float units = 1e3, bool mc = false);
   virtual ~MuonContainer();
     
-  virtual void setTree(TTree *tree);
-  virtual void setBranches(TTree *tree);
-  virtual void clear();
-  using ParticleContainer::setTree; // make other overloaded version of execute() to show up in subclass
+  virtual void setReader(TTreeReader *reader);
 
 protected:
   virtual void updateParticle(uint idx);
@@ -29,75 +26,75 @@ protected:
 private:
 
   // trigger
-  std::vector<int>               *m_isTrigMatched;
-  std::vector<std::vector<int> > *m_isTrigMatchedToChain;
-  std::vector<std::string>       *m_listTrigChains;
+  TTreeReaderArray<int             > m_isTrigMatched;
+  TTreeReaderArray<std::vector<int>> m_isTrigMatchedToChain;
+  TTreeReaderArray<std::string     > m_listTrigChains;
     
   // isolation
-  std::vector<int>   *m_isIsolated_LooseTrackOnly;
-  std::vector<int>   *m_isIsolated_Loose;
-  std::vector<int>   *m_isIsolated_Tight;
-  std::vector<int>   *m_isIsolated_Gradient;
-  std::vector<int>   *m_isIsolated_GradientLoose;
-  std::vector<int>   *m_isIsolated_FixedCutLoose;
-  std::vector<int>   *m_isIsolated_FixedCutTightTrackOnly;
-  std::vector<int>   *m_isIsolated_UserDefinedFixEfficiency;
-  std::vector<int>   *m_isIsolated_UserDefinedCut;
-  std::vector<float> *m_ptcone20;
-  std::vector<float> *m_ptcone30;
-  std::vector<float> *m_ptcone40;
-  std::vector<float> *m_ptvarcone20;
-  std::vector<float> *m_ptvarcone30;
-  std::vector<float> *m_ptvarcone40;
-  std::vector<float> *m_topoetcone20;
-  std::vector<float> *m_topoetcone30;
-  std::vector<float> *m_topoetcone40;
+  TTreeReaderArray<int  > m_isIsolated_LooseTrackOnly;
+  TTreeReaderArray<int  > m_isIsolated_Loose;
+  TTreeReaderArray<int  > m_isIsolated_Tight;
+  TTreeReaderArray<int  > m_isIsolated_Gradient;
+  TTreeReaderArray<int  > m_isIsolated_GradientLoose;
+  TTreeReaderArray<int  > m_isIsolated_FixedCutLoose;
+  TTreeReaderArray<int  > m_isIsolated_FixedCutTightTrackOnly;
+  TTreeReaderArray<int  > m_isIsolated_UserDefinedFixEfficiency;
+  TTreeReaderArray<int  > m_isIsolated_UserDefinedCut;
+  TTreeReaderArray<float> m_ptcone20;
+  TTreeReaderArray<float> m_ptcone30;
+  TTreeReaderArray<float> m_ptcone40;
+  TTreeReaderArray<float> m_ptvarcone20;
+  TTreeReaderArray<float> m_ptvarcone30;
+  TTreeReaderArray<float> m_ptvarcone40;
+  TTreeReaderArray<float> m_topoetcone20;
+  TTreeReaderArray<float> m_topoetcone30;
+  TTreeReaderArray<float> m_topoetcone40;
     
   // quality
-  std::vector<int>   *m_isVeryLoose;
-  std::vector<int>   *m_isLoose;
-  std::vector<int>   *m_isMedium;
-  std::vector<int>   *m_isTight;
+  TTreeReaderArray<int  > m_isVeryLoose;
+  TTreeReaderArray<int  > m_isLoose;
+  TTreeReaderArray<int  > m_isMedium;
+  TTreeReaderArray<int  > m_isTight;
     
   // scale factors w/ sys
   // per object
-  std::vector< std::vector< float > > *m_TTVAEff_SF;
-      
-  std::map< std::string, std::vector< std::vector< float > > >* m_RecoEff_SF;
-  std::map< std::string, std::vector< std::vector< float > > >* m_IsoEff_SF;
-  std::map< std::string, std::vector< std::vector< float > > >* m_TrigEff_SF;
-  std::map< std::string, std::vector< std::vector< float > > >* m_TrigMCEff;
+  TTreeReaderArray<std::vector<float>> m_TTVAEff_SF;
+
+  std::map< std::string, TTreeReaderArray< std::vector< float > > > m_RecoEff_SF;
+  std::map< std::string, TTreeReaderArray< std::vector< float > > > m_IsoEff_SF;
+  std::map< std::string, TTreeReaderArray< std::vector< float > > > m_TrigEff_SF;
+  std::map< std::string, TTreeReaderArray< std::vector< float > > > m_TrigMCEff;
 
   // track parameters
-  std::vector<float> *m_trkd0;
-  std::vector<float> *m_trkd0sig;
-  std::vector<float> *m_trkz0;
-  std::vector<float> *m_trkz0sintheta;
-  std::vector<float> *m_trkphi0;
-  std::vector<float> *m_trktheta;
-  std::vector<float> *m_trkcharge;
-  std::vector<float> *m_trkqOverP;
+  TTreeReaderArray<float> m_trkd0;
+  TTreeReaderArray<float> m_trkd0sig;
+  TTreeReaderArray<float> m_trkz0;
+  TTreeReaderArray<float> m_trkz0sintheta;
+  TTreeReaderArray<float> m_trkphi0;
+  TTreeReaderArray<float> m_trktheta;
+  TTreeReaderArray<float> m_trkcharge;
+  TTreeReaderArray<float> m_trkqOverP;
 
   // track hit content
-  std::vector<int>   *m_trknSiHits;
-  std::vector<int>   *m_trknPixHits;
-  std::vector<int>   *m_trknPixHoles;
-  std::vector<int>   *m_trknSCTHits;
-  std::vector<int>   *m_trknSCTHoles;
-  std::vector<int>   *m_trknTRTHits;
-  std::vector<int>   *m_trknTRTHoles;
-  std::vector<int>   *m_trknBLayerHits;
-  std::vector<int>   *m_trknInnermostPixLayHits; // not available in DC14
-  std::vector<float> *m_trkPixdEdX;            // not available in DC14
+  TTreeReaderArray<int  > m_trknSiHits;
+  TTreeReaderArray<int  > m_trknPixHits;
+  TTreeReaderArray<int  > m_trknPixHoles;
+  TTreeReaderArray<int  > m_trknSCTHits;
+  TTreeReaderArray<int  > m_trknSCTHoles;
+  TTreeReaderArray<int  > m_trknTRTHits;
+  TTreeReaderArray<int  > m_trknTRTHoles;
+  TTreeReaderArray<int  > m_trknBLayerHits;
+  TTreeReaderArray<int  > m_trknInnermostPixLayHits; // not available in DC14
+  TTreeReaderArray<float> m_trkPixdEdX;            // not available in DC14
 
-  std::vector<float>         *m_EnergyLoss;
-  std::vector<float>         *m_EnergyLossSigma;
-  std::vector<unsigned char> *m_energyLossType;
-  std::vector<float>         *m_MeasEnergyLoss;
-  std::vector<float>         *m_MeasEnergyLossSigma;
-  std::vector<float>         *m_ParamEnergyLoss;
-  std::vector<float>         *m_ParamEnergyLossSigmaMinus;
-  std::vector<float>         *m_ParamEnergyLossSigmaPlus;
+  TTreeReaderArray<float>         m_EnergyLoss;
+  TTreeReaderArray<float>         m_EnergyLossSigma;
+  TTreeReaderArray<unsigned char> m_energyLossType;
+  TTreeReaderArray<float>         m_MeasEnergyLoss;
+  TTreeReaderArray<float>         m_MeasEnergyLossSigma;
+  TTreeReaderArray<float>         m_ParamEnergyLoss;
+  TTreeReaderArray<float>         m_ParamEnergyLossSigmaMinus;
+  TTreeReaderArray<float>         m_ParamEnergyLossSigmaPlus;
 
 };
 #endif // MUONCONTAINER_H_

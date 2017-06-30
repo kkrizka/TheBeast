@@ -3,6 +3,8 @@
 
 #include <TTree.h>
 #include <TLorentzVector.h>
+#include <TTreeReader.h>
+#include <TTreeReaderArray.h>
 
 #include <vector>
 #include <string>
@@ -29,30 +31,12 @@ public:
       m_units(units), 
       m_useMass(useMass), 
       m_suffix(suffix)
-  {
-    m_n = 0;
-
-    // kinematic
-    m_pt  =new std::vector<float>();
-    m_eta =new std::vector<float>();
-    m_phi =new std::vector<float>();
-    m_E   =new std::vector<float>();
-    m_M   =new std::vector<float>();
-  }
+  { }
     
   virtual ~ParticleContainer()
-  {
-    // kinematic
-    if(m_infoSwitch.m_kinematic){
-      delete m_pt;
-      delete m_eta;
-      delete m_phi;
-      delete m_E;
-      delete m_M;
-    }
-  }
+  { }
     
-  virtual void setTree(TTree *tree)
+  virtual void setReader(TTreeReader *reader)
   {
 
     std::string                   counterName = "n"+m_name;
@@ -61,56 +45,25 @@ public:
       std::cerr << "WARNING! The useTheS option is depricated in ParticleContainer." << std::endl;
     }
 
-    tree->SetBranchStatus  (counterName.c_str() , 1);
-    tree->SetBranchAddress (counterName.c_str() , &m_n);
+    m_n=TTreeReaderValue<int>(*reader, counterName.c_str());
 
     if(m_infoSwitch.m_kinematic)
       {
 	// Determine whether mass or energy is saved
 	std::string mname = branchName("m");
-	m_useMass=tree->GetBranch(mname.c_str())!=0;
+	m_useMass=reader->GetTree()->GetBranch(mname.c_str())!=0;
 
-	connectBranch<float>(tree,"pt" ,&m_pt);
-	connectBranch<float>(tree,"eta",&m_eta);
-	connectBranch<float>(tree,"phi",&m_phi);
-	if(m_useMass) connectBranch<float>(tree,"m"  ,&m_M);
-	else          connectBranch<float>(tree,"E"  ,&m_E);
+	m_pt =TTreeReaderArray<float>(*reader,branchName("pt" ).c_str());
+	m_eta=TTreeReaderArray<float>(*reader,branchName("eta").c_str());
+	m_phi=TTreeReaderArray<float>(*reader,branchName("phi").c_str());
+	if(m_useMass) m_M=TTreeReaderArray<float>(*reader,branchName("m").c_str());
+	else          m_E=TTreeReaderArray<float>(*reader,branchName("E").c_str());
       }
-  }
-
-  virtual void setBranches(TTree *tree)
-  {
-
-    std::string              counterName = "n"+m_name;
-    if (!m_suffix.empty()) { counterName += "_" + m_suffix; }	
-
-    tree->Branch(counterName.c_str(),    &m_n, (counterName+"/I").c_str());
-
-    if(m_infoSwitch.m_kinematic) {
-      if(m_useMass)  setBranch<float>(tree,"m",                        m_M                );
-      else           setBranch<float>(tree,"E",                        m_E                );
-      setBranch<float>(tree,"pt",                       m_pt               );
-      setBranch<float>(tree,"phi",                      m_phi              );
-      setBranch<float>(tree,"eta",                      m_eta              );
-    }
-  }
-
-  virtual void clear()
-  {
-    m_n = 0;
-
-    if(m_infoSwitch.m_kinematic) {
-      if(m_useMass)  m_M->clear();
-      else           m_E->clear();
-      m_pt  ->clear();
-      m_phi ->clear();
-      m_eta ->clear();
-    }
   }
 
   void updateEntry()
   {
-    for(int i=0;i<m_n;i++)
+    for(int i=0;i<*m_n;i++)
       updateParticle(i);
   }
     
@@ -132,33 +85,21 @@ protected:
     return name;
   }
 
-  template <typename T_BR> void connectBranch(TTree *tree, const std::string& branch, std::vector<T_BR> **variable)
-  {
-    std::string name = branchName(branch);
-    tree->SetBranchStatus  (name.c_str()  , 1);
-    tree->SetBranchAddress (name.c_str()  , variable);
-  }
-
-  template<typename T> void setBranch(TTree* tree, std::string varName, std::vector<T>* localVectorPtr){
-    std::string name = branchName(varName);
-    tree->Branch(name.c_str(),        localVectorPtr);
-  }
-
   virtual void updateParticle(uint idx)
   {
     if(m_infoSwitch.m_kinematic)
       {
-	if(m_useMass){
-	  m_particles[idx].p4.SetPtEtaPhiM(m_pt ->at(idx),
-					   m_eta->at(idx),
-					   m_phi->at(idx),
-					   m_M  ->at(idx));
+	if(m_useMass){	  
+	  m_particles[idx].p4.SetPtEtaPhiM(m_pt [idx],
+					   m_eta[idx],
+					   m_phi[idx],
+					   m_M  [idx]);
 
 	} else{
-	  m_particles[idx].p4.SetPtEtaPhiE(m_pt ->at(idx),
-					   m_eta->at(idx),
-					   m_phi->at(idx),
-					   m_E  ->at(idx));
+	  m_particles[idx].p4.SetPtEtaPhiE(m_pt [idx],
+					   m_eta[idx],
+					   m_phi[idx],
+					   m_E  [idx]);
 	}
       }
   }
@@ -173,7 +114,7 @@ public:
   bool m_debug;
   float m_units;
 
-  int m_n;
+  TTreeReaderValue<int> m_n;
 
 private:
   bool        m_useMass;
@@ -183,11 +124,11 @@ private:
   // Vector branches
 
   // kinematic
-  std::vector<float> *m_pt;
-  std::vector<float> *m_eta;
-  std::vector<float> *m_phi;
-  std::vector<float> *m_E;
-  std::vector<float> *m_M;
+  TTreeReaderArray<float> m_pt;
+  TTreeReaderArray<float> m_eta;
+  TTreeReaderArray<float> m_phi;
+  TTreeReaderArray<float> m_E;
+  TTreeReaderArray<float> m_M;
 };
 
 #endif // PARTICLECONTAINER_H_

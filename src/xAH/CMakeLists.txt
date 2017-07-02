@@ -1,6 +1,7 @@
 SET(HEADERS
   Particle.h
   Jet.h
+  FatJet.h
   Photon.h
   Muon.h
   TrackParticle.h

@@ -11,6 +11,7 @@
 #include "../TheEvent.h"
 
 #include "../xAH/Jet.h"
+#include "../xAH/FatJet.h"
 #include "../xAH/Photon.h"
 
 #include "InfoSwitch.h"
@@ -55,6 +56,7 @@ namespace TCA
 
     // particles
     TTreeReaderArray<xAH::Jet>    *m_jets;
+    TTreeReaderArray<xAH::FatJet> *m_fatjets;
     TTreeReaderArray<xAH::Photon> *m_photons;
 
     // custom

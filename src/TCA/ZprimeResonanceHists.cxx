@@ -69,8 +69,8 @@ void ZprimeResonanceHists::execute()
   // Figure out event stuff
   double eventWeight=1.;
 
-  const xAH::Jet reso0=m_event->m_jets[0];
-  const xAH::Jet reso1=m_event->m_jets[1];
+  const xAH::Jet reso0=m_event->m_jets->At(0);
+  const xAH::Jet reso1=m_event->m_jets->At(1);
 
   //
   // Fill histograms

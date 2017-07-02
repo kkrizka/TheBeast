@@ -23,8 +23,8 @@ bool ZprimeGammaJetJetSelection::passes()
 {
   //
   // dijet+gamma
-  uint njets    = m_event->m_jets.GetSize();
-  uint nphotons = m_event->m_photons.GetSize();
+  uint njets    = m_event->m_jets   ->GetSize();
+  uint nphotons = m_event->m_photons->GetSize();
 
   if(njets < 2)
     return false;
@@ -34,7 +34,7 @@ bool ZprimeGammaJetJetSelection::passes()
     return false;
   //m_cutflow->execute(m_cf_nphotons,m_eventWeight);
 
-  const xAH::Photon photon0=m_event->m_photons[0];
+  const xAH::Photon photon0=m_event->m_photons->At(0);
 
   //
   // photon

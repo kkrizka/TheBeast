@@ -58,7 +58,7 @@ void JetHists::execute()
   switch(m_container)
     {
     case Event::jet:
-      particle=dynamic_cast<xAH::Jet*>(&m_event->m_jets[m_idx]);
+      particle=dynamic_cast<xAH::Jet*>(&m_event->m_jets->At(m_idx));
       break;
     default:
       std::cerr << "Not a jet container." << std::endl;

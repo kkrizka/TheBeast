@@ -43,10 +43,10 @@ void IParticleHists::execute()
   switch(m_container)
     {
     case Event::jet:
-      particle = dynamic_cast<xAH::Particle*>(&m_event->m_jets   [m_idx]);
+      particle = dynamic_cast<xAH::Particle*>(&m_event->m_jets   ->At(m_idx));
       break;
     case Event::photon:
-      particle = dynamic_cast<xAH::Particle*>(&m_event->m_photons[m_idx]);
+      particle = dynamic_cast<xAH::Particle*>(&m_event->m_photons->At(m_idx));
       break;
     }
   if(particle==0) return;

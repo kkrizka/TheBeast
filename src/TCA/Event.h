@@ -54,8 +54,8 @@ namespace TCA
     TTreeReaderValue<float> m_weight_pileup;
 
     // particles
-    TTreeReaderArray<xAH::Jet>    m_jets;
-    TTreeReaderArray<xAH::Photon> m_photons;
+    TTreeReaderArray<xAH::Jet>    *m_jets;
+    TTreeReaderArray<xAH::Photon> *m_photons;
 
     // custom
     bool m_haveZprime;

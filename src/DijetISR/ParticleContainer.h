@@ -53,11 +53,11 @@ public:
 	std::string mname = branchName("m");
 	m_useMass=reader->GetTree()->GetBranch(mname.c_str())!=0;
 
-	m_pt =TTreeReaderArray<float>(*reader,branchName("pt" ).c_str());
-	m_eta=TTreeReaderArray<float>(*reader,branchName("eta").c_str());
-	m_phi=TTreeReaderArray<float>(*reader,branchName("phi").c_str());
-	if(m_useMass) m_M=TTreeReaderArray<float>(*reader,branchName("m").c_str());
-	else          m_E=TTreeReaderArray<float>(*reader,branchName("E").c_str());
+	m_pt =new TTreeReaderArray<float>(*reader,branchName("pt" ).c_str());
+	m_eta=new TTreeReaderArray<float>(*reader,branchName("eta").c_str());
+	m_phi=new TTreeReaderArray<float>(*reader,branchName("phi").c_str());
+	if(m_useMass) m_M=new TTreeReaderArray<float>(*reader,branchName("m").c_str());
+	else          m_E=new TTreeReaderArray<float>(*reader,branchName("E").c_str());
       }
   }
 
@@ -90,16 +90,16 @@ protected:
     if(m_infoSwitch.m_kinematic)
       {
 	if(m_useMass){	  
-	  m_particles[idx].p4.SetPtEtaPhiM(m_pt [idx],
-					   m_eta[idx],
-					   m_phi[idx],
-					   m_M  [idx]);
+	  m_particles[idx].p4.SetPtEtaPhiM(m_pt ->At(idx),
+					   m_eta->At(idx),
+					   m_phi->At(idx),
+					   m_M  ->At(idx));
 
 	} else{
-	  m_particles[idx].p4.SetPtEtaPhiE(m_pt [idx],
-					   m_eta[idx],
-					   m_phi[idx],
-					   m_E  [idx]);
+	  m_particles[idx].p4.SetPtEtaPhiE(m_pt ->At(idx),
+					   m_eta->At(idx),
+					   m_phi->At(idx),
+					   m_E  ->At(idx));
 	}
       }
   }
@@ -124,11 +124,11 @@ private:
   // Vector branches
 
   // kinematic
-  TTreeReaderArray<float> m_pt;
-  TTreeReaderArray<float> m_eta;
-  TTreeReaderArray<float> m_phi;
-  TTreeReaderArray<float> m_E;
-  TTreeReaderArray<float> m_M;
+  TTreeReaderArray<float>* m_pt;
+  TTreeReaderArray<float>* m_eta;
+  TTreeReaderArray<float>* m_phi;
+  TTreeReaderArray<float>* m_E;
+  TTreeReaderArray<float>* m_M;
 };
 
 #endif // PARTICLECONTAINER_H_

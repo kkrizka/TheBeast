@@ -46,7 +46,6 @@ def main():
     #
     # plot
     print(timeit.timeit(lambda:thebeast.get('big','jet0/Pt'),number=1))
-    print(timeit.timeit(lambda:thebeast.get('big','event/mu_ave'),number=1))
     h=thebeast.get('big','jet0/Pt')
     plottools.plot(h)
 

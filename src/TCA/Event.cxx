@@ -8,7 +8,7 @@ Event::Event(bool mc, bool truthOnly)
   : TheEvent(),
     m_haveZprime(false),
     m_truthOnly(truthOnly), m_mc(mc),
-    // m_truth(0), m_trigJets(0),
+    m_jets(0), m_photons(0),
     m_triggerInfoSwitch(0)
 {
   setTriggerDetail("");
@@ -18,6 +18,8 @@ Event::~Event()
 {
   if(m_triggerInfoSwitch) delete m_triggerInfoSwitch;
 
+  if(m_jets)    delete m_jets;
+  if(m_photons) delete m_photons;
   //if(m_truth)    delete m_truth;
   //if(m_trigJets) delete m_trigJets;
 }
@@ -57,8 +59,8 @@ void Event::setReader(TTreeReader *reader)
   m_weight_xs=TTreeReaderValue<float>(*reader, "weight_xs");
 
   // particles
-  m_jets   =TTreeReaderArray<xAH::Jet   >(*reader, "jet");
-  m_photons=TTreeReaderArray<xAH::Photon>(*reader, "ph");
+  m_jets   =new TTreeReaderArray<xAH::Jet   >(*reader, "jet");
+  m_photons=new TTreeReaderArray<xAH::Photon>(*reader, "ph");
 
   // custom
   if(reader->GetTree()->Branch("Zprime_pt") &&

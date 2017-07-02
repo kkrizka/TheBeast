@@ -32,11 +32,11 @@ void Event::setReader(TTreeReader *reader)
 
   if(!m_truthOnly)
     {
-      m_lumiBlock=TTreeReaderValue<int>(*reader, "lumiBlock");
-      m_NPV=TTreeReaderValue<int>(*reader, "NPV");
-      m_actualInteractionsPerCrossing=TTreeReaderValue<float>(*reader, "actualInteractionsPerCrossing");
+      m_lumiBlock                     =TTreeReaderValue<int  >(*reader, "lumiBlock");
+      m_NPV                           =TTreeReaderValue<int  >(*reader, "NPV");
+      m_actualInteractionsPerCrossing =TTreeReaderValue<float>(*reader, "actualInteractionsPerCrossing");
       m_averageInteractionsPerCrossing=TTreeReaderValue<float>(*reader, "averageInteractionsPerCrossing");
-      m_weight_pileup=TTreeReaderValue<float>(*reader, "weight_pileup");
+      m_weight_pileup                 =TTreeReaderValue<float>(*reader, "weight_pileup");
     }
 
   if(m_mc)

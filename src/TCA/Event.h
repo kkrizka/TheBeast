@@ -33,15 +33,15 @@ namespace TCA
   public:
     // Event variables
     TTreeReaderValue<float> m_ht;
-    TTreeReaderValue<int> m_NPV;
+    TTreeReaderValue<int  > m_NPV;
     TTreeReaderValue<float> m_actualInteractionsPerCrossing;
     TTreeReaderValue<float> m_averageInteractionsPerCrossing;
-    TTreeReaderValue<int> m_runNumber;
+    TTreeReaderValue<int  > m_runNumber;
     TTreeReaderValue<long long> m_eventNumber;
-    TTreeReaderValue<int> m_lumiBlock;
+    TTreeReaderValue<int  > m_lumiBlock;
 
-    TTreeReaderValue<int> m_mcEventNumber;
-    TTreeReaderValue<int> m_mcChannelNumber;
+    TTreeReaderValue<int  > m_mcEventNumber;
+    TTreeReaderValue<int  > m_mcChannelNumber;
     TTreeReaderValue<float> m_mcEventWeight;
 
     // trigger

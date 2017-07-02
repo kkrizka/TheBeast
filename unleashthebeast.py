@@ -19,7 +19,7 @@ def main():
     # small sample
     testsample=ROOT.TheSampleFile("mc15_13TeV.305159.MGPy8EG_N30LO_A14N23LO_dmA_jja_Ph100_mRp1_mD10_gSp3_gD1.merge.DAOD_EXOT6.e4900_s2726_r7772_r7676_p2952.root","outTree",testevent)
     thebeast.addSample('test',testsample)
-    
+
     redsample=ROOT.TheSampleSelection(testsample,selection_ystar)
     redsample.runSelection()
     thebeast.addSample('red',redsample)
@@ -46,6 +46,7 @@ def main():
     #
     # plot
     print(timeit.timeit(lambda:thebeast.get('big','jet0/Pt'),number=1))
+    print(timeit.timeit(lambda:thebeast.get('big','event/mu_ave'),number=1))
     h=thebeast.get('big','jet0/Pt')
     plottools.plot(h)
 
